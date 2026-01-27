@@ -1,5 +1,20 @@
+"use client"
+
 import { ThemeSwitch } from "@/components/theme-switch"
+import { useEffect, useState } from "react";
 export default function Name() {
+  const [isMdUp, setIsMdUp] = useState(false)
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 768px)")
+    setIsMdUp(mediaQuery.matches)
+
+    const handler = (e: MediaQueryListEvent) => setIsMdUp(e.matches)
+    mediaQuery.addEventListener("change", handler)
+
+    return () => mediaQuery.removeEventListener("change", handler)
+  }, [])
+
   return (
     <section className="mb-8">
       <div className="flex items-center gap-4 md:gap-6">
@@ -15,7 +30,7 @@ export default function Name() {
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2">
               <h1 className="text-base md:text-2xl font-bold truncate">
-                Kent Kalaw
+                {isMdUp ? "Kent Francis E. Kalaw" : "Kent Kalaw"}
               </h1>
               <svg
                 viewBox="0 0 22 22"
@@ -54,13 +69,13 @@ export default function Name() {
             </svg>
             Batangas City, Philippines
           </p>
-          
+
           <div className="flex items-center justify-between mt-2">
             <p className="text-[13px] md:text-base font-medium text-foreground/80">
               Software Developer{" "}
               <span className="text-gray-400">/</span>{" "}
               Full-stack Developer
-            </p>           
+            </p>
           </div>
         </div>
       </div>
