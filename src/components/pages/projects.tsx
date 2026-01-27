@@ -16,13 +16,13 @@ export default function Projects() {
       url: "https://ai-resume-builder-pi-navy.vercel.app",
     },
     {
-      title: "Koyam's Recette",
-      description: "A Recipe App for Filipino Dishes",
-      url: null,
+      title: "Pixelria",
+      description: "A Pixel Sketching App",
+      url: "https://pixelria.vercel.app/",
     },
     {
-      title: "Alumnite",
-      description: "A Capstone Project for Alumni Engagement",
+      title: "Koyam's Recette",
+      description: "A Recipe App for Filipino Dishes",
       url: null,
     },
   ]
