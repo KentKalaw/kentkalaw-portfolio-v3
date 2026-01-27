@@ -24,7 +24,7 @@ export function ThemeSwitch() {
       <div className="relative h-5 w-5">
         <Sun
           className={cn(
-            "absolute h-5 w-5 transition-all duration-300",
+            "absolute h-5 w-5 transition-transform transition-opacity duration-300 ease-in-out",
             isDark
               ? "scale-0 rotate-90 opacity-0"
               : "scale-100 rotate-0 opacity-100 text-yellow-500"
@@ -32,7 +32,7 @@ export function ThemeSwitch() {
         />
         <Moon
           className={cn(
-            "absolute h-5 w-5 transition-all duration-300",
+            "absolute h-5 w-5 transition-transform transition-opacity duration-300 ease-in-out",
             isDark
               ? "scale-100 rotate-0 opacity-100 text-blue-400"
               : "scale-0 -rotate-90 opacity-0"

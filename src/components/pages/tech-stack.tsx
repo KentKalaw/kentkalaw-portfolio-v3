@@ -45,7 +45,7 @@ export default function TechStack() {
     </CardTitle>
   </CardHeader>
 
-  <CardContent className="relative overflow-hidden py-6">
+  <CardContent className="relative overflow-hidden py-6 will-change-transform">
     <InfiniteSlider speedOnHover={30} speed={50} gap={40}>
       {[
         "html5/html5-original.svg",
@@ -73,14 +73,14 @@ export default function TechStack() {
     <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-background" />
 
     <ProgressiveBlur
-      className="pointer-events-none absolute left-0 top-0 h-full w-16"
+      className="pointer-events-none absolute left-0 top-0 h-full w-16 will-change-transform"
       direction="left"
-      blurIntensity={1}
+      blurIntensity={0.5}
     />
     <ProgressiveBlur
-      className="pointer-events-none absolute right-0 top-0 h-full w-16"
+      className="pointer-events-none absolute right-0 top-0 h-full w-16 will-change-transform"
       direction="right"
-      blurIntensity={1}
+      blurIntensity={0.5}
     />
   </CardContent>
 </Card>
