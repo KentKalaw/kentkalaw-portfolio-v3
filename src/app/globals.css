@@ -46,6 +46,10 @@
   --radius-4xl: calc(var(--radius) + 16px);
 }
 
+body {
+  font-family: var(--font-poppins);
+}
+
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
@@ -118,8 +122,22 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+  }
+  html {
+    transition: background-color 300ms ease, color 300ms ease;
   }
   body {
     @apply bg-background text-foreground;
+    transition: background-color 300ms ease, color 300ms ease;
+  }
+  
+  /* Smooth transitions for all elements that might change color */
+  div, section, article, aside, nav, header, footer,
+  button, a, input, textarea, select,
+  h1, h2, h3, h4, h5, h6, p, span, label {
+    transition: background-color 300ms ease, color 300ms ease, border-color 300ms ease;
   }
 }
