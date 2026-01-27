@@ -2,8 +2,19 @@
 
 import { ThemeSwitch } from "@/components/theme-switch"
 import { useEffect, useState } from "react";
+import { Mail, ChevronRight, FileUser, Download, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 export default function Name() {
   const [isMdUp, setIsMdUp] = useState(false)
+  const [showCVViewer, setShowCVViewer] = useState(false);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(min-width: 768px)")
@@ -18,8 +29,8 @@ export default function Name() {
   return (
     <section className="mb-8">
       <div className="flex items-center gap-4 md:gap-6">
-        <img
-          src="https://placehold.co/160x160"
+        <Image
+          src="/kentkalaw-v1.jpg"
           alt="Kent Kalaw"
           width={160}
           height={160}
@@ -45,8 +56,6 @@ export default function Name() {
             </div>
             <ThemeSwitch />
           </div>
-
-          {/* Location */}
           <p className="text-xs md:text-sm text-foreground/70 flex items-center gap-1">
             <svg
               className="w-3 h-3 md:w-3.5 md:h-3.5"
@@ -77,8 +86,95 @@ export default function Name() {
               Full-stack Developer
             </p>
           </div>
+          <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center">
+            <Button
+              className="font-sans h-8 w-full sm:w-auto hover:-translate-y-0 sm:hover:-translate-y-[2px] transition duration-300"
+              onClick={() => {
+    const contactSection = document.getElementById("contact");
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth" });
+    }
+  }}
+            >
+              <Mail className="mr-2 h-4 w-4" />
+              Contact Me
+              <ChevronRight className="ml-1 h-4 w-4" />
+            </Button>
+
+            <Button
+              variant="outline"
+              className="font-sans h-8 w-full sm:w-auto hover:-translate-y-0 sm:hover:-translate-y-[2px] transition duration-300"
+              onClick={() => setShowCVViewer(true)}
+            >
+              <FileUser className="mr-2 h-4 w-4" />
+              View Resume
+              <ChevronRight className="ml-1 h-4 w-4" />
+            </Button>
+          </div>
         </div>
+        <CVViewerDialog open={showCVViewer} onOpenChange={setShowCVViewer} />
       </div>
+
     </section>
   );
 }
+
+interface CVViewerDialogProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}
+
+const CVViewerDialog = ({ open, onOpenChange }: CVViewerDialogProps) => {
+  const cvPath = "/Kent Francis Kalaw Resume.pdf";
+
+  const handleDownload = () => {
+    const link = document.createElement("a");
+    link.href = cvPath;
+    link.download = "Kent-Francis-Kalaw-Resume.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="max-w-[95vw] w-full h-[95vh] md:max-w-4xl md:h-[90vh] p-0 flex flex-col [&>button]:hidden">
+        <DialogHeader className="px-6 py-4 border-b border-border shrink-0">
+          <div className="flex items-center justify-between gap-4">
+            <DialogTitle className="text-sm md:text-lg font-semibold">
+              My Resume
+            </DialogTitle>
+            <div className="flex items-center gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleDownload}
+                className="rounded-full bg-transparent"
+              >
+                <Download className="w-4 h-4 mr-2" />
+                Download
+              </Button>
+              <DialogClose asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8 rounded-full"
+                >
+                  <X className="h-4 w-4" />
+                  <span className="sr-only">Close</span>
+                </Button>
+              </DialogClose>
+            </div>
+          </div>
+        </DialogHeader>
+        <div className="flex-1 min-h-0 overflow-hidden">
+          <iframe
+            src={cvPath}
+            className="w-full h-full border-0"
+            title="CV Preview"
+          />
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+};
