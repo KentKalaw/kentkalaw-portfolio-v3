@@ -1,5 +1,6 @@
 import Name from "@/components/pages/name";
 import About from "@/components/pages/about";
+import GithubContributionsCard from "@/components/pages/github-contribution";
 export default function Home() {
 
   return (
@@ -7,10 +8,8 @@ export default function Home() {
       <div className="max-w-4xl mx-auto px-4 py-8">
 
       <Name />
-
-        {/* About Section */}
       <About />
-
+      <GithubContributionsCard />
         {/* Experience Section */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-6">Experience</h2>
