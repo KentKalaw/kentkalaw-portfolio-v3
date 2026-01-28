@@ -1,5 +1,6 @@
 import Name from "@/components/pages/name";
 import About from "@/components/pages/about";
+import BlogPreview from "@/components/pages/blog-preview";
 import GithubContributionsCard from "@/components/pages/github-contribution";
 import TechStack from "@/components/pages/tech-stack";
 import Experience from "@/components/pages/experience";
@@ -15,7 +16,14 @@ export default function Home() {
     <main className="relative min-h-screen">
       <div className="max-w-4xl mx-auto px-4 py-8">
         <Name />
-        <About />
+        <div className="flex flex-col md:flex-row md:gap-3">
+          <div className="w-full md:w-1/2">
+            <About />
+          </div>
+          <div className="w-full md:w-1/2">
+            <BlogPreview />
+          </div>
+        </div>
         <TechStack />
         <div className="flex flex-col md:flex-row md:gap-3">
           <div className="w-full md:w-6/10">
