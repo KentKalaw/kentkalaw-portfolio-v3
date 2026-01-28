@@ -120,7 +120,7 @@ export default function Contact () {
             <Textarea
               id="message"
               placeholder="Enter your message"
-              className="min-h-[100px]"
+              className="min-h-[100px] max-h-[200px]"
               {...register("message")}
             />
             {errors.message && (
