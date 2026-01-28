@@ -44,7 +44,7 @@ export default function Socials() {
           </CardTitle>
         </CardHeader>
 
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-2.75">
           {socials.map((social) => {
             const Icon = social.icon
 
