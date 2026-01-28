@@ -29,13 +29,24 @@ export default function Name() {
   return (
     <section className="mb-8">
       <div className="flex items-center gap-4 md:gap-6">
+        <div className="group relative h-40 w-40 overflow-hidden rounded-lg">
         <Image
           src="/kentkalaw-v1.jpg"
           alt="Kent Kalaw"
           width={160}
           height={160}
-          className="rounded-lg"
+          className="rounded-lg object-cover w-full h-full group-hover:opacity-0 transition-opacity duration-300"
         />
+
+        <Image
+          src="/isagi-yoichi.jpg"
+          alt="Isagi Yoichi"
+          width={160}
+          height={160}
+          className="rounded-lg object-cover w-full h-full absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        />
+
+        </div>
 
         <div className="flex-1 min-w-0">
           <div className="flex items-center justify-between gap-2">
