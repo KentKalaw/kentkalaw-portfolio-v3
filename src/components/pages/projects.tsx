@@ -28,7 +28,7 @@ export default function Projects() {
   ]
 
   return (
-<section className="mb-3">
+<section className="mb-3 animate-fade-in animate-delay-300">
   <Card>
     <CardHeader className="flex items-center justify-between">
       <CardTitle className="font-mono flex items-center gap-2 text-base md:text-xl font-bold">

@@ -60,7 +60,7 @@ export default function Contact () {
   };
 
   return (
-    <section id="contact" className="mb-3">
+    <section id="contact" className="mb-3 animate-fade-in animate-delay-700">
     <Card>
       <CardHeader className="flex items-center justify-between">
           <CardTitle className="font-mono flex items-center gap-2 text-base md:text-xl font-bold"><MailPlus />

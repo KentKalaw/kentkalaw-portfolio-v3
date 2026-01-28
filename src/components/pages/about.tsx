@@ -2,7 +2,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { BriefcaseBusiness } from 'lucide-react';
 export default function About() {
   return (
-    <section className="mb-3">
+    <section className="mb-3 animate-fade-in animate-delay-100">
     <Card className="">
       <CardHeader>
         <CardTitle className="font-mono flex items-center gap-2 text-base md:text-xl font-bold">

@@ -13,21 +13,10 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 export default function Name() {
-  const [isMdUp, setIsMdUp] = useState(false)
   const [showCVViewer, setShowCVViewer] = useState(false);
 
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(min-width: 768px)")
-    setIsMdUp(mediaQuery.matches)
-
-    const handler = (e: MediaQueryListEvent) => setIsMdUp(e.matches)
-    mediaQuery.addEventListener("change", handler)
-
-    return () => mediaQuery.removeEventListener("change", handler)
-  }, [])
-
   return (
-    <section className="mb-8">
+    <section className="mb-8 animate-fade-in">
       <div className="flex items-center gap-4 md:gap-6">
         <div className="group relative h-40 w-40 overflow-hidden rounded-lg">
         <Image
@@ -35,6 +24,8 @@ export default function Name() {
           alt="Kent Kalaw"
           width={160}
           height={160}
+          loading="eager"
+          priority
           className="rounded-lg object-cover w-full h-full group-hover:opacity-0 transition-opacity duration-300"
         />
 
@@ -52,7 +43,8 @@ export default function Name() {
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2">
               <h1 className="text-base md:text-2xl font-bold truncate">
-                {isMdUp ? "Kent Francis E. Kalaw" : "Kent Kalaw"}
+                <span className="md:hidden">Kent Kalaw</span>
+                <span className="hidden md:inline">Kent Francis E. Kalaw</span>
               </h1>
               <svg
                 viewBox="0 0 22 22"

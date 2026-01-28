@@ -22,7 +22,7 @@ const experiences: ExperienceItemProps[] = [
 
 export default function Experience() {
     return (
-        <section className="mb-3">
+        <section className="mb-3 animate-fade-in animate-delay-400">
         <Card className="">
             <CardHeader>
                 <CardTitle className=" font-mono flex items-center gap-2 text-base md:text-xl font-bold">

@@ -37,7 +37,7 @@ export default function TechStack() {
   const extraStack = techStackData.slice(2)
 
   return (
-    <section className="mb-3">
+    <section className="mb-3 animate-fade-in animate-delay-200">
       <Card className="mt-3">
   <CardHeader>
     <CardTitle className="font-mono flex items-center gap-2 text-base md:text-xl font-bold"><TypeOutline />
