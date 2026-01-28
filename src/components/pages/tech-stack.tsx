@@ -55,7 +55,7 @@ export default function TechStack() {
           >
             <CarouselContent>
               {techIcons.map((icon, index) => (
-                <CarouselItem className="basis-1/5" key={index}>
+                <CarouselItem className="basis-1/3 md:basis-1/5" key={index}>
                   <div className="flex justify-center">
                     <img
                       className="h-10 w-auto mx-6"
@@ -66,8 +66,8 @@ export default function TechStack() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
+            <CarouselPrevious className="left-0 md:-left-12" />
+            <CarouselNext className="right-0 md:-right-12" />
           </Carousel>
         </CardContent>
       </Card>
