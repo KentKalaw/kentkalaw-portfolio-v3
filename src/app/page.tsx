@@ -8,13 +8,12 @@ import Certifications from "@/components/pages/certifications";
 import Socials from "@/components/pages/socials";
 import Projects from "@/components/pages/projects";
 import Contact from "@/components/pages/contact";
-import { Linkedin, Github, Facebook } from "lucide-react"
+import { Linkedin, Github, Facebook } from "lucide-react";
 
 export default function Home() {
-
   return (
     <main className="relative min-h-screen">
-      <div className="max-w-4xl mx-auto px-4 py-8">
+      <div className="mx-auto max-w-4xl px-4 py-8">
         <Name />
         <div className="flex flex-col md:flex-row md:gap-3">
           <div className="w-full md:w-1/2">
@@ -36,16 +35,16 @@ export default function Home() {
         <GithubContributionsCard />
         <div className="flex flex-col md:flex-row md:gap-3">
           <div className="w-full md:w-3/10">
-            <Socials/>
+            <Socials />
           </div>
           <div className="w-full md:w-7/10">
             <Projects />
           </div>
         </div>
         <Contact />
-        <footer className="border-t border-gray-200 dark:border-gray-700 pt-8 mt-12">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-gray-600 dark:text-gray-400 text-sm">
+        <footer className="mt-12 border-t border-gray-200 pt-8 dark:border-gray-700">
+          <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+            <p className="text-sm text-gray-600 dark:text-gray-400">
               © {new Date().getFullYear()} Kent Kalaw. All rights reserved.
             </p>
             <div className="flex gap-4">
@@ -53,7 +52,7 @@ export default function Home() {
                 href="https://linkedin.com/in/kentkalaw"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-600 dark:text-gray-400 hover:text-blue-600 transition-colors"
+                className="text-gray-600 transition-colors hover:text-blue-600 dark:text-gray-400"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="h-5 w-5" />
@@ -63,7 +62,7 @@ export default function Home() {
                 href="https://github.com/kentkalaw"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+                className="text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
                 aria-label="GitHub"
               >
                 <Github className="h-5 w-5" />
@@ -73,7 +72,7 @@ export default function Home() {
                 href="https://facebook.com/kentkalaw03"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-colors"
+                className="text-gray-600 transition-colors hover:text-blue-500 dark:text-gray-400"
                 aria-label="Facebook"
               >
                 <Facebook className="h-5 w-5" />
@@ -85,4 +84,3 @@ export default function Home() {
     </main>
   );
 }
-
