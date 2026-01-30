@@ -11,13 +11,13 @@ export default function About() {
           </CardTitle>
         </CardHeader>
         <CardContent className="prose dark:prose-invert max-w-none text-sm md:text-sm">
-          <p className="mb-2 text-gray-900 dark:text-gray-300">
+          <p className="mb-2 text-gray-900 dark:text-gray-300 text-justify">
             I'm a Fresh Graduate Full-stack Software Developer with a passion in
             building web and mobile applications using modern technologies. I
-            work on projects including building web applications, mobile
-            applications, and RESTful APIs.
+            work on projects including building scalable digital solutions and
+            integrating RESTful APIs.
           </p>
-          <p className="mb-2 text-gray-900 dark:text-gray-300">
+          <p className="mb-2 text-gray-900 dark:text-gray-300 text-justify">
             I'm passionate about learning new technologies and sharing knowledge
             with the developer community. Currently exploring AI integration and
             modern development workflows.
