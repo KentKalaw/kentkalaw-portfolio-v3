@@ -24,7 +24,7 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>;
 
-export default function Contact () {
+export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
@@ -60,93 +60,92 @@ export default function Contact () {
   };
 
   return (
-    <section id="contact" className="mb-3 animate-fade-in animate-delay-700">
-    <Card>
-      <CardHeader className="flex items-center justify-between">
-          <CardTitle className="font-mono flex items-center gap-2 text-base md:text-xl font-bold"><MailPlus />
-          Get In Touch
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <p className="text-muted-foreground text-justify mb-6 text-xs">
-          I'm currently open to new opportunities and collaborations.
-          Whether you have a question, a project idea, or just want to say
-          hello, feel free to reach out. I look forward to connecting with
-          you!
-        </p>
+    <section id="contact" className="animate-fade-in animate-delay-700 mb-3">
+      <Card>
+        <CardHeader className="flex items-center justify-between">
+          <CardTitle className="flex items-center gap-2 font-mono text-base font-bold md:text-xl">
+            <MailPlus />
+            Get In Touch
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-muted-foreground mb-6 text-justify text-xs">
+            I'm currently open to new opportunities and collaborations. Whether
+            you have a question, a project idea, or just want to say hello, feel
+            free to reach out. I look forward to connecting with you!
+          </p>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="name">Name</Label>
+                <Input
+                  id="name"
+                  placeholder="Enter your name"
+                  {...register("name")}
+                />
+                {errors.name && (
+                  <p className="text-sm text-red-500">{errors.name.message}</p>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  placeholder="Enter your email"
+                  type="email"
+                  {...register("email")}
+                />
+                {errors.email && (
+                  <p className="text-sm text-red-500">{errors.email.message}</p>
+                )}
+              </div>
+            </div>
+
             <div className="space-y-2">
-              <Label htmlFor="name">Name</Label>
+              <Label htmlFor="subject">Subject</Label>
               <Input
-                id="name"
-                placeholder="Enter your name"
-                {...register("name")}
+                id="subject"
+                placeholder="Enter the subject"
+                {...register("subject")}
               />
-              {errors.name && (
-                <p className="text-sm text-red-500">{errors.name.message}</p>
+              {errors.subject && (
+                <p className="text-sm text-red-500">{errors.subject.message}</p>
               )}
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                placeholder="Enter your email"
-                type="email"
-                {...register("email")}
+              <Label htmlFor="message">Message</Label>
+              <Textarea
+                id="message"
+                placeholder="Enter your message"
+                className="max-h-[200px] min-h-[100px]"
+                {...register("message")}
               />
-              {errors.email && (
-                <p className="text-sm text-red-500">{errors.email.message}</p>
+              {errors.message && (
+                <p className="text-sm text-red-500">{errors.message.message}</p>
               )}
             </div>
-          </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="subject">Subject</Label>
-            <Input
-              id="subject"
-              placeholder="Enter the subject"
-              {...register("subject")}
-            />
-            {errors.subject && (
-              <p className="text-sm text-red-500">{errors.subject.message}</p>
-            )}
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="message">Message</Label>
-            <Textarea
-              id="message"
-              placeholder="Enter your message"
-              className="min-h-[100px] max-h-[200px]"
-              {...register("message")}
-            />
-            {errors.message && (
-              <p className="text-sm text-red-500">{errors.message.message}</p>
-            )}
-          </div>
-
-          <Button
-            type="submit"
-            className="flex items-center gap-2 rounded-full"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? (
-              <>
-                <Loader2 className="h-4 w-4 animate-spin" /> Sending...
-              </>
-            ) : (
-              <>
-                <Send className="h-4 w-4" /> Send Message
-              </>
-            )}
-          </Button>
-        </form>
-      </CardContent>
-    </Card>
-</section>
-
+            <Button
+              type="submit"
+              className="flex items-center gap-2 rounded-full"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin" /> Sending...
+                </>
+              ) : (
+                <>
+                  <Send className="h-4 w-4" /> Send Message
+                </>
+              )}
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
+    </section>
   );
-};
+}

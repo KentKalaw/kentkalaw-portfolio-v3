@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
-import { ShieldCheck, ExternalLink } from "lucide-react"
-import { useState, useRef, useEffect } from "react"
-import Link from "next/link"
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { ShieldCheck, ExternalLink } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import Link from "next/link";
 
 export default function Certifications() {
   const certifications = [
@@ -25,51 +25,61 @@ export default function Certifications() {
       year: "2024",
       link: "https://www.netacad.com/certificates/?issuanceId=4cca30ff-2a82-40b7-9a9b-549d63f0903b",
     },
-  ]
+  ];
 
-  const [showAll, setShowAll] = useState(false)
-  const extraRef = useRef<HTMLDivElement>(null)
-  const [height, setHeight] = useState("0px")
+  const [showAll, setShowAll] = useState(false);
+  const extraRef = useRef<HTMLDivElement>(null);
+  const [height, setHeight] = useState("0px");
 
   useEffect(() => {
     if (extraRef.current) {
-      setHeight(showAll ? `${extraRef.current.scrollHeight}px` : "0px")
+      setHeight(showAll ? `${extraRef.current.scrollHeight}px` : "0px");
     }
-  }, [showAll])
+  }, [showAll]);
 
-  const mainCerts = certifications.slice(0, 2)
-  const extraCerts = certifications.slice(2)
+  const mainCerts = certifications.slice(0, 2);
+  const extraCerts = certifications.slice(2);
 
-  const CertificationRow = ({ title, company, year, link }: { title: string; company: string; year: string; link: string }) => (
+  const CertificationRow = ({
+    title,
+    company,
+    year,
+    link,
+  }: {
+    title: string;
+    company: string;
+    year: string;
+    link: string;
+  }) => (
     <Link
       href={link}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex items-center justify-between rounded-lg bg-muted/50 px-4 py-3 transition hover:bg-muted group"
+      className="bg-muted/50 hover:bg-muted group flex items-center justify-between rounded-lg px-4 py-3 transition"
     >
       <div>
         <p className="font-sans text-sm font-semibold">{title}</p>
-        <p className="text-xs text-muted-foreground">{company}</p>
+        <p className="text-muted-foreground text-xs">{company}</p>
       </div>
       <div className="flex items-center gap-2">
-        <span className="text-xs text-muted-foreground">{year}</span>
-        <ExternalLink className="h-3.5 w-3.5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+        <span className="text-muted-foreground text-xs">{year}</span>
+        <ExternalLink className="text-muted-foreground h-3.5 w-3.5 opacity-0 transition-opacity group-hover:opacity-100" />
       </div>
     </Link>
-  )
+  );
 
   return (
-    <section className="mb-3 animate-fade-in animate-delay-500">
+    <section className="animate-fade-in animate-delay-500 mb-3">
       <Card>
         <CardHeader className="flex items-center justify-between">
-          <CardTitle className="font-mono flex items-center gap-2 text-base md:text-xl font-bold">
+          <CardTitle className="flex items-center gap-2 font-mono text-base font-bold md:text-xl">
             <ShieldCheck />
             Certifications
           </CardTitle>
 
           <button
             onClick={() => setShowAll(!showAll)}
-            className="text-xs text-muted-foreground hover:underline"
+            className="text-muted-foreground text-xs hover:underline"
           >
             {showAll ? "Show Less" : "View All >"}
           </button>
@@ -83,7 +93,7 @@ export default function Certifications() {
           <div
             ref={extraRef}
             style={{ maxHeight: height }}
-            className="overflow-hidden transition-all duration-500 ease-in-out space-y-3"
+            className="space-y-3 overflow-hidden transition-all duration-500 ease-in-out"
           >
             {extraCerts.map((cert, i) => (
               <CertificationRow key={i} {...cert} />
@@ -92,5 +102,5 @@ export default function Certifications() {
         </CardContent>
       </Card>
     </section>
-  )
+  );
 }

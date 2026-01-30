@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { ThemeSwitch } from "@/components/theme-switch"
+import { ThemeSwitch } from "@/components/theme-switch";
 import { useEffect, useState } from "react";
 import { Mail, ChevronRight, FileUser, Download, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -16,33 +16,32 @@ export default function Name() {
   const [showCVViewer, setShowCVViewer] = useState(false);
 
   return (
-    <section className="mb-8 animate-fade-in">
+    <section className="animate-fade-in mb-8">
       <div className="flex items-center gap-4 md:gap-6">
         <div className="group relative h-40 w-40 overflow-hidden rounded-lg">
-        <Image
-          src="/kentkalaw-v1.jpg"
-          alt="Kent Kalaw"
-          width={160}
-          height={160}
-          loading="eager"
-          priority
-          className="rounded-lg object-cover w-full h-full group-hover:opacity-0 transition-opacity duration-300"
-        />
+          <Image
+            src="/kentkalaw-v1.jpg"
+            alt="Kent Kalaw"
+            width={160}
+            height={160}
+            loading="eager"
+            priority
+            className="h-full w-full rounded-lg object-cover transition-opacity duration-300 group-hover:opacity-0"
+          />
 
-        <Image
-          src="/isagi-yoichi.jpg"
-          alt="Isagi Yoichi"
-          width={160}
-          height={160}
-          className="rounded-lg object-cover w-full h-full absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        />
-
+          <Image
+            src="/isagi-yoichi.jpg"
+            alt="Isagi Yoichi"
+            width={160}
+            height={160}
+            className="absolute inset-0 h-full w-full rounded-lg object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+          />
         </div>
 
-        <div className="flex-1 min-w-0">
+        <div className="min-w-0 flex-1">
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2">
-              <h1 className="text-base md:text-2xl font-bold truncate">
+              <h1 className="truncate text-base font-bold md:text-2xl">
                 <span className="md:hidden">Kent Kalaw</span>
                 <span className="hidden md:inline">Kent Francis E. Kalaw</span>
               </h1>
@@ -59,9 +58,9 @@ export default function Name() {
             </div>
             <ThemeSwitch />
           </div>
-          <p className="text-xs md:text-sm text-foreground/70 flex items-center gap-1">
+          <p className="text-foreground/70 flex items-center gap-1 text-xs md:text-sm">
             <svg
-              className="w-3 h-3 md:w-3.5 md:h-3.5"
+              className="h-3 w-3 md:h-3.5 md:w-3.5"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -82,22 +81,21 @@ export default function Name() {
             Batangas City, Philippines
           </p>
 
-          <div className="flex items-center justify-between mt-2">
-            <p className="text-[13px] md:text-base font-medium text-foreground/80">
-              Software Developer{" "}
-              <span className="text-gray-400">/</span>{" "}
+          <div className="mt-2 flex items-center justify-between">
+            <p className="text-foreground/80 text-[13px] font-medium md:text-base">
+              Software Developer <span className="text-gray-400">/</span>{" "}
               Full-stack Developer
             </p>
           </div>
           <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center">
             <Button
-              className="font-sans h-8 w-full sm:w-auto hover:-translate-y-0 sm:hover:-translate-y-[2px] transition duration-300"
+              className="h-8 w-full font-sans transition duration-300 hover:-translate-y-0 sm:w-auto sm:hover:-translate-y-[2px]"
               onClick={() => {
-    const contactSection = document.getElementById("contact");
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: "smooth" });
-    }
-  }}
+                const contactSection = document.getElementById("contact");
+                if (contactSection) {
+                  contactSection.scrollIntoView({ behavior: "smooth" });
+                }
+              }}
             >
               <Mail className="mr-2 h-4 w-4" />
               Contact Me
@@ -106,7 +104,7 @@ export default function Name() {
 
             <Button
               variant="outline"
-              className="font-sans h-8 w-full sm:w-auto hover:-translate-y-0 sm:hover:-translate-y-[2px] transition duration-300"
+              className="h-8 w-full font-sans transition duration-300 hover:-translate-y-0 sm:w-auto sm:hover:-translate-y-[2px]"
               onClick={() => setShowCVViewer(true)}
             >
               <FileUser className="mr-2 h-4 w-4" />
@@ -117,7 +115,6 @@ export default function Name() {
         </div>
         <CVViewerDialog open={showCVViewer} onOpenChange={setShowCVViewer} />
       </div>
-
     </section>
   );
 }
@@ -141,10 +138,10 @@ const CVViewerDialog = ({ open, onOpenChange }: CVViewerDialogProps) => {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-[95vw] w-full h-[95vh] md:max-w-4xl md:h-[90vh] p-0 flex flex-col [&>button]:hidden">
-        <DialogHeader className="px-6 py-4 border-b border-border shrink-0">
+      <DialogContent className="flex h-[95vh] w-full max-w-[95vw] flex-col p-0 md:h-[90vh] md:max-w-4xl [&>button]:hidden">
+        <DialogHeader className="border-border shrink-0 border-b px-6 py-4">
           <div className="flex items-center justify-between gap-4">
-            <DialogTitle className="text-sm md:text-lg font-semibold">
+            <DialogTitle className="text-sm font-semibold md:text-lg">
               My Resume
             </DialogTitle>
             <div className="flex items-center gap-2">
@@ -154,7 +151,7 @@ const CVViewerDialog = ({ open, onOpenChange }: CVViewerDialogProps) => {
                 onClick={handleDownload}
                 className="rounded-full bg-transparent"
               >
-                <Download className="w-4 h-4 mr-2" />
+                <Download className="mr-2 h-4 w-4" />
                 Download
               </Button>
               <DialogClose asChild>
@@ -170,10 +167,10 @@ const CVViewerDialog = ({ open, onOpenChange }: CVViewerDialogProps) => {
             </div>
           </div>
         </DialogHeader>
-        <div className="flex-1 min-h-0 overflow-hidden">
+        <div className="min-h-0 flex-1 overflow-hidden">
           <iframe
             src={cvPath}
-            className="w-full h-full border-0"
+            className="h-full w-full border-0"
             title="CV Preview"
           />
         </div>
