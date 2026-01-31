@@ -125,7 +125,7 @@ interface CVViewerDialogProps {
 }
 
 const CVViewerDialog = ({ open, onOpenChange }: CVViewerDialogProps) => {
-  const cvPath = "/Kent Francis Kalaw Resume.pdf";
+  const cvPath = "/Kent Francis Kalaw Resume - CV.pdf";
 
   const handleDownload = () => {
     const link = document.createElement("a");
