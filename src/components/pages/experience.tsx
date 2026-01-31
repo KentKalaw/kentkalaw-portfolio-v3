@@ -8,6 +8,11 @@ interface ExperienceItemProps {
 
 const experiences: ExperienceItemProps[] = [
   {
+    skill: "Freelance Web Developer",
+    title: "Freelance",
+    year: "2025 - Present",
+  },
+  {
     skill: "Frontend Developer - Intern",
     title: "University of Batangas - ICT Department",
     year: "2025",
@@ -15,7 +20,7 @@ const experiences: ExperienceItemProps[] = [
   {
     skill: "BS Information Technology",
     title: "University of Batangas",
-    year: "2021",
+    year: "2021 - 2025",
   },
 ];
 
@@ -31,7 +36,7 @@ export default function Experience() {
         </CardHeader>
         <CardContent>
           {experiences.map((exp, idx) => (
-            <div key={idx} className="relative pl-8 not-last:pb-9">
+            <div key={idx} className="relative pl-8 not-last:pb-8.5 ">
               <div className="bg-muted absolute top-2.5 left-0 h-full w-[2px] group-first:top-6 group-first:h-[calc(100%-24px)]">
                 <div
                   className={`border-primary absolute top-0 -left-[5px] h-3 w-3 rounded-full border-2 ${idx === 0 ? "bg-black" : "bg-background transition-colors duration-300 group-hover:bg-black"}`}

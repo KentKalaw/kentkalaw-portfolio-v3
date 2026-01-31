@@ -25,10 +25,10 @@ export default function Home() {
         </div>
         <TechStack />
         <div className="flex flex-col md:flex-row md:gap-3">
-          <div className="w-full md:w-6/10">
+          <div className="w-full md:w-1/2">
             <Certifications />
           </div>
-          <div className="w-full md:w-4/10">
+          <div className="w-full md:w-1/2">
             <Experience />
           </div>
         </div>

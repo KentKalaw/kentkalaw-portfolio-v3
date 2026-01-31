@@ -37,8 +37,8 @@ export default function Certifications() {
     }
   }, [showAll]);
 
-  const mainCerts = certifications.slice(0, 2);
-  const extraCerts = certifications.slice(2);
+  const mainCerts = certifications.slice(0, 3);
+  const extraCerts = certifications.slice(3);
 
   const CertificationRow = ({
     title,
