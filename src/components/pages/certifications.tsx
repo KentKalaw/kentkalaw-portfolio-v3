@@ -23,7 +23,7 @@ export default function Certifications() {
       title: "Cisco - Cybersecurity Essentials",
       company: "Cisco Networking Academy",
       year: "2024",
-      link: "https://www.netacad.com/certificates/?issuanceId=4cca30ff-2a82-40b7-9a9b-549d63f0903b",
+      link: "https://drive.google.com/file/d/1Y8-oDKbw9wapXuNLKapowOBovVQZ8oI8/view?usp=sharing",
     },
   ];
 
