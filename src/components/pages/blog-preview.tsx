@@ -41,7 +41,10 @@ export default function BlogPreview() {
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="mb-1 flex items-center gap-1">
-                      <span className="text-xs font-semibold text-gray-900 dark:text-gray-100">
+                      <span className="hidden md:block text-xs font-semibold text-gray-900 dark:text-gray-100">
+                        Kent Francis E. Kalaw
+                      </span>
+                      <span className="md:hidden block text-xs font-semibold text-gray-900 dark:text-gray-100">
                         Kent Kalaw
                       </span>
                       <svg
