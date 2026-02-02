@@ -4,17 +4,17 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { GitHubCalendar } from 'react-github-calendar';
 import { ChartLine } from "lucide-react";
 import { useTheme } from "next-themes";
-import React from "react";
+import { useEffect, useState, memo, useMemo} from "react";
 
-const GithubContributionsCard = React.memo(function GithubContributionsCard() {
+const GithubContributionsCard = memo(function GithubContributionsCard() {
   const { theme } = useTheme();
-  const [mounted, setMounted] = React.useState(false);
+  const [mounted, setMounted] = useState(false);
   
-  React.useEffect(() => {
+  useEffect(() => {
     setMounted(true);
   }, []);
   
-  const colorScheme = React.useMemo(() => {
+  const colorScheme = useMemo(() => {
     return theme === 'dark' ? 'dark' : 'light';
   }, [theme]);
   
@@ -37,9 +37,10 @@ const GithubContributionsCard = React.memo(function GithubContributionsCard() {
             )}
           </div>
           <p className="mt-3 text-center text-sm text-gray-600 dark:text-gray-400">
-            My Public GitHub contributions heatmap. Updated in real-time.
+            My Public GitHub contributions heatmap.
             Private contributions are not shown.
           </p>
+          <p className="text-center text-sm text-gray-600 dark:text-gray-400"> Updated in real-time.</p>
           
         </CardContent>
       </Card>
