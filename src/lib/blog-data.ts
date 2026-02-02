@@ -1,5 +1,6 @@
 export interface BlogPost {
   id: number;
+  title?: string;
   content: string;
   timestamp: string;
 }
@@ -7,12 +8,14 @@ export interface BlogPost {
 export const blogPosts: BlogPost[] = [
   {
     id: 2,
+    title: "Implementing AI Chatbot in My Portfolio",
     content: "I’m currently learning AI integration and trying to implement an AI chatbot dito sa portfolio ko. \nSo far, basic functionality pa lang ang tapos, tulad ng simple responses at UI integration.\n\n Ongoing pa yung improvements lalo na sa context awareness, better responses, at overall user experience.",
     timestamp: "Jan 28, 2026 · 11:15 PM",
 
   },
   {
     id: 1,
+    title: "My Journey as a Developer",
     content: "Hello! I created this blog para i-share ko sa inyo ang journey ko as a developer.\n\n Here, I'll be posting about anything what comes to my mind, the projects I work on, at kung anong nangyayari sa buhay ko ngayon, and all that stuff. \n\nStay tuned for all the updates I'll be sharing!!",
     timestamp: "Jan 26, 2026 · 10:59 PM",
     
