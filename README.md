@@ -2,6 +2,8 @@
 
 A modern, minimalistic, and responsive personal portfolio website created using Next.js.
 
+Access through: https://kentkalaw.vercel.app
+
 ![Portfolio Preview](public/desktop-preview.png)
 
 ## Features
