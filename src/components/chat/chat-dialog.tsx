@@ -146,7 +146,7 @@ export function ChatDialog() {
           if (error.name === "AbortError") {
             errorContent = "The request timed out. Please try again.";
           } else if (error.message.includes("busy")) {
-            errorContent = "I'm a bit busy right now. Please try again in a few moments! 😊";
+            errorContent = "I'm a bit busy right now. Please try again in a few moments!";
           }
         }
         
@@ -190,7 +190,7 @@ export function ChatDialog() {
     setIsOpen(false);
     setIsMinimized(false);
   };
-  
+
   if (!isOpen) {
     return (
       <Button
@@ -199,7 +199,8 @@ export function ChatDialog() {
         className={cn(
           "fixed bottom-6 left-6 z-50 h-12 w-12 md:h-14 md:w-14 rounded-full shadow-lg",
           "bg-primary hover:bg-primary/90 text-primary-foreground",
-          "transition-all duration-200 hover:scale-105"
+          "transition-all duration-200 hover:scale-105",
+          "animate-fade-in animate-delay-100"
         )}
       >
         <MessageCircle className="h-5 w-5 md:h-6 md:w-6" />
