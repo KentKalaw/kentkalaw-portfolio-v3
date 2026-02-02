@@ -179,4 +179,18 @@ body {
   .animate-delay-800 {
     animation-delay: 0.8s;
   }
+
+  /* Bounce up and down animation */
+  @keyframes bounceUpDown {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+
+  .animate-bounce-up-down {
+    animation: bounceUpDown 2s ease-in-out infinite;
+  }
 }

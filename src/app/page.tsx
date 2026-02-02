@@ -1,3 +1,5 @@
+"use client";
+
 import Name from "@/components/pages/name";
 import About from "@/components/pages/about";
 import BlogPreview from "@/components/pages/blog-preview";
@@ -8,11 +10,34 @@ import Certifications from "@/components/pages/certifications";
 import Socials from "@/components/pages/socials";
 import Projects from "@/components/pages/projects";
 import Contact from "@/components/pages/contact";
-import { Linkedin, Github, Facebook } from "lucide-react";
+import { useRef, useState, useEffect } from "react";
+import { Linkedin, Github, Facebook, ChevronsUp } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
+  const scrollAreaRef = useRef<HTMLDivElement | null>(null);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 300);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const triggerScrollToTop = () => {
+    if (scrollAreaRef.current) {
+      scrollAreaRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
+
   return (
-    <main className="relative min-h-screen">
+    <main className="relative min-h-screen" ref={scrollAreaRef}>
       <div className="mx-auto max-w-4xl px-4 py-8">
         <Name />
         <div className="flex flex-col md:flex-row md:gap-3">
@@ -42,6 +67,20 @@ export default function Home() {
           </div>
         </div>
         <Contact />
+
+        <Button
+          onClick={triggerScrollToTop}
+          size="icon"
+          className={`fixed right-8 bottom-8 z-50 rounded-full bg-gray-200 text-gray-800 transition-all duration-300 hover:scale-110 hover:bg-gray-300 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700 ${
+            showScrollTop
+              ? "animate-bounce-up-down pointer-events-auto translate-y-0 opacity-100"
+              : "pointer-events-none translate-y-4 opacity-0"
+          }`}
+          aria-label="Scroll to top"
+        >
+          <ChevronsUp className="h-6 w-6" />
+        </Button>
+
         <footer className="mt-12 border-t border-gray-200 pt-8 dark:border-gray-700">
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
             <p className="text-sm text-gray-600 dark:text-gray-400">
