@@ -12,12 +12,11 @@ Access through: https://kentkalaw.vercel.app
 - Styled with Tailwind CSS and shadcn/ui components
 - Dark/Light mode with smooth transitions
 - Fully responsive design
+- Integrated AI Chatbot
 - GitHub contributions integration
 - Blog section
 - Contact form
 - Smooth animations and transitions
-
-- TBA (AI ChatBot integration)
 
 ## File Structure
 ```
@@ -33,6 +32,7 @@ Access through: https://kentkalaw.vercel.app
 │ │ ├── pages/            # Page sections
 │ │ └── ui/               # UI components (shadcn)
 │ └── lib/                # Utility functions and data
+├── supabase/             # Supabase client
 ├── components.json       # shadcn/ui config
 ├── next.config.ts        # Next.js config
 ├── tailwind.config.ts    # Tailwind config
