@@ -14,17 +14,14 @@ export function ChatMessage({ role, content }: ChatMessageProps) {
 
   return (
     <div
-      className={cn(
-        "flex gap-3 p-4",
-        isUser ? "flex-row-reverse" : "flex-row"
-      )}
+      className={cn("flex gap-3 p-4", isUser ? "flex-row-reverse" : "flex-row")}
     >
       {isUser ? (
-        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
+        <div className="bg-primary text-primary-foreground flex h-8 w-8 shrink-0 items-center justify-center rounded-full">
           <User className="h-4 w-4" />
         </div>
       ) : (
-        <div className="relative h-8 w-8 shrink-0 rounded-full overflow-hidden">
+        <div className="relative h-8 w-8 shrink-0 overflow-hidden rounded-full">
           <Image
             src="/kentkalaw-v1.jpg"
             alt="Kent's AI Assistant"
@@ -38,7 +35,7 @@ export function ChatMessage({ role, content }: ChatMessageProps) {
           "max-w-[80%] rounded-2xl px-4 py-2 text-sm",
           isUser
             ? "bg-primary text-primary-foreground"
-            : "bg-muted text-foreground"
+            : "bg-muted text-foreground",
         )}
       >
         <p className="whitespace-pre-wrap">{content}</p>

@@ -70,11 +70,15 @@ export function ChatDialog() {
         const data = await response.json();
         if (data.messages && data.messages.length > 0) {
           const formattedMessages: Message[] = data.messages.map(
-            (msg: { id: string; role: "user" | "assistant"; content: string }) => ({
+            (msg: {
+              id: string;
+              role: "user" | "assistant";
+              content: string;
+            }) => ({
               id: msg.id,
               role: msg.role,
               content: msg.content,
-            })
+            }),
           );
           setMessages([WELCOME_MESSAGE, ...formattedMessages]);
         }
@@ -87,7 +91,7 @@ export function ChatDialog() {
   const sendMessage = useCallback(
     async (content: string) => {
       console.log("sendMessage called with:", content, "sessionId:", sessionId);
-      
+
       if (!sessionId) {
         console.error("No sessionId available!");
         const newId = uuidv4();
@@ -102,7 +106,7 @@ export function ChatDialog() {
         content,
       };
 
-      setMessages((prev) => [...prev, userMessage]);
+      setMessages(prev => [...prev, userMessage]);
       setIsLoading(true);
 
       const controller = new AbortController();
@@ -135,32 +139,34 @@ export function ChatDialog() {
           content: data.message,
         };
 
-        setMessages((prev) => [...prev, assistantMessage]);
+        setMessages(prev => [...prev, assistantMessage]);
       } catch (error) {
         clearTimeout(timeoutId);
         console.error("Error sending message:", error);
-        
-        let errorContent = "Sorry, I encountered an error. Please try again later or use the contact form to reach Kent directly.";
-        
+
+        let errorContent =
+          "Sorry, I encountered an error. Please try again later or use the contact form to reach Kent directly.";
+
         if (error instanceof Error) {
           if (error.name === "AbortError") {
             errorContent = "The request timed out. Please try again.";
           } else if (error.message.includes("busy")) {
-            errorContent = "I'm a bit busy right now. Please try again in a few moments!";
+            errorContent =
+              "I'm a bit busy right now. Please try again in a few moments!";
           }
         }
-        
+
         const errorMessage: Message = {
           id: uuidv4(),
           role: "assistant",
           content: errorContent,
         };
-        setMessages((prev) => [...prev, errorMessage]);
+        setMessages(prev => [...prev, errorMessage]);
       } finally {
         setIsLoading(false);
       }
     },
-    [sessionId]
+    [sessionId],
   );
 
   const clearChat = () => {
@@ -197,10 +203,10 @@ export function ChatDialog() {
         onClick={handleOpen}
         size="icon"
         className={cn(
-          "fixed bottom-6 left-6 z-50 h-12 w-12 md:h-14 md:w-14 rounded-full shadow-lg",
+          "fixed bottom-6 left-6 z-50 h-12 w-12 rounded-full shadow-lg md:h-14 md:w-14",
           "bg-primary hover:bg-primary/90 text-primary-foreground",
           "transition-all duration-200 hover:scale-105",
-          "animate-fade-in animate-delay-100"
+          "animate-fade-in animate-delay-100",
         )}
       >
         <MessageCircle className="h-5 w-5 md:h-6 md:w-6" />
@@ -213,16 +219,16 @@ export function ChatDialog() {
         onClick={handleRestore}
         size="icon"
         className={cn(
-          "fixed bottom-6 left-6 z-50 h-12 w-12 md:h-14 md:w-14 rounded-full shadow-lg",
+          "fixed bottom-6 left-6 z-50 h-12 w-12 rounded-full shadow-lg md:h-14 md:w-14",
           "bg-primary hover:bg-primary/90 text-primary-foreground",
           "transition-all duration-200 hover:scale-105",
-          "ring-2 ring-primary-foreground/30 ring-offset-2 ring-offset-background"
+          "ring-primary-foreground/30 ring-offset-background ring-2 ring-offset-2",
         )}
       >
         <div className="relative">
           <MessageCircle className="h-5 w-5 md:h-6 md:w-6" />
           {hasUnread && (
-            <span className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-red-500 animate-pulse" />
+            <span className="absolute -top-1 -right-1 h-3 w-3 animate-pulse rounded-full bg-red-500" />
           )}
         </div>
       </Button>
@@ -234,40 +240,40 @@ export function ChatDialog() {
         "fixed z-50",
         "inset-0",
         "md:inset-auto md:bottom-6 md:left-6",
-        "md:w-[380px] md:h-[500px] md:max-h-[80vh]",
+        "md:h-[500px] md:max-h-[80vh] md:w-[380px]",
         "md:rounded-lg",
         "bg-background border shadow-2xl",
         "flex flex-col overflow-hidden",
-        "animate-in slide-in-from-bottom-5 duration-200"
+        "animate-in slide-in-from-bottom-5 duration-200",
       )}
     >
-      <div className="flex items-center justify-between px-3 md:px-4 py-3 border-b bg-primary text-primary-foreground">
+      <div className="bg-primary text-primary-foreground flex items-center justify-between border-b px-3 py-3 md:px-4">
         <div className="flex items-center gap-2">
           <Button
             variant="ghost"
             size="icon"
             onClick={handleClose}
-            className="h-8 w-8 hover:bg-primary-foreground/20 md:hidden"
+            className="hover:bg-primary-foreground/20 h-8 w-8 md:hidden"
             title="Back"
           >
             <ArrowLeft className="h-4 w-4" />
           </Button>
           <div className="relative">
-            <div className="h-9 w-9 rounded-full overflow-hidden ring-2 ring-primary-foreground/30">
+            <div className="ring-primary-foreground/30 h-9 w-9 overflow-hidden rounded-full ring-2">
               <Image
                 src="/kentkalaw-v1.jpg"
                 alt="Kent's AI Assistant"
                 width={36}
                 height={36}
-                className="object-cover h-full w-full"
+                className="h-full w-full object-cover"
               />
             </div>
-            <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full bg-green-500 border-2 border-primary" />
+            <span className="border-primary absolute -right-0.5 -bottom-0.5 h-3 w-3 rounded-full border-2 bg-green-500" />
           </div>
           <div>
             <h3 className="text-sm font-semibold">Kent&apos;s AI Assistant</h3>
             <div className="flex items-center gap-1">
-              <span className="h-1.5 w-1.5 rounded-full bg-green-400 animate-pulse" />
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-green-400" />
               <p className="text-xs opacity-80">Online</p>
             </div>
           </div>
@@ -277,7 +283,7 @@ export function ChatDialog() {
             variant="ghost"
             size="icon"
             onClick={clearChat}
-            className="h-8 w-8 hover:bg-primary-foreground/20"
+            className="hover:bg-primary-foreground/20 h-8 w-8"
             title="Clear chat"
           >
             <Trash2 className="h-4 w-4" />
@@ -286,7 +292,7 @@ export function ChatDialog() {
             variant="ghost"
             size="icon"
             onClick={handleMinimize}
-            className="h-8 w-8 hover:bg-primary-foreground/20 hidden md:flex"
+            className="hover:bg-primary-foreground/20 hidden h-8 w-8 md:flex"
             title="Minimize"
           >
             <Minus className="h-4 w-4" />
@@ -295,7 +301,7 @@ export function ChatDialog() {
             variant="ghost"
             size="icon"
             onClick={handleClose}
-            className="h-8 w-8 hover:bg-primary-foreground/20 hidden md:flex"
+            className="hover:bg-primary-foreground/20 hidden h-8 w-8 md:flex"
             title="Close"
           >
             <X className="h-4 w-4" />
@@ -307,7 +313,7 @@ export function ChatDialog() {
         className="flex-1 overflow-y-auto overscroll-contain"
       >
         <div className="flex flex-col">
-          {messages.map((message) => (
+          {messages.map(message => (
             <ChatMessage
               key={message.id}
               role={message.role}
@@ -316,7 +322,7 @@ export function ChatDialog() {
           ))}
           {isLoading && (
             <div className="flex gap-3 p-4">
-              <div className="relative h-8 w-8 shrink-0 rounded-full overflow-hidden">
+              <div className="relative h-8 w-8 shrink-0 overflow-hidden rounded-full">
                 <Image
                   src="/kentkalaw-v1.jpg"
                   alt="Kent's AI Assistant"
@@ -324,10 +330,10 @@ export function ChatDialog() {
                   className="object-cover"
                 />
               </div>
-              <div className="flex items-center gap-1 rounded-2xl bg-muted px-4 py-2">
-                <span className="h-2 w-2 animate-bounce rounded-full bg-muted-foreground [animation-delay:-0.3s]" />
-                <span className="h-2 w-2 animate-bounce rounded-full bg-muted-foreground [animation-delay:-0.15s]" />
-                <span className="h-2 w-2 animate-bounce rounded-full bg-muted-foreground" />
+              <div className="bg-muted flex items-center gap-1 rounded-2xl px-4 py-2">
+                <span className="bg-muted-foreground h-2 w-2 animate-bounce rounded-full [animation-delay:-0.3s]" />
+                <span className="bg-muted-foreground h-2 w-2 animate-bounce rounded-full [animation-delay:-0.15s]" />
+                <span className="bg-muted-foreground h-2 w-2 animate-bounce rounded-full" />
               </div>
             </div>
           )}

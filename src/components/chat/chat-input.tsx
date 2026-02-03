@@ -30,14 +30,17 @@ export function ChatInput({ onSend, isLoading, disabled }: ChatInputProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex items-center gap-2 p-4 border-t">
+    <form
+      onSubmit={handleSubmit}
+      className="flex items-center gap-2 border-t p-4"
+    >
       <Textarea
         value={input}
-        onChange={(e) => setInput(e.target.value)}
+        onChange={e => setInput(e.target.value)}
         onKeyDown={handleKeyDown}
         placeholder="Type your message..."
         disabled={isLoading || disabled}
-        className="min-h-[44px] max-h-[120px] resize-none"
+        className="max-h-[120px] min-h-[44px] resize-none"
         rows={1}
       />
       <Button
