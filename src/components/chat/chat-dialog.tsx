@@ -19,7 +19,7 @@ const WELCOME_MESSAGE: Message = {
   id: "welcome",
   role: "assistant",
   content:
-    "Hi! 👋 I'm Kent's AI assistant. Feel free to ask me about his work, skills, projects, or anything else you'd like to know!",
+    "Hi! 👋 I'm Kent Francis Kalaw! Feel free to ask me about my work, skills, projects, or anything else you'd like to know!",
 };
 
 export function ChatDialog() {
@@ -271,7 +271,7 @@ export function ChatDialog() {
             <span className="border-primary absolute -right-0.5 -bottom-0.5 h-3 w-3 rounded-full border-2 bg-green-500" />
           </div>
           <div>
-            <h3 className="text-sm font-semibold">Kent&apos;s AI Assistant</h3>
+            <h3 className="text-sm font-semibold">Kent Francis Kalaw</h3>
             <div className="flex items-center gap-1">
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-green-400" />
               <p className="text-xs opacity-80">Online</p>
