@@ -32,7 +32,7 @@ Access through: https://kentkalaw.vercel.app
 │ │ ├── pages/            # Page sections
 │ │ └── ui/               # UI components (shadcn)
 │ └── lib/                # Utility functions and data
-├── supabase/             # Supabase client
+├── supabase/             # Supabase schema
 ├── components.json       # shadcn/ui config
 ├── next.config.ts        # Next.js config
 ├── tailwind.config.ts    # Tailwind config
