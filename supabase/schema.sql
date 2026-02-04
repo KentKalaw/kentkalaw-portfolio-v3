@@ -45,3 +45,67 @@ $$;
 -- Optional: Schedule the cleanup function to run daily using pg_cron
 -- Note: pg_cron needs to be enabled in your Supabase project settings
 -- SELECT cron.schedule('cleanup-old-chats', '0 0 * * *', 'SELECT cleanup_old_chat_sessions()');
+
+-- ============================================
+-- BLOGS TABLE SCHEMA
+-- ============================================
+
+-- Create the blogs table
+CREATE TABLE IF NOT EXISTS blogs (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  title TEXT NOT NULL,
+  content TEXT NOT NULL,
+  slug TEXT UNIQUE NOT NULL,
+  author_name TEXT DEFAULT 'Kent Francis E. Kalaw',
+  author_username TEXT DEFAULT 'kentkalaw',
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Create an index on slug for faster queries
+CREATE INDEX IF NOT EXISTS idx_blogs_slug ON blogs(slug);
+
+-- Create an index on created_at for ordering
+CREATE INDEX IF NOT EXISTS idx_blogs_created_at ON blogs(created_at DESC);
+
+-- Enable Row Level Security (RLS)
+ALTER TABLE blogs ENABLE ROW LEVEL SECURITY;
+
+-- Create a policy that allows anyone to read blogs (public access)
+CREATE POLICY "Allow public reads" ON blogs
+  FOR SELECT
+  TO anon, authenticated
+  USING (true);
+
+-- Create a policy that allows only authenticated users to insert blogs
+CREATE POLICY "Allow authenticated inserts" ON blogs
+  FOR INSERT
+  TO authenticated
+  WITH CHECK (true);
+
+-- Create a policy that allows only authenticated users to update blogs
+CREATE POLICY "Allow authenticated updates" ON blogs
+  FOR UPDATE
+  TO authenticated
+  USING (true);
+
+-- Create a policy that allows only authenticated users to delete blogs
+CREATE POLICY "Allow authenticated deletes" ON blogs
+  FOR DELETE
+  TO authenticated
+  USING (true);
+
+-- Create a function to automatically update the updated_at timestamp
+CREATE OR REPLACE FUNCTION update_blogs_updated_at()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.updated_at = NOW();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Create a trigger to call the function before updates
+CREATE TRIGGER blogs_updated_at_trigger
+  BEFORE UPDATE ON blogs
+  FOR EACH ROW
+  EXECUTE FUNCTION update_blogs_updated_at();

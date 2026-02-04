@@ -1,0 +1,14 @@
+{
+  "rewrites": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "blogs.kentkalaw.vercel.app"
+        }
+      ],
+      "destination": "/blogs/:path*"
+    }
+  ]
+}
