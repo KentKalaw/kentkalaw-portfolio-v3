@@ -54,6 +54,7 @@ $$;
 CREATE TABLE IF NOT EXISTS blogs (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   title TEXT NOT NULL,
+  subtitle TEXT NOT NULL,
   content TEXT NOT NULL,
   slug TEXT UNIQUE NOT NULL,
   author_name TEXT DEFAULT 'Kent Francis E. Kalaw',
