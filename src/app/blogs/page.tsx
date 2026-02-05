@@ -1,4 +1,4 @@
-import { BookOpen, ArrowLeft } from "lucide-react";
+import { BookOpen } from "lucide-react";
 import { ThemeSwitch } from "@/components/theme-switch";
 import Link from "next/link";
 import Image from "next/image";
