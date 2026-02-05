@@ -1,5 +1,5 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { BookOpen, ArrowRight } from "lucide-react";
+import { BookOpen } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { blogPosts } from "@/lib/blog-data";
