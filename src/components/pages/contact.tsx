@@ -11,6 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Loader2, MailPlus, Send } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { GoogleReCaptchaProvider, useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
 const formSchema = z.object({
   name: z.string().min(2, "Please enter your name."),
@@ -24,8 +25,9 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>;
 
-export default function Contact() {
+function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { executeRecaptcha } = useGoogleReCaptcha();
 
   const {
     register,
@@ -37,20 +39,32 @@ export default function Contact() {
   });
 
   const onSubmit = async (data: FormData) => {
+    if (!executeRecaptcha) {
+      toast.error("reCAPTCHA not ready. Please try again.");
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
+
+      const token = await executeRecaptcha("contact_form");
+
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          ...data,
+          recaptchaToken: token,
+        }),
       });
 
       if (res.ok) {
         toast.success("Message sent successfully!");
         reset();
       } else {
-        toast.error("Something went wrong. Please try again.");
+        const errorData = await res.json();
+        toast.error(errorData.message || "Something went wrong. Please try again.");
       }
     } catch (error) {
       toast.error("Failed to send message.");
@@ -147,5 +161,13 @@ export default function Contact() {
         </CardContent>
       </Card>
     </section>
+  );
+}
+
+export default function Contact() {
+  return (
+    <GoogleReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}>
+      <ContactForm />
+    </GoogleReCaptchaProvider>
   );
 }
