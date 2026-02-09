@@ -39,6 +39,7 @@ function ContactForm() {
   });
 
   const onSubmit = async (data: FormData) => {
+
     if (!executeRecaptcha) {
       toast.error("reCAPTCHA not ready. Please try again.");
       return;
