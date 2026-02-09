@@ -68,18 +68,18 @@ export default function Home() {
         </div>
         <Contact />
 
-        <Button
-          onClick={triggerScrollToTop}
-          size="icon"
-          className={`fixed right-8 bottom-8 z-50 rounded-full bg-gray-900 text-gray-200 transition-all duration-300 hover:scale-110 hover:bg-gray-800 dark:bg-gray-200 dark:text-gray-900 dark:hover:bg-gray-300 ${
-            showScrollTop
-              ? "animate-bounce-up-down pointer-events-auto translate-y-0 opacity-100"
-              : "pointer-events-none translate-y-4 opacity-0"
-          }`}
-          aria-label="Scroll to top"
-        >
-          <ChevronsUp className="h-6 w-6" />
-        </Button>
+       <Button
+  onClick={triggerScrollToTop}
+  size="icon"
+  className={`fixed right-8 bottom-20 z-50 rounded-full bg-gray-900 text-gray-200 transition-all duration-300 hover:scale-110 hover:bg-gray-800 dark:bg-gray-200 dark:text-gray-900 dark:hover:bg-gray-300 ${
+    showScrollTop
+      ? "animate-bounce-up-down pointer-events-auto translate-y-0 opacity-100"
+      : "pointer-events-none translate-y-4 opacity-0"
+  }`}
+  aria-label="Scroll to top"
+>
+  <ChevronsUp className="h-6 w-6" />
+</Button>
 
         <footer className="mt-12 border-t border-gray-200 pt-8 dark:border-gray-700">
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
