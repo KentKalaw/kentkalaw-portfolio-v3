@@ -2,7 +2,7 @@
 
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { GitHubCalendar } from 'react-github-calendar';
-import { ChartLine } from "lucide-react";
+import { ChartLine, Github } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState, memo, useMemo} from "react";
 
@@ -23,7 +23,7 @@ const GithubContributionsCard = memo(function GithubContributionsCard() {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2 font-mono text-base font-bold md:text-xl">
-            <ChartLine />
+            <Github />
             Public GitHub Contributions
           </CardTitle>
         </CardHeader>
