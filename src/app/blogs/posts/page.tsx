@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { BookOpen, Plus, Edit3, Trash2 } from "lucide-react";
@@ -29,7 +29,7 @@ type DashboardPost = {
 
 const PAGE_SIZE = 5;
 
-export default function BlogPostsDashboardPage() {
+function BlogPostsDashboard() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [posts, setPosts] = useState<DashboardPost[]>([]);
@@ -329,4 +329,10 @@ export default function BlogPostsDashboardPage() {
   );
 }
 
-
+export default function BlogPostsDashboardPage() {
+  return (
+    <Suspense fallback={<div className="flex min-h-screen items-center justify-center px-4"><p className="text-sm text-muted-foreground">Loading…</p></div>}>
+      <BlogPostsDashboard />
+    </Suspense>
+  );
+}
