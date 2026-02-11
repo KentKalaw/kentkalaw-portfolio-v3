@@ -42,10 +42,6 @@ BEGIN
 END;
 $$;
 
--- Optional: Schedule the cleanup function to run daily using pg_cron
--- Note: pg_cron needs to be enabled in your Supabase project settings
--- SELECT cron.schedule('cleanup-old-chats', '0 0 * * *', 'SELECT cleanup_old_chat_sessions()');
-
 -- ============================================
 -- BLOGS TABLE SCHEMA
 -- ============================================
@@ -57,46 +53,50 @@ CREATE TABLE IF NOT EXISTS blogs (
   subtitle TEXT NOT NULL,
   content TEXT NOT NULL,
   slug TEXT UNIQUE NOT NULL,
-  author_name TEXT DEFAULT 'Kent Francis E. Kalaw',
-  author_username TEXT DEFAULT 'kentkalaw',
   created_at TIMESTAMPTZ DEFAULT NOW(),
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- Create an index on slug for faster queries
-CREATE INDEX IF NOT EXISTS idx_blogs_slug ON blogs(slug);
+-- Indexes for faster lookups
+CREATE INDEX IF NOT EXISTS idx_blogs_slug
+  ON blogs (slug);
 
--- Create an index on created_at for ordering
-CREATE INDEX IF NOT EXISTS idx_blogs_created_at ON blogs(created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_blogs_created_at
+  ON blogs (created_at DESC);
 
--- Enable Row Level Security (RLS)
+-- Enable Row Level Security
 ALTER TABLE blogs ENABLE ROW LEVEL SECURITY;
 
--- Create a policy that allows anyone to read blogs (public access)
-CREATE POLICY "Allow public reads" ON blogs
+-- Public can read blogs (both anon and authenticated)
+CREATE POLICY "blogs_public_select"
+  ON blogs
   FOR SELECT
   TO anon, authenticated
   USING (true);
 
--- Create a policy that allows only authenticated users to insert blogs
-CREATE POLICY "Allow authenticated inserts" ON blogs
+-- Only authenticated users can INSERT
+CREATE POLICY "blogs_authenticated_insert"
+  ON blogs
   FOR INSERT
   TO authenticated
   WITH CHECK (true);
 
--- Create a policy that allows only authenticated users to update blogs
-CREATE POLICY "Allow authenticated updates" ON blogs
+-- Only authenticated users can UPDATE
+CREATE POLICY "blogs_authenticated_update"
+  ON blogs
   FOR UPDATE
   TO authenticated
-  USING (true);
+  USING (true)
+  WITH CHECK (true);
 
--- Create a policy that allows only authenticated users to delete blogs
-CREATE POLICY "Allow authenticated deletes" ON blogs
+-- Only authenticated users can DELETE
+CREATE POLICY "blogs_authenticated_delete"
+  ON blogs
   FOR DELETE
   TO authenticated
   USING (true);
 
--- Create a function to automatically update the updated_at timestamp
+-- Automatically keep updated_at in sync
 CREATE OR REPLACE FUNCTION update_blogs_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -105,7 +105,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Create a trigger to call the function before updates
 CREATE TRIGGER blogs_updated_at_trigger
   BEFORE UPDATE ON blogs
   FOR EACH ROW

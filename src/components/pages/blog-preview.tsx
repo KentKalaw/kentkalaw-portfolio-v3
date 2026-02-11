@@ -13,7 +13,7 @@ export default function BlogPreview() {
         <CardHeader className="flex items-center justify-between">
           <CardTitle className="flex items-center gap-2 font-mono text-base font-bold md:text-xl">
             <BookOpen />
-            Blog & Notes
+            Blogs
           </CardTitle>
           <Link
             href="/blogs"

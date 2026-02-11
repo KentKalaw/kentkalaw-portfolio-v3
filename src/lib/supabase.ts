@@ -30,10 +30,9 @@ export type ChatMessage = {
 export type BlogPost = {
   id: string;
   title: string;
+  subtitle: string;
   content: string;
   slug: string;
-  author_name: string;
-  author_username: string;
   created_at: string;
   updated_at: string;
 };
