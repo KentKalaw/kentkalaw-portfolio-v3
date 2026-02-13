@@ -10,9 +10,8 @@ import {
 export default function Name() {
   return (
     <section className="animate-fade-in">
-      <div className="flex flex-col items-center gap-4 border-x border-edge md:flex-row md:items-center md:gap-6">
-        
-        <div className="group relative h-40 w-40 screen-line-before screen-line-after rounded-full bg-zinc-300 p-1 shadow-xs dark:bg-zinc-800">
+      <div className="border-edge flex flex-col items-center gap-4 border-x md:flex-row md:items-center md:gap-6">
+        <div className="group screen-line-before screen-line-after relative h-40 w-40 rounded-full bg-zinc-300 p-1 shadow-xs dark:bg-zinc-800">
           <div className="relative h-full w-full overflow-hidden rounded-full bg-white">
             <Image
               src="/kentkalaw-v1.jpg"
@@ -31,8 +30,8 @@ export default function Name() {
           </div>
         </div>
 
-        <div className="min-w-0 flex-1 w-full md:w-auto">
-          <div className="flex items-center justify-center md:justify-between gap-2">
+        <div className="w-full min-w-0 flex-1 md:w-auto">
+          <div className="flex items-center justify-center gap-2 md:justify-between">
             <div className="flex items-center gap-2">
               <h1 className="truncate text-base font-bold md:text-2xl">
                 <span className="font-mono">Kent Francis E. Kalaw</span>
@@ -49,64 +48,70 @@ export default function Name() {
               </svg>
             </div>
           </div>
-          <div className="flex items-center justify-center md:justify-between gap-2">
+          <div className="flex items-center justify-center gap-2 md:justify-between">
             <div className="flex items-center gap-2">
-          <p className="text-foreground/70 flex items-center gap-1 text-xs md:text-base font-mono">
-            <svg
-              className="h-3 w-3 md:h-5 md:w-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="1.5"
-                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-              />
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="1.5"
-                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-              />
-            </svg>
-            Batangas City, Philippines
-          </p>
-          </div>
+              <p className="text-foreground/70 flex items-center gap-1 font-mono text-xs md:text-base">
+                <svg
+                  className="h-3 w-3 md:h-5 md:w-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1.5"
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1.5"
+                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                </svg>
+                Batangas City, Philippines
+              </p>
+            </div>
           </div>
 
-          <div className="flex items-center justify-center md:justify-between gap-2">
+          <div className="flex items-center justify-center gap-2 md:justify-between">
             <div className="flex items-center gap-2">
-            <RotatingTextContainer text={
-              [
-                "Web Development",
-                "Software Developer",
-                "Full-stack Developer",
-                "API Integration",
-                "AI Integration",
-                "Database Management"
-              ]
-            } 
-            y={10}
-            duration={3000}
-            className="text-foreground/80 font-mono text-base md:text-lg">
-              <RotatingText />
-            </RotatingTextContainer>
+              <RotatingTextContainer
+                text={[
+                  "Web Development",
+                  "Software Developer",
+                  "Full-stack Developer",
+                  "API Integration",
+                  "AI Integration",
+                  "Database Management",
+                ]}
+                y={10}
+                duration={3000}
+                className="text-foreground/80 font-mono text-base md:text-lg"
+              >
+                <RotatingText />
+              </RotatingTextContainer>
             </div>
           </div>
-          <div className="flex items-center justify-center md:justify-between gap-2 mb-2">
+          <div className="mb-2 flex items-center justify-center gap-2 md:justify-between">
             <div className="flex items-center gap-2">
-              <Badge variant="outline" className="inline-flex items-center gap-1 rounded-lg px-3 py-1 text-xs font-mono font-medium text-green-500 bg-green-50 dark:bg-green-950 dark:text-green-400">
-              <CircleSmall className="h-2 w-2 animate-pulse text-green-500" />
-              AVAILABLE FOR WORK
-            </Badge>
-            <Badge variant="outline" className="inline-flex items-center gap-1 rounded-lg px-3 py-1 text-xs font-mono font-medium text-blue-500 bg-blue-50 dark:bg-blue-950 dark:text-blue-400">
-              <CircleSmall className="h-2 w-2 animate-pulse text-blue-500" />
-              FRESH GRADUATE
-            </Badge>
+              <Badge
+                variant="outline"
+                className="inline-flex items-center gap-1 rounded-lg bg-green-50 px-3 py-1 font-mono text-xs font-medium text-green-500 dark:bg-green-950 dark:text-green-400"
+              >
+                <CircleSmall className="h-2 w-2 animate-pulse text-green-500" />
+                AVAILABLE FOR WORK
+              </Badge>
+              <Badge
+                variant="outline"
+                className="inline-flex items-center gap-1 rounded-lg bg-blue-50 px-3 py-1 font-mono text-xs font-medium text-blue-500 dark:bg-blue-950 dark:text-blue-400"
+              >
+                <CircleSmall className="h-2 w-2 animate-pulse text-blue-500" />
+                FRESH GRADUATE
+              </Badge>
             </div>
-            </div>
+          </div>
         </div>
       </div>
     </section>

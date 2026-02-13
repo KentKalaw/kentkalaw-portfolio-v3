@@ -15,7 +15,12 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import Autoplay from "embla-carousel-autoplay";
-import { Panel, PanelHeader, PanelTitle, PanelContent } from "@/components/panel";
+import {
+  Panel,
+  PanelHeader,
+  PanelTitle,
+  PanelContent,
+} from "@/components/panel";
 
 export default function TechStack() {
   const techIcons = [
@@ -35,54 +40,54 @@ export default function TechStack() {
   ];
 
   return (
-      <Panel className="animate-fade-in animate-delay-500">
-        <PanelHeader>
-          <PanelTitle>
-            <p className="text-base tracking-[0.8em] uppercase text-muted-foreground">
-          Tech Stack
-        </p>
-          </PanelTitle>
-        </PanelHeader>
+    <Panel className="animate-fade-in animate-delay-500">
+      <PanelHeader>
+        <PanelTitle>
+          <p className="text-muted-foreground text-base tracking-[0.8em] uppercase">
+            Tech Stack
+          </p>
+        </PanelTitle>
+      </PanelHeader>
 
-        <PanelContent className="relative flex items-center justify-center overflow-hidden py-6">
-          <TooltipProvider>
-            <Carousel
-              className="w-full max-w-5xl"
-              opts={{
-                align: "start",
-                loop: true,
-              }}
-              plugins={[
-                Autoplay({
-                  delay: 1250,
-                  stopOnInteraction: false,
-                  stopOnMouseEnter: true,
-                }),
-              ]}
-            >
-              <CarouselContent>
-                {techIcons.map((icon, index) => (
-                  <CarouselItem className="basis-1/3 md:basis-1/5" key={index}>
-                    <div className="flex justify-center">
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <img
-                            className="mx-6 h-10 w-auto cursor-pointer"
-                            src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${icon.path}`}
-                            alt={icon.name + " logo"}
-                          />
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>{icon.name}</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </div>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-            </Carousel>
-          </TooltipProvider>
-        </PanelContent>
-      </Panel>
+      <PanelContent className="relative flex items-center justify-center overflow-hidden py-6">
+        <TooltipProvider>
+          <Carousel
+            className="w-full max-w-5xl"
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            plugins={[
+              Autoplay({
+                delay: 1250,
+                stopOnInteraction: false,
+                stopOnMouseEnter: true,
+              }),
+            ]}
+          >
+            <CarouselContent>
+              {techIcons.map((icon, index) => (
+                <CarouselItem className="basis-1/3 md:basis-1/5" key={index}>
+                  <div className="flex justify-center">
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <img
+                          className="mx-6 h-10 w-auto cursor-pointer"
+                          src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${icon.path}`}
+                          alt={icon.name + " logo"}
+                        />
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>{icon.name}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+        </TooltipProvider>
+      </PanelContent>
+    </Panel>
   );
 }

@@ -2,7 +2,12 @@
 
 import { ShieldCheck, ExternalLink } from "lucide-react";
 import Link from "next/link";
-import { Panel, PanelHeader, PanelTitle, PanelContent } from "@/components/panel";
+import {
+  Panel,
+  PanelHeader,
+  PanelTitle,
+  PanelContent,
+} from "@/components/panel";
 
 export default function Certifications() {
   const certifications = [
@@ -24,7 +29,6 @@ export default function Certifications() {
       year: "2024",
       link: "https://drive.google.com/file/d/1Y8-oDKbw9wapXuNLKapowOBovVQZ8oI8/view?usp=sharing",
     },
-
   ];
 
   const mainCerts = certifications.slice(0, 6);
@@ -50,7 +54,7 @@ export default function Certifications() {
         <p className="font-sans text-sm font-semibold">{title}</p>
         <p className="text-muted-foreground text-xs">{company}</p>
       </div>
-      <div className="flex items-center gap-2 mt-2">
+      <div className="mt-2 flex items-center gap-2">
         <span className="text-muted-foreground text-xs">{year}</span>
         <ExternalLink className="text-muted-foreground h-3.5 w-3.5 opacity-0 transition-opacity group-hover:opacity-100" />
       </div>
@@ -58,28 +62,28 @@ export default function Certifications() {
   );
 
   return (
-     <Panel id="certifications" className="animate-fade-in animate-delay-500">
-  <PanelHeader>
-    <div className="flex items-center justify-between w-full">
-      <PanelTitle className="text-base tracking-[0.4em] sm:tracking-[0.8em] uppercase text-muted-foreground">
-        Certifications
-      </PanelTitle>
+    <Panel id="certifications" className="animate-fade-in animate-delay-500">
+      <PanelHeader>
+        <div className="flex w-full items-center justify-between">
+          <PanelTitle className="text-muted-foreground text-base tracking-[0.4em] uppercase sm:tracking-[0.8em]">
+            Certifications
+          </PanelTitle>
 
-      <Link
-        href="/certifications"
-        className="text-xs text-muted-foreground transition-colors hover:text-foreground"
-      >
-        View all →
-      </Link>
-    </div>
-  </PanelHeader>
-        <PanelContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {mainCerts.map((cert, i) => (
-              <CertificationCard key={i} {...cert} />
-            ))}
-          </div>
-        </PanelContent>
-      </Panel>
+          <Link
+            href="/certifications"
+            className="text-muted-foreground hover:text-foreground text-xs transition-colors"
+          >
+            View all →
+          </Link>
+        </div>
+      </PanelHeader>
+      <PanelContent>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          {mainCerts.map((cert, i) => (
+            <CertificationCard key={i} {...cert} />
+          ))}
+        </div>
+      </PanelContent>
+    </Panel>
   );
 }

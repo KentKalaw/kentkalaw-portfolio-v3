@@ -10,8 +10,16 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Loader2, MailPlus, Send } from "lucide-react";
-import { Panel, PanelHeader, PanelTitle, PanelContent } from "@/components/panel";
-import { GoogleReCaptchaProvider, useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import {
+  Panel,
+  PanelHeader,
+  PanelTitle,
+  PanelContent,
+} from "@/components/panel";
+import {
+  GoogleReCaptchaProvider,
+  useGoogleReCaptcha,
+} from "react-google-recaptcha-v3";
 
 const formSchema = z.object({
   name: z.string().min(2, "Please enter your name."),
@@ -60,7 +68,9 @@ function ContactForm() {
         reset();
       } else {
         const errorData = await res.json();
-        toast.error(errorData.message || "Something went wrong. Please try again.");
+        toast.error(
+          errorData.message || "Something went wrong. Please try again.",
+        );
       }
     } catch {
       toast.error("Failed to send message.");
@@ -70,68 +80,101 @@ function ContactForm() {
   };
 
   return (
-       <Panel id="contact" className="animate-fade-in animate-delay-500">
-        <PanelHeader>
-          <PanelTitle>
-            <p className="text-base tracking-[0.8em] uppercase text-muted-foreground">
-          Get in Touch
-        </p>
-          </PanelTitle>
-        </PanelHeader>
-
-        <PanelContent className="space-y-6">
-          <p className="text-sm text-muted-foreground md:text-base text-justify">
-            I'm currently open to new opportunities and collaborations. Whether you have a question, a project idea, or just want to say hello, feel free to reach out. I look forward to connecting with you!
+    <Panel id="contact" className="animate-fade-in animate-delay-500">
+      <PanelHeader>
+        <PanelTitle>
+          <p className="text-muted-foreground text-base tracking-[0.8em] uppercase">
+            Get in Touch
           </p>
+        </PanelTitle>
+      </PanelHeader>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-              <div className="space-y-2">
-                <Label htmlFor="name">Name</Label>
-                <Input id="name" placeholder="Enter your name" {...register("name")} />
-                {errors.name && <p className="text-sm text-red-500">{errors.name.message}</p>}
-              </div>
+      <PanelContent className="space-y-6">
+        <p className="text-muted-foreground text-justify text-sm md:text-base">
+          I'm currently open to new opportunities and collaborations. Whether
+          you have a question, a project idea, or just want to say hello, feel
+          free to reach out. I look forward to connecting with you!
+        </p>
 
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" placeholder="Enter your email" {...register("email")} />
-                {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
-              </div>
-            </div>
-
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div className="space-y-2">
-              <Label htmlFor="subject">Subject</Label>
-              <Input id="subject" placeholder="Enter the subject" {...register("subject")} />
-              {errors.subject && <p className="text-sm text-red-500">{errors.subject.message}</p>}
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="message">Message</Label>
-              <Textarea
-                id="message"
-                placeholder="Enter your message"
-                className="min-h-[120px] max-h-[240px]"
-                {...register("message")}
+              <Label htmlFor="name">Name</Label>
+              <Input
+                id="name"
+                placeholder="Enter your name"
+                {...register("name")}
               />
-              {errors.message && <p className="text-sm text-red-500">{errors.message.message}</p>}
+              {errors.name && (
+                <p className="text-sm text-red-500">{errors.name.message}</p>
+              )}
             </div>
 
-            <Button
-              type="submit"
-              className="flex items-center justify-center gap-2 rounded-full w-full md:w-auto"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? <><Loader2 className="h-4 w-4 animate-spin" /> Sending...</> : <><Send className="h-4 w-4" /> Send Message</>}
-            </Button>
-          </form>
-        </PanelContent>
-      </Panel>
+            <div className="space-y-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="Enter your email"
+                {...register("email")}
+              />
+              {errors.email && (
+                <p className="text-sm text-red-500">{errors.email.message}</p>
+              )}
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="subject">Subject</Label>
+            <Input
+              id="subject"
+              placeholder="Enter the subject"
+              {...register("subject")}
+            />
+            {errors.subject && (
+              <p className="text-sm text-red-500">{errors.subject.message}</p>
+            )}
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="message">Message</Label>
+            <Textarea
+              id="message"
+              placeholder="Enter your message"
+              className="max-h-[240px] min-h-[120px]"
+              {...register("message")}
+            />
+            {errors.message && (
+              <p className="text-sm text-red-500">{errors.message.message}</p>
+            )}
+          </div>
+
+          <Button
+            type="submit"
+            className="flex w-full items-center justify-center gap-2 rounded-full md:w-auto"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? (
+              <>
+                <Loader2 className="h-4 w-4 animate-spin" /> Sending...
+              </>
+            ) : (
+              <>
+                <Send className="h-4 w-4" /> Send Message
+              </>
+            )}
+          </Button>
+        </form>
+      </PanelContent>
+    </Panel>
   );
 }
 
 export default function Contact() {
   return (
-    <GoogleReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}>
+    <GoogleReCaptchaProvider
+      reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+    >
       <ContactForm />
     </GoogleReCaptchaProvider>
   );
