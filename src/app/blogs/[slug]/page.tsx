@@ -1,6 +1,8 @@
+
 import { notFound } from "next/navigation";
+import CopyLinkButton from "./CopyLinkButton";
 import Link from "next/link";
-import { BookOpen } from "lucide-react";
+import { BookOpen, Link2 } from "lucide-react";
 import { ThemeSwitch } from "@/components/theme-switch";
 import {
   Breadcrumb,
@@ -10,6 +12,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { Button } from "@/components/ui/button";
 import { supabase, isSupabaseConfigured, type BlogPost } from "@/lib/supabase";
 import ReactMarkdown, { type Components } from "react-markdown";
 import { cn } from "@/lib/utils";
@@ -64,22 +67,13 @@ export default async function BlogPage(props: BlogPageProps) {
 
   const markdownComponents: Components = {
     code(codeProps) {
-      const {
-        inline,
-        className,
-        children,
-        ...props
-      }: {
-        inline?: boolean;
-        className?: string;
-        children: React.ReactNode;
-      } = codeProps as any;
+      const { inline, className, children, ...props }: any = codeProps;
 
       if (inline) {
         return (
           <code
             className={cn(
-              "rounded bg-zinc-100 px-1.5 py-0.5 text-xs font-mono text-zinc-900 dark:bg-zinc-800 dark:text-zinc-100",
+              "rounded bg-muted px-1.5 py-0.5 text-xs font-mono",
               className,
             )}
             {...props}
@@ -92,7 +86,7 @@ export default async function BlogPage(props: BlogPageProps) {
       return (
         <code
           className={cn(
-            "mt-4 block w-full overflow-x-auto rounded-lg border border-zinc-200 bg-zinc-950/95 px-3 py-2 text-xs leading-relaxed text-zinc-50 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 font-mono",
+            "mt-4 block w-full overflow-x-auto rounded-lg border border-edge bg-card px-3 py-3 text-xs leading-relaxed font-mono",
             className,
           )}
           {...props}
@@ -105,7 +99,7 @@ export default async function BlogPage(props: BlogPageProps) {
       return (
         <ul
           className={cn(
-            "mt-3 list-disc space-y-1 pl-5 text-sm leading-relaxed",
+            "mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed",
             className,
           )}
           {...props}
@@ -116,7 +110,7 @@ export default async function BlogPage(props: BlogPageProps) {
       return (
         <ol
           className={cn(
-            "mt-3 list-decimal space-y-1 pl-5 text-sm leading-relaxed",
+            "mt-4 list-decimal space-y-2 pl-5 text-sm leading-relaxed",
             className,
           )}
           {...props}
@@ -126,9 +120,11 @@ export default async function BlogPage(props: BlogPageProps) {
   };
 
   return (
-    <main className="relative min-h-screen">
-      <div className="mx-auto max-w-3xl px-4 py-8">
-        <div className="mb-6 flex items-center justify-between gap-2">
+    <main className="relative animate-fade-in animate-delay-100 min-h-screen overflow-x-hidden pt-18">
+      <div className="screen-line-before screen-line-after border-x border-edge max-w-5xl mx-auto px-4 py-10">
+
+        {/* Top Bar */}
+        <div className="mb-8 flex items-center justify-between">
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
@@ -148,34 +144,35 @@ export default async function BlogPage(props: BlogPageProps) {
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
+
           <ThemeSwitch />
         </div>
-
-        <header className="mb-8 space-y-2">
-          <div className="flex items-center gap-2 text-xs text-muted-foreground">
+        <header className="mb-10 space-y-3">
+          <div className="flex screen-line-before screen-line-after items-center py-6 gap-2 text-xs text-muted-foreground">
             <BookOpen className="h-4 w-4" />
             <span>{minutesToRead} min read</span>
             <span>·</span>
             <span>{formatDate(blog.created_at)}</span>
           </div>
+
           <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">
             {blog.title}
           </h1>
+
           {blog.subtitle && (
             <p className="text-sm text-muted-foreground md:text-base">
               {blog.subtitle}
             </p>
           )}
         </header>
-
-        <article className="prose prose-sm max-w-none text-sm leading-relaxed text-gray-900 dark:prose-invert dark:text-gray-100 md:prose-base">
+        <article className="prose prose-sm max-w-none text-sm leading-relaxed dark:prose-invert md:prose-base">
           <ReactMarkdown components={markdownComponents}>
             {blog.content}
           </ReactMarkdown>
         </article>
+        <div className="flex w-full justify-end my-6 border-t border-edge" />
+          <CopyLinkButton />
       </div>
     </main>
   );
 }
-
-

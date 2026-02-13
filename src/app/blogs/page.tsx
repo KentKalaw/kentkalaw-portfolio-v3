@@ -30,6 +30,7 @@ type PaginatedBlogs = {
 };
 
 const WORDS_PER_MINUTE = 200;
+const PAGE_SIZE = 3;
 
 function estimateReadingTime(content: string): number {
   const words = content.trim().split(/\s+/).filter(Boolean).length;
@@ -50,8 +51,6 @@ function formatDate(date: string | Date): string {
     year: "numeric",
   }).format(d);
 }
-
-const PAGE_SIZE = 4;
 
 async function getBlogs(page: number): Promise<PaginatedBlogs> {
   if (isSupabaseConfigured) {
@@ -85,7 +84,8 @@ async function getBlogs(page: number): Promise<PaginatedBlogs> {
   }
 
   const sortedFallback = [...fallbackBlogPosts].sort(
-    (a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime(),
+    (a, b) =>
+      new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime(),
   );
 
   const items = sortedFallback.map((post, index) => ({
@@ -122,9 +122,10 @@ export default async function BlogsPage({ searchParams }: BlogsPageProps) {
   const pageCount = Math.max(1, Math.ceil(total / PAGE_SIZE));
 
   return (
-    <main className="relative min-h-screen">
-      <div className="mx-auto max-w-3xl px-4 py-8">
-        <div className="animate-fade-in mb-6 flex items-center justify-between gap-2">
+    <main className="relative min-h-screen overflow-x-hidden pt-18">
+      <div className="screen-line-before screen-line-after border-x border-edge max-w-5xl mx-auto px-4 py-10">
+
+        <div className="animate-fade-in mb-8 flex items-center justify-between">
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
@@ -138,62 +139,78 @@ export default async function BlogsPage({ searchParams }: BlogsPageProps) {
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
-            <ThemeSwitch />
+
+          <ThemeSwitch />
         </div>
 
-        <div className="animate-fade-in animate-delay-100 mb-8">
+        <div className="screen-line-before screen-line-after py-6 animate-fade-in animate-delay-100 mb-10">
           <h1 className="mb-2 flex items-center gap-3 text-3xl font-bold md:text-4xl">
-            <BookOpen className="h-8 w-8" />
+            <BookOpen className="h-8 w-8 text-muted-foreground" />
             Blogs
           </h1>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
-            Everything about my life and my thoughts, and some technical stuff.
+          <p className="text-sm text-muted-foreground">
+            Everything about my life, thoughts, and technical explorations.
           </p>
         </div>
 
-        <div className="animate-fade-in animate-delay-200 space-y-3 rounded-xl border border-gray-200 bg-background/80 p-4 dark:border-gray-800">
-          {blogs.map((post, index) => (
+        {/* Blog List */}
+        <div className="animate-fade-in animate-delay-200 space-y-3 rounded-xl border border-edge bg-background/60 p-4">
+
+          {blogs.map((post) => (
             <div
               key={post.id}
-              className={`rounded-lg border bg-card/60 p-4 transition-colors hover:border-gray-300 hover:bg-card dark:hover:border-gray-700 ${index !== blogs.length - 1 ? "border-b-1" : ""}`}
+              className="group rounded-lg border border-edge bg-card/50 p-4 transition-all duration-200 hover:bg-muted/40"
             >
+              {/* Top Row */}
               <div className="flex items-start justify-between gap-4">
-                <div className="min-w-0 flex-1">
-                  <h2 className="truncate text-base font-semibold text-gray-900 dark:text-gray-100 md:text-lg">
+                <div className="min-w-0 flex-1 space-y-1">
+                  <h2 className="truncate text-base font-semibold text-foreground md:text-lg">
                     {post.title}
                   </h2>
+
                   {post.subtitle && (
-                    <p className="mt-1 line-clamp-1 text-sm text-gray-600 dark:text-gray-400">
+                    <p className="line-clamp-1 text-sm text-muted-foreground">
                       {post.subtitle}
                     </p>
                   )}
                 </div>
-                <span className="whitespace-nowrap text-xs text-gray-500 dark:text-gray-400">
+
+                <span className="shrink-0 whitespace-nowrap text-xs text-muted-foreground">
                   {post.minutesToRead} min read
                 </span>
               </div>
 
-             
-
+              {/* Bottom Row */}
               <div className="mt-4 flex items-center justify-between">
-                <span className="text-xs text-gray-500 dark:text-gray-400">
+                <span className="text-xs text-muted-foreground">
                   {formatDate(post.createdAt)}
                 </span>
-                <div className="flex items-center gap-2">
-                  <Button variant="outline" size="sm" className="shadow-none" asChild>
-                    <Link href={post.slug.startsWith("local-") ? "/blogs" : `/blogs/${post.slug}`}>
-                      <span className="mr-1 text-xs font-medium">Read</span>
-                      <ArrowRight className="h-3 w-3" />
-                    </Link>
-                  </Button>
-                </div>
+
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="shadow-none"
+                  asChild
+                >
+                  <Link
+                    href={
+                      post.slug.startsWith("local-")
+                        ? "/blogs"
+                        : `/blogs/${post.slug}`
+                    }
+                  >
+                    <span className="mr-1 text-xs font-medium">Read</span>
+                    <ArrowRight className="h-3 w-3" />
+                  </Link>
+                </Button>
               </div>
             </div>
           ))}
         </div>
 
+        {/* Pagination */}
         {pageCount > 1 && (
-          <div className="mt-6 flex items-center justify-between text-xs text-muted-foreground">
+          <div className="mt-8 flex items-center justify-between text-xs text-muted-foreground">
             <Button
               variant="ghost"
               size="sm"
@@ -201,13 +218,21 @@ export default async function BlogsPage({ searchParams }: BlogsPageProps) {
               asChild
               disabled={currentPage <= 1}
             >
-              <Link href={currentPage <= 2 ? "/blogs" : `/blogs?page=${currentPage - 1}`}>
+              <Link
+                href={
+                  currentPage <= 2
+                    ? "/blogs"
+                    : `/blogs?page=${currentPage - 1}`
+                }
+              >
                 Previous
               </Link>
             </Button>
+
             <span>
               Page {currentPage} of {pageCount}
             </span>
+
             <Button
               variant="ghost"
               size="sm"
@@ -215,7 +240,9 @@ export default async function BlogsPage({ searchParams }: BlogsPageProps) {
               asChild
               disabled={currentPage >= pageCount}
             >
-              <Link href={`/blogs?page=${currentPage + 1}`}>Next</Link>
+              <Link href={`/blogs?page=${currentPage + 1}`}>
+                Next
+              </Link>
             </Button>
           </div>
         )}
