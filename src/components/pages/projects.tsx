@@ -32,7 +32,7 @@ export default function Projects() {
       <Panel id="projects" className="animate-fade-in animate-delay-500">
   <PanelHeader>
     <div className="flex items-center justify-between w-full">
-      <PanelTitle className="text-base tracking-[0.2em] sm:tracking-[0.8em] uppercase text-muted-foreground">
+      <PanelTitle className="text-base tracking-[0.8em] uppercase text-muted-foreground">
         Projects
       </PanelTitle>
 

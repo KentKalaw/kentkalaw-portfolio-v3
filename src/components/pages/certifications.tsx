@@ -61,7 +61,7 @@ export default function Certifications() {
      <Panel id="certifications" className="animate-fade-in animate-delay-500">
   <PanelHeader>
     <div className="flex items-center justify-between w-full">
-      <PanelTitle className="text-base tracking-[0.2em] sm:tracking-[0.8em] uppercase text-muted-foreground">
+      <PanelTitle className="text-base tracking-[0.4em] sm:tracking-[0.8em] uppercase text-muted-foreground">
         Certifications
       </PanelTitle>
 

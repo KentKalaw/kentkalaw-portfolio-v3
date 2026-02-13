@@ -95,7 +95,7 @@ export default function Name() {
             </RotatingTextContainer>
             </div>
           </div>
-          <div className="flex items-center justify-center md:justify-between gap-2">
+          <div className="flex items-center justify-center md:justify-between gap-2 mb-2">
             <div className="flex items-center gap-2">
               <Badge variant="outline" className="inline-flex items-center gap-1 rounded-lg px-3 py-1 text-xs font-mono font-medium text-green-500 bg-green-50 dark:bg-green-950 dark:text-green-400">
               <CircleSmall className="h-2 w-2 animate-pulse text-green-500" />

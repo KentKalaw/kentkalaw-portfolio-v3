@@ -23,7 +23,7 @@ export default function About() {
           </p>
 
           <p className="text-justify text-justify text-muted-foreground">
-            My work includes API integration, full-stack systems, and performance-focused UI implementation. I’m currently exploring AI integration and modern development workflows to build smarter, more adaptive applications.
+            My work includes API integration, full-stack systems, and performance-focused UI implementation.
           </p>
         </PanelContent>
       </Panel>
