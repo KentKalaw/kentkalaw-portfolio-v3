@@ -25,7 +25,6 @@ function formatDate(date: string | Date): string {
 
 export default function BlogPreview() {
   const [posts, setPosts] = useState<PreviewPost[]>([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function load() {
@@ -47,11 +46,10 @@ export default function BlogPreview() {
             })) ?? [];
 
           setPosts(mapped);
-          setLoading(false);
           return;
         }
       }
-
+      
       const latest = [...fallbackBlogPosts]
         .sort(
           (a, b) =>
@@ -67,35 +65,30 @@ export default function BlogPreview() {
         }));
 
       setPosts(latest);
-      setLoading(false);
     }
 
     load();
   }, []);
 
   return (
-     <Panel id="blog" className="animate-fade-in animate-delay-500">
-  <PanelHeader>
-    <div className="flex items-center justify-between w-full">
-      <PanelTitle className="text-base tracking-[0.8em] uppercase text-muted-foreground">
-        Blog
-      </PanelTitle>
+    <Panel id="blog" className="animate-fade-in animate-delay-500">
+      <PanelHeader>
+        <div className="flex items-center justify-between w-full">
+          <PanelTitle className="text-base tracking-[0.8em] uppercase text-muted-foreground">
+            Blog
+          </PanelTitle>
 
-      <Link
-        href="/blogs"
-        className="text-xs text-muted-foreground transition-colors hover:text-foreground"
-      >
-        View all →
-      </Link>
-    </div>
-  </PanelHeader>
+          <Link
+            href="/blogs"
+            className="text-xs text-muted-foreground transition-colors hover:text-foreground"
+          >
+            View all →
+          </Link>
+        </div>
+      </PanelHeader>
 
       <PanelContent className="space-y-4">
-        {loading ? (
-          <p className="text-sm text-muted-foreground">
-            Loading latest posts…
-          </p>
-        ) : posts.length === 0 ? (
+        {posts.length === 0 ? (
           <p className="text-sm text-muted-foreground">
             No posts yet. Writing soon.
           </p>
@@ -117,6 +110,6 @@ export default function BlogPreview() {
           </div>
         )}
       </PanelContent>
-      </Panel>  
+    </Panel>
   );
 }
