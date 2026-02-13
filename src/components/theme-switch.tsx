@@ -1,16 +1,16 @@
 "use client"
 
-import * as React from "react"
-import { Switch } from "@/components/ui/switch"
 import { useTheme } from "next-themes"
 import { Sun, Moon } from "lucide-react"
+import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { useEffect, useState } from "react"
 
 export function ThemeSwitch() {
   const { theme, setTheme } = useTheme()
-  const [mounted, setMounted] = React.useState(false)
+  const [mounted, setMounted] = useState(false)
 
-  React.useEffect(() => {
+  useEffect(() => {
     setMounted(true)
   }, [])
 
@@ -19,34 +19,24 @@ export function ThemeSwitch() {
   const isDark = theme === "dark"
 
   return (
-    <div className="flex items-center gap-2">
-
-      <div className="relative h-5 w-5">
-        <Sun
-          className={cn(
-            "absolute h-5 w-5 transition-transform transition-opacity duration-300 ease-in-out",
-            isDark
-              ? "scale-0 rotate-90 opacity-0"
-              : "scale-100 rotate-0 opacity-100 text-yellow-500"
-          )}
-        />
-        <Moon
-          className={cn(
-            "absolute h-5 w-5 transition-transform transition-opacity duration-300 ease-in-out",
-            isDark
-              ? "scale-100 rotate-0 opacity-100 text-blue-400"
-              : "scale-0 -rotate-90 opacity-0"
-          )}
-        />
-      </div>
-
-
-      <Switch
-        checked={isDark}
-        onCheckedChange={(checked) =>
-          setTheme(checked ? "dark" : "light")
-        }
+    <Button
+      variant="ghost"
+      size="icon"
+      onClick={() => setTheme(isDark ? "light" : "dark")}
+      className="relative h-9 w-9 rounded-xl text-white/70 hover:bg-white/10 hover:text-white"
+    >
+      <Sun
+        className={cn(
+          "absolute h-5 w-5 transition-all duration-300",
+          isDark ? "scale-0 rotate-90 opacity-0" : "scale-100 rotate-0 opacity-100 text-yellow-400"
+        )}
       />
-    </div>
+      <Moon
+        className={cn(
+          "absolute h-5 w-5 transition-all duration-300",
+          isDark ? "scale-100 rotate-0 opacity-100 text-blue-400" : "scale-0 -rotate-90 opacity-0"
+        )}
+      />
+    </Button>
   )
 }

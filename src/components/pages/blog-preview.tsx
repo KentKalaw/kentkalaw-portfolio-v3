@@ -1,13 +1,10 @@
-
 "use client";
 
 import { useEffect, useState } from "react";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { BookOpen } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
 import { blogPosts as fallbackBlogPosts } from "@/lib/blog-data";
 import { supabase, isSupabaseConfigured, type BlogPost } from "@/lib/supabase";
+import { Panel, PanelHeader, PanelTitle, PanelContent } from "@/components/panel";
 
 type PreviewPost = {
   id: string | number;
@@ -58,8 +55,7 @@ export default function BlogPreview() {
       const latest = [...fallbackBlogPosts]
         .sort(
           (a, b) =>
-            new Date(b.timestamp).getTime() -
-            new Date(a.timestamp).getTime(),
+            new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
         )
         .slice(0, 2)
         .map((post) => ({
@@ -78,77 +74,49 @@ export default function BlogPreview() {
   }, []);
 
   return (
-    <section className="animate-fade-in animate-delay-100 mb-3">
-      <Card>
-        <CardHeader className="flex items-center justify-between">
-          <CardTitle className="flex items-center gap-2 font-mono text-base font-bold md:text-xl">
-            <BookOpen />
-            Blog
-          </CardTitle>
-          <Link
-            href="/blogs"
-            className="text-muted-foreground text-xs hover:underline"
-          >
-            View Blogs {">"}
-          </Link>
-        </CardHeader>
-        <CardContent>
-          {loading ? (
-            <p className="text-xs text-muted-foreground">
-              Loading latest posts…
-            </p>
-          ) : posts.length === 0 ? (
-            <p className="text-xs text-muted-foreground">
-              No posts yet. Write something soon.
-            </p>
-          ) : (
-            <div className="space-y-0">
-              {posts.map((post, index) => (
-                <div
-                  key={post.id}
-                  className={`py-3 ${
-                    index !== posts.length - 1
-                      ? "border-b border-gray-200 dark:border-gray-700"
-                      : ""
-                  }`}
-                >
-                  <div className="flex gap-2">
-                    <div className="flex-shrink-0">
-                      <Image
-                        src="/kentkalaw-v1.jpg"
-                        alt="Kent Kalaw"
-                        width={32}
-                        height={32}
-                        className="h-8 w-8 rounded-full object-cover"
-                      />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <div className="mb-1 flex items-center gap-1">
-                        <span className="hidden md:block text-xs font-semibold text-gray-900 dark:text-gray-100">
-                          Kent Francis E. Kalaw
-                        </span>
-                        <span className="md:hidden block text-xs font-semibold text-gray-900 dark:text-gray-100">
-                          Kent Kalaw
-                        </span>
-                        <span className="text-xs text-gray-500 dark:text-gray-400">
-                          ·
-                        </span>
-                        <span className="text-xs text-gray-500 dark:text-gray-400">
-                          {post.timestamp}
-                        </span>
-                      </div>
-                      <p className="line-clamp-3 text-xs leading-relaxed text-gray-900 dark:text-gray-100">
-                        {post.content}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </CardContent>
-      </Card>
-    </section>
+     <Panel id="blog" className="animate-fade-in animate-delay-500">
+  <PanelHeader>
+    <div className="flex items-center justify-between w-full">
+      <PanelTitle className="text-base tracking-[0.8em] uppercase text-muted-foreground">
+        Blog
+      </PanelTitle>
+
+      <Link
+        href="/blogs"
+        className="text-xs text-muted-foreground transition-colors hover:text-foreground"
+      >
+        View all →
+      </Link>
+    </div>
+  </PanelHeader>
+
+      <PanelContent className="space-y-4">
+        {loading ? (
+          <p className="text-sm text-muted-foreground">
+            Loading latest posts…
+          </p>
+        ) : posts.length === 0 ? (
+          <p className="text-sm text-muted-foreground">
+            No posts yet. Writing soon.
+          </p>
+        ) : (
+          <div className="divide-y divide-border/40">
+            {posts.map((post) => (
+              <article key={post.id} className="group py-6 transition-colors">
+                <Link href={`/blogs/${post.slug}`} className="block space-y-2">
+                  <p className="text-xs text-muted-foreground">{post.timestamp}</p>
+                  <h3 className="text-lg font-medium leading-snug transition-colors group-hover:text-foreground">
+                    {post.title}
+                  </h3>
+                  <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">
+                    {post.content}
+                  </p>
+                </Link>
+              </article>
+            ))}
+          </div>
+        )}
+      </PanelContent>
+      </Panel>  
   );
 }
-

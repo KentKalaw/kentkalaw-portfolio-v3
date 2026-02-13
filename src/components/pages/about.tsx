@@ -1,29 +1,32 @@
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { BriefcaseBusiness } from "lucide-react";
+"use client"
+
+import { Panel, PanelContent, PanelHeader, PanelTitle } from "@/components/panel"
+
 export default function About() {
   return (
-    <section className="animate-fade-in animate-delay-100 mb-3">
-      <Card className="">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 font-mono text-base font-bold md:text-xl">
-            <BriefcaseBusiness />
-            About
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="prose dark:prose-invert max-w-none text-sm md:text-sm">
-          <p className="mb-2 text-gray-900 dark:text-gray-300 text-justify">
-            I'm a Fresh Graduate Full-stack Software Developer with a passion in
-            building web and mobile applications using modern technologies. I
-            work on projects including building scalable digital solutions and
-            integrating RESTful APIs.
+    
+      <Panel className="animate-fade-in animate-delay-400">
+        <PanelHeader>
+          <PanelTitle>
+            <p className="text-base tracking-[0.8em] uppercase text-muted-foreground">
+          About
+        </p>
+          </PanelTitle>
+        </PanelHeader>
+
+        <PanelContent className="text-justify space-y-4 text-sm leading-relaxed md:text-base">
+          <p className="text-justify text-justify text-2xl font-semibold leading-snug md:text-3xl">
+            Full-stack developer focused on building scalable, clean, and user-friendly digital experiences.
           </p>
-          <p className="mb-2 text-gray-900 dark:text-gray-300 text-justify">
-            I'm passionate about learning new technologies and sharing knowledge
-            with the developer community. Currently exploring AI integration and
-            modern development workflows.
+          <p className="text-justify text-justify text-muted-foreground">
+            I'm a fresh graduate specializing in modern web and mobile development. I build responsive, production-ready applications using current frameworks and scalable architecture patterns.
           </p>
-        </CardContent>
-      </Card>
-    </section>
-  );
+
+          <p className="text-justify text-justify text-muted-foreground">
+            My work includes API integration, full-stack systems, and performance-focused UI implementation. I’m currently exploring AI integration and modern development workflows to build smarter, more adaptive applications.
+          </p>
+        </PanelContent>
+      </Panel>
+
+  )
 }

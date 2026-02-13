@@ -1,49 +1,41 @@
 "use client";
 
-import { ThemeSwitch } from "@/components/theme-switch";
-import { useEffect, useState } from "react";
-import { Mail, ChevronRight, FileUser, Download, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { CircleSmall } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+  RotatingText,
+  RotatingTextContainer,
+} from "@/components/animate-ui/primitives/texts/rotating";
 export default function Name() {
-  const [showCVViewer, setShowCVViewer] = useState(false);
-
   return (
-    <section className="animate-fade-in mb-8">
-      <div className="flex items-center gap-4 md:gap-6">
-        <div className="group relative h-40 w-40 overflow-hidden rounded-lg">
-          <Image
-            src="/kentkalaw-v1.jpg"
-            alt="Kent Kalaw"
-            width={160}
-            height={160}
-            loading="eager"
-            priority
-            className="h-full w-full rounded-lg object-cover transition-opacity duration-300 group-hover:opacity-0"
-          />
+    <section className="animate-fade-in">
+      <div className="flex flex-col items-center gap-4 border-x border-edge md:flex-row md:items-center md:gap-6">
+        
+        <div className="group relative h-40 w-40 screen-line-before screen-line-after rounded-full bg-zinc-300 p-1 shadow-xs dark:bg-zinc-800">
+          <div className="relative h-full w-full overflow-hidden rounded-full bg-white">
+            <Image
+              src="/kentkalaw-v1.jpg"
+              alt="Kent Kalaw"
+              fill
+              priority
+              className="object-cover transition-opacity duration-300 group-hover:opacity-0"
+            />
 
-          <Image
-            src="/isagi-yoichi.jpg"
-            alt="Isagi Yoichi"
-            width={160}
-            height={160}
-            className="absolute inset-0 h-full w-full rounded-lg object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-          />
+            <Image
+              src="/isagi-yoichi.jpg"
+              alt="Isagi Yoichi"
+              fill
+              className="object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+            />
+          </div>
         </div>
 
-        <div className="min-w-0 flex-1">
-          <div className="flex items-center justify-between gap-2">
+        <div className="min-w-0 flex-1 w-full md:w-auto">
+          <div className="flex items-center justify-center md:justify-between gap-2">
             <div className="flex items-center gap-2">
               <h1 className="truncate text-base font-bold md:text-2xl">
-                <span className="md:hidden">Kent Kalaw</span>
-                <span className="hidden md:inline">Kent Francis E. Kalaw</span>
+                <span className="font-mono">Kent Francis E. Kalaw</span>
               </h1>
               <svg
                 viewBox="0 0 22 22"
@@ -56,11 +48,12 @@ export default function Name() {
                 />
               </svg>
             </div>
-            <ThemeSwitch />
           </div>
-          <p className="text-foreground/70 flex items-center gap-1 text-xs md:text-sm">
+          <div className="flex items-center justify-center md:justify-between gap-2">
+            <div className="flex items-center gap-2">
+          <p className="text-foreground/70 flex items-center gap-1 text-xs md:text-base font-mono">
             <svg
-              className="h-3 w-3 md:h-3.5 md:w-3.5"
+              className="h-3 w-3 md:h-5 md:w-5"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -80,101 +73,42 @@ export default function Name() {
             </svg>
             Batangas City, Philippines
           </p>
-
-          <div className="mt-2 flex items-center justify-between">
-            <p className="text-foreground/80 text-[13px] font-medium md:text-base">
-              Software Developer <span className="text-gray-400">/</span>{" "}
-              Full-stack Developer
-            </p>
           </div>
-          <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center">
-            <Button
-              className="h-8 w-full font-sans transition duration-300 hover:-translate-y-0 sm:w-auto sm:hover:-translate-y-[2px]"
-              onClick={() => {
-                const contactSection = document.getElementById("contact");
-                if (contactSection) {
-                  contactSection.scrollIntoView({ behavior: "smooth" });
-                }
-              }}
-            >
-              <Mail className="mr-2 h-4 w-4" />
-              Contact Me
-              <ChevronRight className="ml-1 h-4 w-4" />
-            </Button>
-
-            <Button
-              variant="outline"
-              className="h-8 w-full font-sans transition duration-300 hover:-translate-y-0 sm:w-auto sm:hover:-translate-y-[2px]"
-              onClick={() => setShowCVViewer(true)}
-            >
-              <FileUser className="mr-2 h-4 w-4" />
-              View Resume
-              <ChevronRight className="ml-1 h-4 w-4" />
-            </Button>
           </div>
+
+          <div className="flex items-center justify-center md:justify-between gap-2">
+            <div className="flex items-center gap-2">
+            <RotatingTextContainer text={
+              [
+                "Web Development",
+                "Software Developer",
+                "Full-stack Developer",
+                "API Integration",
+                "AI Integration",
+                "Database Management"
+              ]
+            } 
+            y={10}
+            duration={3000}
+            className="text-foreground/80 font-mono text-base md:text-lg">
+              <RotatingText />
+            </RotatingTextContainer>
+            </div>
+          </div>
+          <div className="flex items-center justify-center md:justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <Badge variant="outline" className="inline-flex items-center gap-1 rounded-lg px-3 py-1 text-xs font-mono font-medium text-green-500 bg-green-50 dark:bg-green-950 dark:text-green-400">
+              <CircleSmall className="h-2 w-2 animate-pulse text-green-500" />
+              AVAILABLE FOR WORK
+            </Badge>
+            <Badge variant="outline" className="inline-flex items-center gap-1 rounded-lg px-3 py-1 text-xs font-mono font-medium text-blue-500 bg-blue-50 dark:bg-blue-950 dark:text-blue-400">
+              <CircleSmall className="h-2 w-2 animate-pulse text-blue-500" />
+              FRESH GRADUATE
+            </Badge>
+            </div>
+            </div>
         </div>
-        <CVViewerDialog open={showCVViewer} onOpenChange={setShowCVViewer} />
       </div>
     </section>
   );
 }
-
-interface CVViewerDialogProps {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-}
-
-const CVViewerDialog = ({ open, onOpenChange }: CVViewerDialogProps) => {
-  const cvPath = "/Kent-Francis-Kalaw-Resume.pdf";
-
-  const handleDownload = () => {
-    const link = document.createElement("a");
-    link.href = cvPath;
-    link.download = "Kent-Francis-Kalaw-Resume.pdf";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
-  return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="flex h-[95vh] w-full max-w-[95vw] flex-col p-0 md:h-[90vh] md:max-w-4xl [&>button]:hidden">
-        <DialogHeader className="border-border shrink-0 border-b px-6 py-4">
-          <div className="flex items-center justify-between gap-4">
-            <DialogTitle className="text-sm font-semibold md:text-lg">
-              My Resume
-            </DialogTitle>
-            <div className="flex items-center gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleDownload}
-                className="rounded-full bg-transparent"
-              >
-                <Download className="mr-2 h-4 w-4" />
-                Download
-              </Button>
-              <DialogClose asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 rounded-full"
-                >
-                  <X className="h-4 w-4" />
-                  <span className="sr-only">Close</span>
-                </Button>
-              </DialogClose>
-            </div>
-          </div>
-        </DialogHeader>
-        <div className="min-h-0 flex-1 overflow-hidden">
-          <iframe
-            src={cvPath}
-            className="h-full w-full border-0"
-            title="CV Preview"
-          />
-        </div>
-      </DialogContent>
-    </Dialog>
-  );
-};

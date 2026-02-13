@@ -1,6 +1,7 @@
 "use client";
 
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import Link from "next/link";
+import { Panel, PanelHeader, PanelTitle, PanelContent } from "@/components/panel";
 import { BookOpen, ExternalLink } from "lucide-react";
 
 export default function Projects() {
@@ -28,18 +29,23 @@ export default function Projects() {
   ];
 
   return (
-    <section className="animate-fade-in animate-delay-300 mb-3">
-      <Card>
-        <CardHeader className="flex items-center justify-between">
-          <CardTitle className="flex items-center gap-2 font-mono text-base font-bold md:text-xl">
-            <BookOpen />
-            Projects
-          </CardTitle>
-          <button className="text-muted-foreground text-xs hover:underline">
-            View All {">"}
-          </button>
-        </CardHeader>
-        <CardContent>
+      <Panel id="projects" className="animate-fade-in animate-delay-500">
+  <PanelHeader>
+    <div className="flex items-center justify-between w-full">
+      <PanelTitle className="text-base tracking-[0.2em] sm:tracking-[0.8em] uppercase text-muted-foreground">
+        Projects
+      </PanelTitle>
+
+      <Link
+        href="/projects"
+        className="text-xs text-muted-foreground transition-colors hover:text-foreground"
+      >
+        View all →
+      </Link>
+    </div>
+  </PanelHeader>
+
+        <PanelContent>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {projects.map((project, idx) => {
               const isClickable = !!project.url;
@@ -49,11 +55,7 @@ export default function Projects() {
                 <Container
                   key={idx}
                   {...(isClickable
-                    ? {
-                        href: project.url,
-                        target: "_blank",
-                        rel: "noopener noreferrer",
-                      }
+                    ? { href: project.url, target: "_blank", rel: "noopener noreferrer" }
                     : {})}
                   className={`bg-muted/50 block rounded-lg p-4 transition ${
                     isClickable
@@ -62,18 +64,16 @@ export default function Projects() {
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <p className="font-sans text-sm font-semibold">
-                      {project.title}
-                    </p>
-                    {isClickable && (
-                      <ExternalLink className="text-muted-foreground h-4 w-4" />
-                    )}
+                    <p className="font-sans text-sm font-semibold">{project.title}</p>
+                    {isClickable && <ExternalLink className="text-muted-foreground h-4 w-4" />}
                   </div>
-                  <p className="text-muted-foreground mt-1 text-xs">
-                    {project.description}
-                  </p>
+                  <p className="text-muted-foreground mt-1 text-xs">{project.description}</p>
                   <p
-                    className={`mt-1 text-xs ${isClickable ? "text-blue-500 dark:text-blue-300" : "text-muted-foreground italic"}`}
+                    className={`mt-1 text-xs ${
+                      isClickable
+                        ? "text-blue-500 dark:text-blue-300"
+                        : "text-muted-foreground italic"
+                    }`}
                   >
                     {isClickable ? project.url : "Not available for viewing"}
                   </p>
@@ -81,8 +81,7 @@ export default function Projects() {
               );
             })}
           </div>
-        </CardContent>
-      </Card>
-    </section>
+        </PanelContent>
+      </Panel>
   );
 }

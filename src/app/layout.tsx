@@ -3,7 +3,9 @@ import { Geist, Geist_Mono, Poppins } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/sonner";
-import { ChatDialog } from "@/components/chat";
+import { TooltipProvider } from "@/components/ui/tooltip"
+// import { ChatDialog } from "@/components/chat";
+// import { FloatingNavbar } from "@/components/navbar/navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,8 +43,8 @@ export default function RootLayout({
             defaultTheme="system"
             enableSystem
           >
-            {children}
-            <ChatDialog />
+            <TooltipProvider>{children}</TooltipProvider>
+            {/* <ChatDialog /> */}
           </ThemeProvider>
           <Toaster />
       </body>

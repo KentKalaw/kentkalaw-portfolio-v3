@@ -13,6 +13,8 @@ import Contact from "@/components/pages/contact";
 import { useRef, useState, useEffect } from "react";
 import { Linkedin, Github, Facebook, ChevronsUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { FloatingNavbar } from "@/components/navbar/navbar";
+import { cn } from "@/lib/utils";
 
 export default function Home() {
   const scrollAreaRef = useRef<HTMLDivElement | null>(null);
@@ -37,49 +39,58 @@ export default function Home() {
   };
 
   return (
-    <main className="relative min-h-screen" ref={scrollAreaRef}>
-      <div className="mx-auto max-w-4xl px-4 py-8">
+    <main
+      className="relative min-h-screen overflow-x-hidden pt-18"
+      ref={scrollAreaRef}
+    >
+      <div className="mx-auto max-w-5xl px-4 py-8">
+        <FloatingNavbar />
         <Name />
-        <div className="flex flex-col md:flex-row md:gap-3">
-          <div className="w-full md:w-1/2">
+        <div className="flex md:gap-3">
+          <div className="w-full">
+            <Separator className="animate-fade-in animate-delay-500" />
             <About />
-          </div>
-          <div className="w-full md:w-1/2">
-            <BlogPreview />
-          </div>
-        </div>
-        <TechStack />
-        <div className="flex flex-col md:flex-row md:gap-3">
-          <div className="w-full md:w-1/2">
-            <Certifications />
-          </div>
-          <div className="w-full md:w-1/2">
-            <Experience />
-          </div>
-        </div>
-        <GithubContributionsCard />
-        <div className="flex flex-col md:flex-row md:gap-3">
-          <div className="w-full md:w-3/10">
-            <Socials />
-          </div>
-          <div className="w-full md:w-7/10">
-            <Projects />
-          </div>
-        </div>
-        <Contact />
+            <Separator className="animate-fade-in animate-delay-500" />
 
-       <Button
-  onClick={triggerScrollToTop}
-  size="icon"
-  className={`fixed right-8 bottom-20 z-50 rounded-full bg-gray-900 text-gray-200 transition-all duration-300 hover:scale-110 hover:bg-gray-800 dark:bg-gray-200 dark:text-gray-900 dark:hover:bg-gray-300 ${
-    showScrollTop
-      ? "animate-bounce-up-down pointer-events-auto translate-y-0 opacity-100"
-      : "pointer-events-none translate-y-4 opacity-0"
-  }`}
-  aria-label="Scroll to top"
->
-  <ChevronsUp className="h-6 w-6" />
-</Button>
+            <BlogPreview />
+            <Separator className="animate-fade-in animate-delay-500" />
+
+            <TechStack />
+            <Separator className="animate-fade-in animate-delay-500" />
+
+            <Certifications />
+            <Separator className="animate-fade-in animate-delay-500" />
+
+            <Experience />
+            <Separator className="animate-fade-in animate-delay-500" />
+
+            <GithubContributionsCard />
+            <Separator className="animate-fade-in animate-delay-500" />
+
+            <Projects />
+            <Separator className="animate-fade-in animate-delay-500" />
+
+            <Socials />
+            <Separator className="animate-fade-in animate-delay-500" />
+
+            <Contact />
+            <Separator className="animate-fade-in animate-delay-500" />
+            
+          </div>
+        </div>
+
+        <Button
+          onClick={triggerScrollToTop}
+          size="icon"
+          className={`fixed right-8 bottom-20 z-50 rounded-full bg-gray-900 text-gray-200 transition-all duration-300 hover:scale-110 hover:bg-gray-800 dark:bg-gray-200 dark:text-gray-900 dark:hover:bg-gray-300 ${
+            showScrollTop
+              ? "animate-bounce-up-down pointer-events-auto translate-y-0 opacity-100"
+              : "pointer-events-none translate-y-4 opacity-0"
+          }`}
+          aria-label="Scroll to top"
+        >
+          <ChevronsUp className="h-6 w-6" />
+        </Button>
 
         <footer className="mt-12 border-t border-gray-200 pt-8 dark:border-gray-700">
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
@@ -122,4 +133,17 @@ export default function Home() {
       </div>
     </main>
   );
+}
+
+function Separator({ className }: { className?: string }) {
+  return (
+    <div
+      className={cn(
+        "relative flex h-8 w-full border-x border-edge",
+        "before:absolute before:-left-[100vw] before:-z-1 before:h-8 before:w-[200vw]",
+        "before:bg-[repeating-linear-gradient(315deg,var(--pattern-foreground)_0,var(--pattern-foreground)_1px,transparent_0,transparent_50%)] before:bg-size-[10px_10px] before:[--pattern-foreground:var(--color-edge)]/56",
+        className
+      )}
+    />
+  )
 }

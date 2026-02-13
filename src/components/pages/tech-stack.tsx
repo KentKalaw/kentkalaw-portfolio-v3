@@ -1,6 +1,5 @@
 "use client";
 
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Braces } from "lucide-react";
 import {
   Carousel,
@@ -16,6 +15,8 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import Autoplay from "embla-carousel-autoplay";
+import { Panel, PanelHeader, PanelTitle, PanelContent } from "@/components/panel";
+
 export default function TechStack() {
   const techIcons = [
     { path: "html5/html5-original.svg", name: "HTML5" },
@@ -34,19 +35,19 @@ export default function TechStack() {
   ];
 
   return (
-    <section className="animate-fade-in animate-delay-200 mb-3">
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 font-mono text-base font-bold md:text-xl">
-            <Braces />
-            Tech Stack
-          </CardTitle>
-        </CardHeader>
+      <Panel className="animate-fade-in animate-delay-500">
+        <PanelHeader>
+          <PanelTitle>
+            <p className="text-base tracking-[0.8em] uppercase text-muted-foreground">
+          Tech Stack
+        </p>
+          </PanelTitle>
+        </PanelHeader>
 
-        <CardContent className="relative flex items-center justify-center overflow-hidden py-6">
+        <PanelContent className="relative flex items-center justify-center overflow-hidden py-6">
           <TooltipProvider>
             <Carousel
-              className="w-full max-w-2xl"
+              className="w-full max-w-5xl"
               opts={{
                 align: "start",
                 loop: true,
@@ -79,12 +80,9 @@ export default function TechStack() {
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <CarouselPrevious className="left-0 md:-left-12" />
-              <CarouselNext className="right-0 md:-right-12" />
             </Carousel>
           </TooltipProvider>
-        </CardContent>
-      </Card>
-    </section>
+        </PanelContent>
+      </Panel>
   );
 }

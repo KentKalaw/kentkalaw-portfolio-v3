@@ -1,9 +1,8 @@
 "use client";
 
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { ShieldCheck, ExternalLink } from "lucide-react";
-import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import { Panel, PanelHeader, PanelTitle, PanelContent } from "@/components/panel";
 
 export default function Certifications() {
   const certifications = [
@@ -25,22 +24,12 @@ export default function Certifications() {
       year: "2024",
       link: "https://drive.google.com/file/d/1Y8-oDKbw9wapXuNLKapowOBovVQZ8oI8/view?usp=sharing",
     },
+
   ];
 
-  const [showAll, setShowAll] = useState(false);
-  const extraRef = useRef<HTMLDivElement>(null);
-  const [height, setHeight] = useState("0px");
+  const mainCerts = certifications.slice(0, 6);
 
-  useEffect(() => {
-    if (extraRef.current) {
-      setHeight(showAll ? `${extraRef.current.scrollHeight}px` : "0px");
-    }
-  }, [showAll]);
-
-  const mainCerts = certifications.slice(0, 3);
-  const extraCerts = certifications.slice(3);
-
-  const CertificationRow = ({
+  const CertificationCard = ({
     title,
     company,
     year,
@@ -55,13 +44,13 @@ export default function Certifications() {
       href={link}
       target="_blank"
       rel="noopener noreferrer"
-      className="bg-muted/50 hover:bg-muted group flex items-center justify-between rounded-lg px-4 py-3 transition"
+      className="bg-muted/50 hover:bg-muted group flex flex-col justify-between rounded-lg p-4 transition"
     >
       <div>
         <p className="font-sans text-sm font-semibold">{title}</p>
         <p className="text-muted-foreground text-xs">{company}</p>
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 mt-2">
         <span className="text-muted-foreground text-xs">{year}</span>
         <ExternalLink className="text-muted-foreground h-3.5 w-3.5 opacity-0 transition-opacity group-hover:opacity-100" />
       </div>
@@ -69,38 +58,28 @@ export default function Certifications() {
   );
 
   return (
-    <section className="animate-fade-in animate-delay-500 mb-3">
-      <Card>
-        <CardHeader className="flex items-center justify-between">
-          <CardTitle className="flex items-center gap-2 font-mono text-base font-bold md:text-xl">
-            <ShieldCheck />
-            Certifications
-          </CardTitle>
+     <Panel id="certifications" className="animate-fade-in animate-delay-500">
+  <PanelHeader>
+    <div className="flex items-center justify-between w-full">
+      <PanelTitle className="text-base tracking-[0.2em] sm:tracking-[0.8em] uppercase text-muted-foreground">
+        Certifications
+      </PanelTitle>
 
-          <button
-            onClick={() => setShowAll(!showAll)}
-            className="text-muted-foreground text-xs hover:underline"
-          >
-            {showAll ? "Show Less" : "View All >"}
-          </button>
-        </CardHeader>
-
-        <CardContent className="space-y-3">
-          {mainCerts.map((cert, i) => (
-            <CertificationRow key={i} {...cert} />
-          ))}
-
-          <div
-            ref={extraRef}
-            style={{ maxHeight: height }}
-            className="space-y-3 overflow-hidden transition-all duration-500 ease-in-out"
-          >
-            {extraCerts.map((cert, i) => (
-              <CertificationRow key={i} {...cert} />
+      <Link
+        href="/certifications"
+        className="text-xs text-muted-foreground transition-colors hover:text-foreground"
+      >
+        View all →
+      </Link>
+    </div>
+  </PanelHeader>
+        <PanelContent>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {mainCerts.map((cert, i) => (
+              <CertificationCard key={i} {...cert} />
             ))}
           </div>
-        </CardContent>
-      </Card>
-    </section>
+        </PanelContent>
+      </Panel>
   );
 }
