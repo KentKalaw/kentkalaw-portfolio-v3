@@ -92,44 +92,48 @@ export default function Home() {
           <ChevronsUp className="h-6 w-6" />
         </Button>
 
-        <footer className="mt-12 border-t border-gray-200 pt-8 dark:border-gray-700">
-          <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-            <p className="text-sm text-gray-600 dark:text-gray-400">
-              © {new Date().getFullYear()} Kent Kalaw. All rights reserved.
-            </p>
-            <div className="flex gap-4">
-              <a
-                href="https://linkedin.com/in/kentkalaw"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-600 transition-colors hover:text-blue-600 dark:text-gray-400"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="h-5 w-5" />
-              </a>
+        <footer className="screen-line-before screen-line-after border-x border-edge max-w-5xl mx-auto">
+  <div className="border-t border-edge px-4 py-8">
+    <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+      <p className="text-sm text-muted-foreground">
+        © {new Date().getFullYear()} Kent Kalaw. All rights reserved.
+      </p>
 
-              <a
-                href="https://github.com/kentkalaw"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                aria-label="GitHub"
-              >
-                <Github className="h-5 w-5" />
-              </a>
+      <div className="flex items-center gap-5">
+        <a
+          href="https://linkedin.com/in/kentkalaw"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-muted-foreground transition-colors hover:text-foreground"
+          aria-label="LinkedIn"
+        >
+          <Linkedin className="h-5 w-5" />
+        </a>
 
-              <a
-                href="https://facebook.com/kentkalaw03"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-600 transition-colors hover:text-blue-500 dark:text-gray-400"
-                aria-label="Facebook"
-              >
-                <Facebook className="h-5 w-5" />
-              </a>
-            </div>
-          </div>
-        </footer>
+        <a
+          href="https://github.com/kentkalaw"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-muted-foreground transition-colors hover:text-foreground"
+          aria-label="GitHub"
+        >
+          <Github className="h-5 w-5" />
+        </a>
+
+        <a
+          href="https://facebook.com/kentkalaw03"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-muted-foreground transition-colors hover:text-foreground"
+          aria-label="Facebook"
+        >
+          <Facebook className="h-5 w-5" />
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
       </div>
     </main>
   );
@@ -139,11 +143,13 @@ function Separator({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "relative flex h-8 w-full border-x border-edge",
-        "before:absolute before:-left-[100vw] before:-z-1 before:h-8 before:w-[200vw]",
-        "before:bg-[repeating-linear-gradient(315deg,var(--pattern-foreground)_0,var(--pattern-foreground)_1px,transparent_0,transparent_50%)] before:bg-size-[10px_10px] before:[--pattern-foreground:var(--color-edge)]/56",
+        "screen-line-before screen-line-after",
+        "relative h-8 border-x border-edge max-w-5xl mx-auto",
+        "flex items-center",
         className
       )}
-    />
+    >
+      <div className="mx-auto h-px w-32 bg-gradient-to-r from-transparent via-border to-transparent" />
+    </div>
   )
 }
