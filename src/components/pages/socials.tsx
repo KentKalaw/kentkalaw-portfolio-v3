@@ -31,7 +31,7 @@ export default function Socials() {
       </PanelHeader>
 
       <PanelContent>
-        <div className="flex justify-center gap-4 md:justify-center">
+        <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
           {socials.map(social => {
             const Icon = social.icon;
 
@@ -41,10 +41,16 @@ export default function Socials() {
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-foreground text-muted-foreground rounded-full p-2 transition-transform duration-200 hover:scale-125"
                 aria-label={social.name}
+                className="group text-muted-foreground hover:text-foreground flex items-center gap-2 transition-all duration-200 active:scale-95"
               >
-                <Icon className="h-6 w-6" />
+                <div className="border-border bg-background group-hover:border-foreground flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-200 group-hover:scale-105">
+                  <Icon className="h-5 w-5" />
+                </div>
+
+                <span className="hidden text-sm opacity-80 transition-opacity duration-200 group-hover:opacity-100 sm:inline">
+                  {social.name}
+                </span>
               </a>
             );
           })}
