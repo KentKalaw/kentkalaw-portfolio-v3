@@ -62,9 +62,8 @@ export default function ProjectsPage() {
       description:
         "A web-based registration system for University of Batangas' College of Information and Communications Technology (CICT) Days event.",
       features: [
-        "Registration Form: User-friendly form for attendees to sign up for CICT Days.",
+        "Barcode Registration Form: Attendees can register by scanning their QR code or manually entering their details.",
         "Admin Dashboard: Interface for event organizers to manage registrations, view attendee information, and generate reports.",
-        "Barcode Reader: Integration for efficient check-in during the event.",
         "Engagement Features: Live Reaction System for attendees to interact during sessions. (Emojis)",
         "Lottery System: Random selection of attendees for giveaways and prizes.",
       ],
