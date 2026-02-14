@@ -35,6 +35,7 @@ const experiences: ExperienceItem[] = [
       "Served as a Front-end Developer, implementing and maintaining UI/UX designs using modern front-end frameworks",
       "Built web applications using Next.js and Laravel, managing databases with Prisma ORM (MySQL).",
       "Translated system requirements into functional features while ensuring performance, accessibility, and maintainability",
+      "Designed and implemented user interfaces in collaboration with co-interns for CICT Department and university events, used by over 2,000+ end users."
     ],
   },
   {
@@ -55,7 +56,7 @@ export default function Experience() {
   return (
     <Panel className="animate-fade-in animate-delay-500">
       <PanelHeader>
-        <PanelTitle className="text-muted-foreground text-base tracking-[0.4em] uppercase">
+        <PanelTitle className="text-muted-foreground text-base tracking-[0.8em] uppercase">
           Experience
         </PanelTitle>
       </PanelHeader>

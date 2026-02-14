@@ -50,7 +50,7 @@ export default function Projects() {
       features: [
         "Drawing Tools: Pen with color selection, flood fill, eyedropper, eraser, and customizable background.",
         "Modifiers: Stackable shading or exclusive lighten effect.",
-        "Canvas Controls: Adjustable grid (8×8 to 60×60), toggleable gridlines, and full reset with confirmation.",
+        "Canvas Controls: Adjustable grid (8 by 8 to 60 by 60), toggleable gridlines, and full reset with confirmation.",
         "Export Options: Download sketches as PNG",
       ],
       url: "https://pixelria.vercel.app/",
@@ -64,7 +64,7 @@ export default function Projects() {
         "Search and Filter: Find recipes quickly with advanced search options.",
         "User Contributions: Add, edit, and share your own recipes.",
       ],
-      url: null,
+      url: "https://github.com/KentKalaw/koyam-recette",
     },
   ];
 
@@ -77,7 +77,7 @@ export default function Projects() {
           </PanelTitle>
 
           <Link
-            href="#"
+            href="/projects"
             className="text-muted-foreground hover:text-foreground text-xs transition-colors"
           >
             View all →
@@ -100,7 +100,7 @@ export default function Projects() {
                   <div className="flex items-center">
                     <div className="flex items-center px-4">
                       <div className="border-border flex h-8 w-8 items-center justify-center rounded-full border">
-                        <Code2 className="text-muted-foreground h-4 w-4" />
+                        <Code2 className="dark:text-muted-foreground h-4 w-4" />
                       </div>
                     </div>
                     <div className="bg-border w-px self-stretch" />
@@ -137,15 +137,15 @@ export default function Projects() {
                 </button>
                 <div
                   className={`overflow-hidden transition-all duration-300 ${
-                    isOpen ? "screen-line-before max-h-40 py-2 pb-4" : "max-h-0"
+                    isOpen ? "screen-line-before max-h-60 py-2 pb-4" : "max-h-0"
                   }`}
                 >
                   <div className="mt-2 pr-4 pl-4">
-                    <p className="text-muted-foreground text-sm">
+                    <p className="dark:text-muted-foreground text-sm">
                       {project.description}
                     </p>
                     {project.features && (
-                      <ul className="text-muted-foreground mt-1 list-disc space-y-1 pl-8 text-sm">
+                      <ul className="dark:text-muted-foreground mt-1 list-disc space-y-1 pl-8 text-sm">
                         {project.features.map((feature, i) => (
                           <li key={i}>{feature}</li>
                         ))}
