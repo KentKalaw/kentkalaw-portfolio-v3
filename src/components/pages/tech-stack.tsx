@@ -1,20 +1,6 @@
 "use client";
 
-import { Braces } from "lucide-react";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import Autoplay from "embla-carousel-autoplay";
+import { LogoSlider } from "@/components/ui/logo-slider";
 import {
   Panel,
   PanelHeader,
@@ -39,6 +25,23 @@ export default function TechStack() {
     { path: "supabase/supabase-original.svg", name: "Supabase" },
   ];
 
+  const logos = techIcons.map((icon, index) => (
+  <div
+    key={index}
+    className="flex flex-col items-center justify-center gap-2"
+  >
+    <img
+      src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${icon.path}`}
+      alt={`${icon.name} logo`}
+      className="h-8 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300"
+    />
+    <span className="text-xs text-muted-foreground text-center whitespace-nowrap">
+      {icon.name}
+    </span>
+  </div>
+));
+
+
   return (
     <Panel className="animate-fade-in animate-delay-500">
       <PanelHeader>
@@ -49,44 +52,12 @@ export default function TechStack() {
         </PanelTitle>
       </PanelHeader>
 
-      <PanelContent className="relative flex items-center justify-center overflow-hidden py-6">
-        <TooltipProvider>
-          <Carousel
-            className="w-full max-w-5xl"
-            opts={{
-              align: "start",
-              loop: true,
-            }}
-            plugins={[
-              Autoplay({
-                delay: 1250,
-                stopOnInteraction: false,
-                stopOnMouseEnter: true,
-              }),
-            ]}
-          >
-            <CarouselContent>
-              {techIcons.map((icon, index) => (
-                <CarouselItem className="basis-1/3 md:basis-1/5" key={index}>
-                  <div className="flex justify-center">
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <img
-                          className="mx-6 h-10 w-auto cursor-pointer"
-                          src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${icon.path}`}
-                          alt={icon.name + " logo"}
-                        />
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>{icon.name}</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-          </Carousel>
-        </TooltipProvider>
+      <PanelContent className="py-6">
+        <LogoSlider
+          logos={logos}
+          speed={60}
+          direction="left"
+        />
       </PanelContent>
     </Panel>
   );
