@@ -33,7 +33,7 @@ export default function TechStack() {
     <img
       src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${icon.path}`}
       alt={`${icon.name} logo`}
-      className="h-8 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300"
+      className="h-8 w-auto object-contain transition-all duration-300"
     />
     <span className="text-xs text-muted-foreground text-center whitespace-nowrap">
       {icon.name}
