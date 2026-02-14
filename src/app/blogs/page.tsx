@@ -1,15 +1,14 @@
-import { BookOpen, ArrowRight } from "lucide-react";
+import { MoveLeft, ArrowRight } from "lucide-react";
 import { ThemeSwitch } from "@/components/theme-switch";
 import Link from "next/link";
+import Footer from "@/components/footer/footer";
 import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { Button } from "@/components/ui/button";
+  Panel,
+  PanelHeader,
+  PanelTitle,
+  PanelContent,
+} from "@/components/panel";
+
 import { supabase, isSupabaseConfigured, type BlogPost } from "@/lib/supabase";
 import { blogPosts as fallbackBlogPosts } from "@/lib/blog-data";
 
@@ -63,7 +62,7 @@ async function getBlogs(page: number): Promise<PaginatedBlogs> {
       .order("created_at", { ascending: false });
 
     if (!error && data) {
-      const items = (data as BlogPost[]).map((post) => ({
+      const items = (data as BlogPost[]).map(post => ({
         id: post.id,
         title: post.title,
         subtitle: post.subtitle,
@@ -84,8 +83,7 @@ async function getBlogs(page: number): Promise<PaginatedBlogs> {
   }
 
   const sortedFallback = [...fallbackBlogPosts].sort(
-    (a, b) =>
-      new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime(),
+    (a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime(),
   );
 
   const items = sortedFallback.map((post, index) => ({
@@ -122,130 +120,95 @@ export default async function BlogsPage({ searchParams }: BlogsPageProps) {
   const pageCount = Math.max(1, Math.ceil(total / PAGE_SIZE));
 
   return (
-    <main className="relative min-h-screen overflow-x-hidden pt-18">
-      <div className="screen-line-before screen-line-after border-x border-edge max-w-5xl mx-auto px-4 py-10">
-
-        <div className="animate-fade-in mb-8 flex items-center justify-between">
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <Link href="/">Home</Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbPage>Blogs</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
-
-          <ThemeSwitch />
+    <main className="relative min-h-screen overflow-x-hidden pt-18 animate-fade-in animate-delay-100">
+      <div className="mx-auto max-w-5xl px-4 py-10">
+        <div className="flex flex-row items-center">
+          <Link
+            href="/"
+            className="text-muted-foreground hover:text-foreground mb-2 flex items-center gap-2 px-4 text-sm transition-colors"
+          >
+            <MoveLeft className="mr-1 h-4 w-4" />
+            Go Back
+          </Link>
         </div>
+        <Panel>
+          <PanelHeader>
+            <div className="flex items-center justify-between">
+              <PanelTitle className="text-xl tracking-[0.4em] uppercase">
+                Blogs
+              </PanelTitle>
 
-        <div className="screen-line-before screen-line-after py-6 animate-fade-in animate-delay-100 mb-10">
-          <h1 className="mb-2 flex items-center gap-3 text-3xl font-bold md:text-4xl">
-            <BookOpen className="h-8 w-8 text-muted-foreground" />
-            Blogs
-          </h1>
-          <p className="text-sm text-muted-foreground">
-            Everything about my life, thoughts, and technical explorations.
-          </p>
-        </div>
-
-        {/* Blog List */}
-        <div className="animate-fade-in animate-delay-200 space-y-3 rounded-xl border border-edge bg-background/60 p-4">
-
-          {blogs.map((post) => (
-            <div
-              key={post.id}
-              className="group rounded-lg border border-edge bg-card/50 p-4 transition-all duration-200 hover:bg-muted/40"
-            >
-              {/* Top Row */}
-              <div className="flex items-start justify-between gap-4">
-                <div className="min-w-0 flex-1 space-y-1">
-                  <h2 className="truncate text-base font-semibold text-foreground md:text-lg">
-                    {post.title}
-                  </h2>
-
-                  {post.subtitle && (
-                    <p className="line-clamp-1 text-sm text-muted-foreground">
-                      {post.subtitle}
-                    </p>
-                  )}
-                </div>
-
-                <span className="shrink-0 whitespace-nowrap text-xs text-muted-foreground">
-                  {post.minutesToRead} min read
-                </span>
-              </div>
-
-              {/* Bottom Row */}
-              <div className="mt-4 flex items-center justify-between">
-                <span className="text-xs text-muted-foreground">
-                  {formatDate(post.createdAt)}
-                </span>
-
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="shadow-none"
-                  asChild
-                >
-                  <Link
-                    href={
-                      post.slug.startsWith("local-")
-                        ? "/blogs"
-                        : `/blogs/${post.slug}`
-                    }
-                  >
-                    <span className="mr-1 text-xs font-medium">Read</span>
-                    <ArrowRight className="h-3 w-3" />
-                  </Link>
-                </Button>
-              </div>
+              <ThemeSwitch />
             </div>
-          ))}
-        </div>
+          </PanelHeader>
+          <PanelContent className="p-0">
+            <div className="divide-border divide-y">
+              {blogs.map(post => {
+                const href = post.slug.startsWith("local-")
+                  ? "/blogs"
+                  : `/blogs/${post.slug}`;
 
-        {/* Pagination */}
-        {pageCount > 1 && (
-          <div className="mt-8 flex items-center justify-between text-xs text-muted-foreground">
-            <Button
-              variant="ghost"
-              size="sm"
-              className="px-2 shadow-none"
-              asChild
-              disabled={currentPage <= 1}
-            >
-              <Link
-                href={
-                  currentPage <= 2
-                    ? "/blogs"
-                    : `/blogs?page=${currentPage - 1}`
-                }
-              >
-                Previous
-              </Link>
-            </Button>
+                return (
+                  <Link key={post.id} href={href} className="group block">
+                    <div className="hover:bg-muted/40 flex w-full cursor-pointer items-start justify-between gap-4 p-4 transition-all duration-200">
+                      <div className="min-w-0 flex-1 space-y-1">
+                        <h2 className="text-foreground truncate text-base font-semibold md:text-lg">
+                          {post.title}
+                        </h2>
+                        {post.subtitle && (
+                          <p className="text-muted-foreground line-clamp-1 text-sm">
+                            {post.subtitle}
+                          </p>
+                        )}
+                        <p className="text-muted-foreground mt-1 text-sm">
+                          {post.preview}
+                        </p>
+                      </div>
+                      <div className="flex flex-col items-end gap-2">
+                        <span className="text-muted-foreground shrink-0 text-xs whitespace-nowrap">
+                          {post.minutesToRead} min read
+                        </span>
+                        <span className="text-muted-foreground group-hover:text-foreground flex items-center text-xs font-medium transition-colors">
+                          Read <ArrowRight className="ml-1 h-3 w-3" />
+                        </span>
+                        <span className="text-muted-foreground text-xs">
+                          {formatDate(post.createdAt)}
+                        </span>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+            {pageCount > 1 && (
+              <div className="screen-line-before dark:text-muted-foreground flex items-center justify-between px-2 py-2 text-sm">
+                <Link
+                  href={
+                    currentPage <= 2
+                      ? "/blogs"
+                      : `/blogs?page=${currentPage - 1}`
+                  }
+                  className={` ${currentPage <= 1 ? "pointer-events-none opacity-50" : ""}`}
+                >
+                  Previous
+                </Link>
 
-            <span>
-              Page {currentPage} of {pageCount}
-            </span>
+                <span>
+                  Page {currentPage} of {pageCount}
+                </span>
 
-            <Button
-              variant="ghost"
-              size="sm"
-              className="px-2 shadow-none"
-              asChild
-              disabled={currentPage >= pageCount}
-            >
-              <Link href={`/blogs?page=${currentPage + 1}`}>
-                Next
-              </Link>
-            </Button>
-          </div>
-        )}
+                <Link
+                  href={`/blogs?page=${currentPage + 1}`}
+                  className={` ${currentPage >= pageCount ? "pointer-events-none opacity-50" : ""}`}
+                >
+                  Next
+                </Link>
+              </div>
+            )}
+          </PanelContent>
+        </Panel>
+
+        <Footer />
       </div>
     </main>
   );

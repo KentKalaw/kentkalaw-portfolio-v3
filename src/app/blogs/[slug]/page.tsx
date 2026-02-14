@@ -1,8 +1,7 @@
-
 import { notFound } from "next/navigation";
 import CopyLinkButton from "./CopyLinkButton";
 import Link from "next/link";
-import { BookOpen, Link2 } from "lucide-react";
+import { BookOpen, MoveLeft } from "lucide-react";
 import { ThemeSwitch } from "@/components/theme-switch";
 import {
   Breadcrumb,
@@ -12,19 +11,20 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { Button } from "@/components/ui/button";
+import { Panel, PanelHeader, PanelTitle, PanelContent } from "@/components/panel";
 import { supabase, isSupabaseConfigured, type BlogPost } from "@/lib/supabase";
 import ReactMarkdown, { type Components } from "react-markdown";
 import { cn } from "@/lib/utils";
+import Footer from "@/components/footer/footer";
 
 const WORDS_PER_MINUTE = 200;
 
-function estimateReadingTime(content: string): number {
+function estimateReadingTime(content: string) {
   const words = content.trim().split(/\s+/).filter(Boolean).length;
   return Math.max(1, Math.round(words / WORDS_PER_MINUTE));
 }
 
-function formatDate(date: string | Date): string {
+function formatDate(date: string | Date) {
   const d = typeof date === "string" ? new Date(date) : date;
   return new Intl.DateTimeFormat("en-US", {
     month: "long",
@@ -54,27 +54,22 @@ type BlogPageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export default async function BlogPage(props: BlogPageProps) {
-  const { slug } = await props.params;
+export default async function BlogPage({ params }: BlogPageProps) {
+  const { slug } = await params;
 
   const blog = await getBlogBySlug(slug);
-
-  if (!blog) {
-    notFound();
-  }
+  if (!blog) notFound();
 
   const minutesToRead = estimateReadingTime(blog.content);
 
   const markdownComponents: Components = {
-    code(codeProps) {
-      const { inline, className, children, ...props }: any = codeProps;
-
+    code({ inline, className, children, ...props }: any) {
       if (inline) {
         return (
           <code
             className={cn(
               "rounded bg-muted px-1.5 py-0.5 text-xs font-mono",
-              className,
+              className
             )}
             {...props}
           >
@@ -82,12 +77,11 @@ export default async function BlogPage(props: BlogPageProps) {
           </code>
         );
       }
-
       return (
         <code
           className={cn(
             "mt-4 block w-full overflow-x-auto rounded-lg border border-edge bg-card px-3 py-3 text-xs leading-relaxed font-mono",
-            className,
+            className
           )}
           {...props}
         >
@@ -100,7 +94,7 @@ export default async function BlogPage(props: BlogPageProps) {
         <ul
           className={cn(
             "mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed",
-            className,
+            className
           )}
           {...props}
         />
@@ -111,7 +105,7 @@ export default async function BlogPage(props: BlogPageProps) {
         <ol
           className={cn(
             "mt-4 list-decimal space-y-2 pl-5 text-sm leading-relaxed",
-            className,
+            className
           )}
           {...props}
         />
@@ -120,12 +114,10 @@ export default async function BlogPage(props: BlogPageProps) {
   };
 
   return (
-    <main className="relative animate-fade-in animate-delay-100 min-h-screen overflow-x-hidden pt-18">
-      <div className="screen-line-before screen-line-after border-x border-edge max-w-5xl mx-auto px-4 py-10">
-
-        {/* Top Bar */}
-        <div className="mb-8 flex items-center justify-between">
-          <Breadcrumb>
+    <main className="relative min-h-screen overflow-x-hidden pt-18 animate-fade-in animate-delay-100">
+      <div className="mx-auto max-w-5xl px-4 py-10">
+        <div className="flex flex-row items-center">
+          <Breadcrumb className="text-muted-foreground hover:text-foreground mb-2 flex items-center gap-2 px-4 text-sm transition-colors">
             <BreadcrumbList>
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
@@ -144,34 +136,48 @@ export default async function BlogPage(props: BlogPageProps) {
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
-
-          <ThemeSwitch />
         </div>
-        <header className="mb-10 space-y-3">
-          <div className="flex screen-line-before screen-line-after items-center py-6 gap-2 text-xs text-muted-foreground">
-            <BookOpen className="h-4 w-4" />
-            <span>{minutesToRead} min read</span>
-            <span>·</span>
-            <span>{formatDate(blog.created_at)}</span>
-          </div>
+        <Panel>
+          <PanelHeader>
+            <div className="flex items-center justify-between">
+              <PanelTitle className="text-xl tracking-[0.4em] uppercase">
+                Blog Post
+              </PanelTitle>
 
-          <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">
-            {blog.title}
-          </h1>
+              <ThemeSwitch />
+            </div>
+          </PanelHeader>
+          <PanelContent className="p-0">
+            <div className="flex items-center p-4 gap-2 text-xs text-muted-foreground">
+              <BookOpen className="h-4 w-4" />
+              <span>{minutesToRead} min read</span>
+              <span>·</span>
+              <span>{formatDate(blog.created_at)}</span>
+            </div>
 
-          {blog.subtitle && (
-            <p className="text-sm text-muted-foreground md:text-base">
-              {blog.subtitle}
-            </p>
-          )}
-        </header>
-        <article className="prose prose-sm max-w-none text-sm leading-relaxed dark:prose-invert md:prose-base">
-          <ReactMarkdown components={markdownComponents}>
-            {blog.content}
-          </ReactMarkdown>
-        </article>
-        <div className="flex w-full justify-end my-6 border-t border-edge" />
-          <CopyLinkButton />
+            <div className="flex flex-col px-4 gap-2">
+              {
+              blog.title && (
+                <p className="text-2xl">{blog.title}</p>
+              )}
+            {blog.subtitle && (
+              <p className="text-sm text-muted-foreground">{blog.subtitle}</p>
+            )}
+
+             <article className="prose prose-sm max-w-none text-sm leading-relaxed dark:prose-invert md:prose-base mb-4">
+              <ReactMarkdown components={markdownComponents}>
+                {blog.content}
+              </ReactMarkdown>
+            </article>
+
+            </div>
+            
+
+           
+            <CopyLinkButton />
+          </PanelContent>
+        </Panel>
+        <Footer />
       </div>
     </main>
   );
