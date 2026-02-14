@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+
 export async function POST(req: Request) {
 
   const myEmail = "kentfranciskalaw@gmail.com";
@@ -25,13 +26,15 @@ export async function POST(req: Request) {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recaptchaToken}`,
+        
       }
     );
-
+    
     const verificationData = await verificationResponse.json();
 
+
     if (!verificationData.success || verificationData.score < 0.5) {
-      console.log('reCAPTCHA verification failed:', verificationData);
+
       return NextResponse.json(
         { 
           message: 'reCAPTCHA verification failed. Please try again.',
