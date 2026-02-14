@@ -5,7 +5,13 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { BookOpen, Plus, Edit3, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 import { supabase, isSupabaseConfigured, type BlogPost } from "@/lib/supabase";
 import { ThemeSwitch } from "@/components/theme-switch";
 import {
@@ -39,10 +45,7 @@ function BlogPostsDashboard() {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [selectedPost, setSelectedPost] = useState<DashboardPost | null>(null);
 
-  const currentPage = Math.max(
-    1,
-    Number(searchParams.get("page") ?? "1") || 1,
-  );
+  const currentPage = Math.max(1, Number(searchParams.get("page") ?? "1") || 1);
 
   useEffect(() => {
     if (!isSupabaseConfigured) {
@@ -80,7 +83,7 @@ function BlogPostsDashboard() {
         setTotal(0);
       } else {
         const mapped =
-          (data as BlogPost[] | null)?.map((post) => ({
+          (data as BlogPost[] | null)?.map(post => ({
             id: post.id,
             title: post.title,
             subtitle: post.subtitle,
@@ -119,8 +122,8 @@ function BlogPostsDashboard() {
         return;
       }
 
-      setPosts((prev) => prev.filter((post) => post.id !== id));
-      setTotal((prev) => Math.max(0, prev - 1));
+      setPosts(prev => prev.filter(post => post.id !== id));
+      setTotal(prev => Math.max(0, prev - 1));
     } finally {
       setDeletingId(null);
     }
@@ -136,12 +139,24 @@ function BlogPostsDashboard() {
   if (!isSupabaseConfigured) {
     return (
       <main className="flex min-h-screen items-center justify-center px-4">
-        <p className="max-w-md text-center text-sm text-muted-foreground">
-          Supabase is not configured. Please add your Supabase environment keys to manage blog
-          posts.
+        <p className="text-muted-foreground max-w-md text-center text-sm">
+          Supabase is not configured. Please add your Supabase environment keys
+          to manage blog posts.
         </p>
       </main>
     );
+  }
+
+  async function handleLogout() {
+    if (!isSupabaseConfigured) return;
+
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.error(error);
+      return;
+    }
+
+    router.replace("/blogs/login");
   }
 
   return (
@@ -149,7 +164,7 @@ function BlogPostsDashboard() {
       <div className="mx-auto max-w-4xl px-4 py-8">
         <div className="mb-6 flex items-center justify-between gap-3">
           <div className="space-y-1">
-            <div className="flex items-center gap-2 text-xs text-muted-foreground">
+            <div className="text-muted-foreground flex items-center gap-2 text-xs">
               <BookOpen className="h-4 w-4" />
               <span>Blog posts dashboard</span>
             </div>
@@ -159,16 +174,21 @@ function BlogPostsDashboard() {
           </div>
           <div className="flex items-center gap-3">
             <Button
-              variant="outline"
+              variant="ghost"
               size="sm"
-              className="shadow-none"
-              asChild
+              className="text-xs shadow-none"
+              onClick={handleLogout}
             >
+              Logout
+            </Button>
+
+            <Button variant="outline" size="sm" className="shadow-none" asChild>
               <Link href="/blogs/new">
                 <Plus className="mr-1 h-3 w-3" />
                 New post
               </Link>
             </Button>
+
             <ThemeSwitch />
           </div>
         </div>
@@ -186,14 +206,14 @@ function BlogPostsDashboard() {
           </CardHeader>
           <CardContent>
             {loading ? (
-              <p className="text-xs text-muted-foreground">Loading posts…</p>
+              <p className="text-muted-foreground text-xs">Loading posts…</p>
             ) : posts.length === 0 ? (
-              <p className="text-xs text-muted-foreground">
+              <p className="text-muted-foreground text-xs">
                 No posts yet. Create your first one.
               </p>
             ) : (
-              <div className="divide-y divide-border">
-                {posts.map((post) => (
+              <div className="divide-border divide-y">
+                {posts.map(post => (
                   <div
                     key={post.id}
                     className="flex flex-col gap-2 py-3 md:flex-row md:items-center md:justify-between"
@@ -204,10 +224,10 @@ function BlogPostsDashboard() {
                           {post.title}
                         </p>
                       </div>
-                      <p className="truncate text-xs text-muted-foreground">
+                      <p className="text-muted-foreground truncate text-xs">
                         {post.subtitle}
                       </p>
-                      <p className="text-[11px] text-muted-foreground">
+                      <p className="text-muted-foreground text-[11px]">
                         {formatDate(post.createdAt)}
                       </p>
                     </div>
@@ -218,9 +238,7 @@ function BlogPostsDashboard() {
                         className="px-2 text-xs shadow-none"
                         asChild
                       >
-                        <Link href={`/blogs/${post.slug}`}>
-                          View
-                        </Link>
+                        <Link href={`/blogs/${post.slug}`}>View</Link>
                       </Button>
                       <Button
                         variant="outline"
@@ -254,7 +272,7 @@ function BlogPostsDashboard() {
             )}
 
             {pageCount > 1 && (
-              <div className="mt-4 flex items-center justify-between text-xs text-muted-foreground">
+              <div className="text-muted-foreground mt-4 flex items-center justify-between text-xs">
                 <Button
                   variant="ghost"
                   size="sm"
@@ -331,7 +349,13 @@ function BlogPostsDashboard() {
 
 export default function BlogPostsDashboardPage() {
   return (
-    <Suspense fallback={<div className="flex min-h-screen items-center justify-center px-4"><p className="text-sm text-muted-foreground">Loading…</p></div>}>
+    <Suspense
+      fallback={
+        <div className="flex min-h-screen items-center justify-center px-4">
+          <p className="text-muted-foreground text-sm">Loading…</p>
+        </div>
+      }
+    >
       <BlogPostsDashboard />
     </Suspense>
   );
