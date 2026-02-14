@@ -12,7 +12,7 @@ Access through: https://kentkalaw.vercel.app
 - Styled with Tailwind CSS and shadcn/ui components
 - Dark/Light mode with smooth transitions
 - Fully responsive design
-- Integrated AI Chatbot
+- Integrated AI Chatbot (Disabled for the meantime)
 - GitHub contributions integration
 - Blog section
 - Contact form
@@ -25,6 +25,8 @@ Access through: https://kentkalaw.vercel.app
 │ ├── app/                # Next.js app directory
 │ │ ├── api/              # API routes
 │ │ ├── blogs/            # Blog pages
+│ │ ├── projects/         # Projects pages
+│ │ ├── certifications/   # Certifications pages
 │ │ ├── globals.css       # Global styles
 │ │ ├── layout.tsx        # Root layout
 │ │ └── page.tsx          # Home page
