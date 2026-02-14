@@ -9,6 +9,11 @@ import {
   PanelContent,
 } from "@/components/panel";
 import { ChevronDown, ExternalLink, Code2 } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export default function Projects() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -73,7 +78,7 @@ export default function Projects() {
           </PanelTitle>
 
           <Link
-            href="/projects"
+            href="#"
             className="text-muted-foreground hover:text-foreground text-xs transition-colors"
           >
             View all →
@@ -109,15 +114,20 @@ export default function Projects() {
                   </div>
                   <div className="flex items-center gap-3 pr-4">
                     {isClickable && (
-                      <a
-                        href={project.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={e => e.stopPropagation()}
-                        className="text-muted-foreground hover:text-foreground transition-colors"
-                      >
-                        <ExternalLink className="h-4 w-4" />
-                      </a>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <a
+                            href={project.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={e => e.stopPropagation()}
+                            className="text-muted-foreground hover:text-foreground transition-colors"
+                          >
+                            <ExternalLink className="h-4 w-4" />
+                          </a>
+                        </TooltipTrigger>
+                        <TooltipContent>View URL</TooltipContent>
+                      </Tooltip>
                     )}
                     <ChevronDown
                       className={`text-muted-foreground h-4 w-4 transition-transform duration-200 ${
