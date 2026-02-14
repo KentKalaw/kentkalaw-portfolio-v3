@@ -94,10 +94,7 @@ const triggerScrollToTop = () => {
       size="icon"
       className="h-8 w-8 rounded-xl text-white/70 hover:bg-white/10 hover:text-white md:h-9 md:w-9"
       onClick={() => {
-        const certificationsSection = document.getElementById("certifications");
-        if (certificationsSection) {
-          certificationsSection.scrollIntoView({ behavior: "smooth", block: "center" });
-        }
+        window.location.href = "/certifications";
       }}
     >
       <Tickets />
@@ -115,10 +112,7 @@ const triggerScrollToTop = () => {
       size="icon"
       className="h-8 w-8 rounded-xl text-white/70 hover:bg-white/10 hover:text-white md:h-9 md:w-9"
       onClick={() => {
-        const projectsSection = document.getElementById("projects");
-        if (projectsSection) {
-          projectsSection.scrollIntoView({ behavior: "smooth", block: "center" });
-        }
+        window.location.href = "/projects";
       }}
     >
       <FolderCode />
