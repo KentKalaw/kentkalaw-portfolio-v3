@@ -22,7 +22,7 @@ const certifications: CertificationItem[] = [
     title: "CompTIA IT Fundamentals (ITF+)",
     company: "CompTIA",
     year: "2025",
-    svgPath: "/Comptia.svg",
+    svgPath: "/comptia-icon.svg",
     certLink:
       "https://www.credly.com/badges/4af20cea-6765-42ca-9342-7ede0cfe594c/public_url",
   },
@@ -31,7 +31,7 @@ const certifications: CertificationItem[] = [
     title: "AWS - Cloud Foundations",
     company: "Amazon Web Services (AWS)",
     year: "2024",
-    svgPath: "/Amazonaws.svg",
+    svgPath: "/aws-icon.svg",
     certLink:
       "https://www.credly.com/badges/41fdd82e-d354-4e07-9d0c-dcca466b520b/public_url",
   },
@@ -39,7 +39,7 @@ const certifications: CertificationItem[] = [
     title: "Cisco - Cybersecurity Essentials",
     company: "Cisco Networking Academy",
     year: "2024",
-    svgPath: "/Cisco.svg",
+    svgPath: "/cisco-icon.svg",
     certLink:
       "https://drive.google.com/file/d/1Y8-oDKbw9wapXuNLKapowOBovVQZ8oI8/view?usp=sharing",
   },
@@ -78,7 +78,7 @@ export default function Certifications() {
                   <img
                     src={cert.svgPath}
                     alt={cert.company}
-                    className="h-6 w-6 object-contain"
+                    className="h-6 w-6 object-contain dark:invert"
                   />
                 </div>
               </div>
