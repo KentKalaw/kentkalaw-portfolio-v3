@@ -38,7 +38,7 @@ const backendIcons = [
     <img
       src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${icon.path}`}
       alt={`${icon.name} logo`}
-      className="h-8 w-auto object-contain transition-all duration-300"
+      className="h-8 w-auto object-contain grayscale-[0.80] hover:grayscale-0 hover:translate-y-[-8px] transition-all duration-300"
     />
     <span className="text-xs text-muted-foreground text-center whitespace-nowrap">
       {icon.name}
@@ -54,14 +54,13 @@ const backEndlogos = backendIcons.map((icon, index) => (
     <img
       src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${icon.path}`}
       alt={`${icon.name} logo`}
-      className="h-8 w-auto object-contain transition-all duration-300"
+      className="h-8 w-auto object-contain grayscale-[0.80] hover:grayscale-0 hover:translate-y-[-8px] transition-all duration-300"
     />
     <span className="text-xs text-muted-foreground text-center whitespace-nowrap">
       {icon.name}
     </span>
   </div>
 ));
-
 
   return (
     <Panel className="animate-fade-in animate-delay-500">
@@ -82,7 +81,7 @@ const backEndlogos = backendIcons.map((icon, index) => (
           </p>
           <LogoSlider
           logos={frontEndlogos}
-          speed={60}
+          speed={40}
           direction="left"
         />
         <p>
@@ -92,7 +91,7 @@ const backEndlogos = backendIcons.map((icon, index) => (
           </p>
         <LogoSlider
           logos={backEndlogos}
-          speed={60}
+          speed={40}
           direction="right"
         />
         </div>
