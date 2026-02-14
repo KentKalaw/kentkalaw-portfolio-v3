@@ -87,9 +87,9 @@ export default function CertificationsPage() {
             </div>
           </PanelHeader>
           <PanelContent className="divide-border divide-y p-0">
-            {certifications.map((cert, idx) => (
+            {certifications.map((cert, id) => (
               <button
-                key={idx}
+                key={id}
                 className="group hover:bg-muted/40 flex w-full cursor-pointer items-center justify-between py-4 text-left transition-colors"
                 onClick={() =>
                   cert.certLink && window.open(cert.certLink, "_blank")

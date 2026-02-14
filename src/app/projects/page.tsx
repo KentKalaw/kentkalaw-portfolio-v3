@@ -14,10 +14,15 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Footer from "@/components/footer/footer";
 export default function ProjectsPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const contentRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const toggleIndex = (id: number) => {
+    setOpenIndex(openIndex === id ? null : id);
+  };
 
   const projects = [
     {
@@ -107,14 +112,14 @@ export default function ProjectsPage() {
           </PanelHeader>
           <PanelContent className="p-0">
             <div className="divide-border divide-y">
-              {projects.map((project, idx) => {
-                const isOpen = openIndex === idx;
+              {projects.map((project, id) => {
+                const isOpen = openIndex === id;
                 const isClickable = !!project.url;
 
                 return (
-                  <div key={idx} className="group">
+                  <div key={id} className="group">
                     <button
-                      onClick={() => setOpenIndex(isOpen ? null : idx)}
+                      onClick={() => toggleIndex(id)}
                       className="hover:bg-muted/40 flex w-full cursor-pointer items-center justify-between py-4 text-left transition-colors"
                     >
                       <div className="flex items-center">
@@ -156,13 +161,22 @@ export default function ProjectsPage() {
                       </div>
                     </button>
                     <div
-                      className={`overflow-hidden transition-all duration-300 ${
-                        isOpen
-                          ? "screen-line-before max-h-60 py-2 pb-4"
-                          : "max-h-0"
-                      }`}
+                      ref={el => {
+                        contentRefs.current[id] = el;
+                      }}
+                      style={{
+                        maxHeight: isOpen
+                          ? `${contentRefs.current[id]?.scrollHeight}px`
+                          : "0px",
+                        transition: "max-height 0.3s ease",
+                        overflow: "hidden",
+                      }}
                     >
-                      <div className="mt-2 pr-4 pl-4">
+                      <div
+                        className={`mt-2 py-2 pr-4 pl-4 transition-opacity duration-300 ${
+                          isOpen ? "opacity-100" : "opacity-0"
+                        }`}
+                      >
                         <p className="dark:text-muted-foreground text-sm">
                           {project.description}
                         </p>

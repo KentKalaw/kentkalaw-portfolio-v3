@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   Panel,
   PanelHeader,
@@ -35,7 +35,7 @@ const experiences: ExperienceItem[] = [
       "Served as a Front-end Developer, implementing and maintaining UI/UX designs using modern front-end frameworks",
       "Built web applications using Next.js and Laravel, managing databases with Prisma ORM (MySQL).",
       "Translated system requirements into functional features while ensuring performance, accessibility, and maintainability",
-      "Designed and implemented user interfaces in collaboration with co-interns for CICT Department and university events, used by over 2,000+ end users."
+      "Designed and implemented user interfaces in collaboration with co-interns for CICT Department and university events, used by over 2,000+ end users.",
     ],
   },
   {
@@ -52,6 +52,11 @@ const experiences: ExperienceItem[] = [
 
 export default function Experience() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const contentRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const toggleIndex = (id: number) => {
+    setOpenIndex(openIndex === id ? null : id);
+  };
 
   return (
     <Panel className="animate-fade-in animate-delay-500">
@@ -62,13 +67,13 @@ export default function Experience() {
       </PanelHeader>
 
       <PanelContent className="divide-border divide-y p-0">
-        {experiences.map((exp, idx) => {
-          const isOpen = openIndex === idx;
+        {experiences.map((exp, id) => {
+          const isOpen = openIndex === id;
 
           return (
-            <div key={idx} className="group">
+            <div key={id} className="group">
               <button
-                onClick={() => setOpenIndex(isOpen ? null : idx)}
+                onClick={() => toggleIndex(id)}
                 className="hover:bg-muted/40 flex w-full cursor-pointer items-center justify-between py-4 text-left transition-colors"
               >
                 <div className="flex items-center">
@@ -95,13 +100,23 @@ export default function Experience() {
                   />
                 </div>
               </button>
-
               <div
-                className={`overflow-hidden transition-all duration-300 ${
-                  isOpen ? "screen-line-before max-h-40 py-2 pb-4" : "max-h-0"
-                }`}
+                ref={(el) => {
+                  contentRefs.current[id] = el;
+                }}
+                style={{
+                  maxHeight: isOpen
+                    ? `${contentRefs.current[id]?.scrollHeight}px`
+                    : "0px",
+                  transition: "max-height 0.3s ease",
+                  overflow: "hidden",
+                }}
               >
-                <div className="mt-2 pr-4 pl-4">
+                <div
+                  className={`mt-2 pr-4 pl-4 py-2 transition-opacity duration-300 ${
+                    isOpen ? "opacity-100" : "opacity-0"
+                  }`}
+                >
                   <ul className="text-muted-foreground list-disc space-y-1 pl-8 text-sm">
                     {exp.description.map((item, i) => (
                       <li key={i}>{item}</li>
