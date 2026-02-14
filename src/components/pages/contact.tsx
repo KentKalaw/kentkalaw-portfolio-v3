@@ -103,6 +103,7 @@ function ContactForm() {
               <Input
                 id="name"
                 placeholder="Enter your name"
+                autoComplete="off"
                 {...register("name")}
               />
               {errors.name && (
@@ -116,6 +117,7 @@ function ContactForm() {
                 id="email"
                 type="email"
                 placeholder="Enter your email"
+                autoComplete="off"
                 {...register("email")}
               />
               {errors.email && (
@@ -129,6 +131,7 @@ function ContactForm() {
             <Input
               id="subject"
               placeholder="Enter the subject"
+              autoComplete="off"
               {...register("subject")}
             />
             {errors.subject && (
@@ -141,6 +144,7 @@ function ContactForm() {
             <Textarea
               id="message"
               placeholder="Enter your message"
+              autoComplete="off"
               className="max-h-[240px] min-h-[120px]"
               {...register("message")}
             />
