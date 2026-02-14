@@ -15,7 +15,7 @@ Access through: https://kentkalaw.vercel.app
 - Integrated AI Chatbot (Disabled for the meantime)
 - GitHub contributions integration
 - Blog section
-- Contact form
+- Contact form (Powered by ReCaptcha)
 - Smooth animations and transitions
 
 ## File Structure
