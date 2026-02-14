@@ -76,7 +76,7 @@ const backEndlogos = backendIcons.map((icon, index) => (
       <PanelContent>
         <div className="space-y-2">
           <p>
-            <span className="text-sm text-muted-foreground uppercase tracking-widest">
+            <span className="text-sm uppercase tracking-widest">
               FRONT-END
             </span>
           </p>
@@ -86,7 +86,7 @@ const backEndlogos = backendIcons.map((icon, index) => (
           direction="left"
         />
         <p>
-            <span className="text-sm text-muted-foreground uppercase tracking-widest">
+            <span className="text-sm uppercase tracking-widest">
               BACK-END
             </span>
           </p>
