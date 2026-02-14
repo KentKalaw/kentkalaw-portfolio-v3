@@ -9,7 +9,7 @@ import {
 
 export default function About() {
   return (
-    <Panel className="animate-fade-in animate-delay-400">
+    <Panel id="about" className="animate-fade-in animate-delay-400">
       <PanelHeader>
         <PanelTitle>
           <p className="text-muted-foreground text-base tracking-[0.8em] uppercase">
