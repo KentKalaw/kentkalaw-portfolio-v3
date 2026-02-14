@@ -36,10 +36,9 @@ export default function Projects() {
       title: "AI Resume Builder",
       date: "2025",
       description:
-        "AI-powered resume generator that dynamically formats and optimizes CV content.",
+        "Simple AI-powered resume generator that optimizes CV content.",
       features: [
-        "AI-driven content analysis and formatting",
-        "Real-time preview and editing",
+        "AI Content Optimization: Enhance resume content with AI suggestions.",
       ],
       url: "https://ai-resume-builder-pi-navy.vercel.app",
     },
