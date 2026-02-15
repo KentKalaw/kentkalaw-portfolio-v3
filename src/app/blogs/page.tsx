@@ -1,4 +1,4 @@
-import { MoveLeft, ArrowRight } from "lucide-react";
+import { MoveLeft, ArrowRight, MoveRight } from "lucide-react";
 import { ThemeSwitch } from "@/components/theme-switch";
 import Link from "next/link";
 import Footer from "@/components/footer/footer";
@@ -156,7 +156,7 @@ export default async function BlogsPage({ searchParams }: BlogsPageProps) {
                           {post.title}
                         </h2>
                         {post.subtitle && (
-                          <p className="text-muted-foreground line-clamp-1 text-sm">
+                          <p className="text-foreground line-clamp-1 text-sm">
                             {post.subtitle}
                           </p>
                         )}
@@ -181,7 +181,7 @@ export default async function BlogsPage({ searchParams }: BlogsPageProps) {
               })}
             </div>
             {pageCount > 1 && (
-              <div className="screen-line-before dark:text-muted-foreground flex items-center justify-between px-2 py-2 text-sm">
+              <div className="screen-line-before dark:text-muted-foreground flex items-center px-2 py-2 justify-between text-sm">
                 <Link
                   href={
                     currentPage <= 2
@@ -190,7 +190,7 @@ export default async function BlogsPage({ searchParams }: BlogsPageProps) {
                   }
                   className={` ${currentPage <= 1 ? "pointer-events-none opacity-50" : ""}`}
                 >
-                  Previous
+                  <MoveLeft />
                 </Link>
 
                 <span>
@@ -201,7 +201,7 @@ export default async function BlogsPage({ searchParams }: BlogsPageProps) {
                   href={`/blogs?page=${currentPage + 1}`}
                   className={` ${currentPage >= pageCount ? "pointer-events-none opacity-50" : ""}`}
                 >
-                  Next
+                  <MoveRight />
                 </Link>
               </div>
             )}
