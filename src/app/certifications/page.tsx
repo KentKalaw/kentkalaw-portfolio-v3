@@ -37,7 +37,7 @@ export default function CertificationsPage() {
       svgPath: "/nextjs-icon.svg",
       certLink: null,
     },
-     {
+    {
       title: "Next.js App Router Fundamentals",
       company: "Vercel",
       year: "2025",
@@ -60,22 +60,11 @@ export default function CertificationsPage() {
       certLink:
         "https://drive.google.com/file/d/1Y8-oDKbw9wapXuNLKapowOBovVQZ8oI8/view?usp=sharing",
     },
-    
   ];
 
   return (
     <main className="animate-fade-in animate-delay-100 relative min-h-screen overflow-x-hidden pt-18">
       <div className="mx-auto max-w-5xl px-4 py-8">
-        <div className="flex flex-row items-center">
-          <Link
-            href="/"
-            className="text-muted-foreground hover:text-foreground mb-2 flex items-center gap-2 px-4 text-sm transition-colors"
-          >
-            <MoveLeft className="mr-1 h-4 w-4" />
-            Go Back
-          </Link>
-        </div>
-
         <Panel>
           <PanelHeader>
             <div className="flex items-center justify-between">
@@ -90,13 +79,13 @@ export default function CertificationsPage() {
             {certifications.map((cert, id) => (
               <button
                 key={id}
-                className="group hover:bg-muted/40 flex w-full cursor-pointer items-center justify-between py-4 text-left transition-colors"
+                className="group hover:bg-muted/40 flex w-full cursor-pointer items-center justify-between text-left transition-colors"
                 onClick={() =>
                   cert.certLink && window.open(cert.certLink, "_blank")
                 }
               >
                 <div className="flex items-center">
-                  <div className="flex items-center px-4">
+                  <div className="flex items-center px-5 py-4">
                     <div className="border-border text-muted-foreground flex h-8 w-8 items-center justify-center rounded-full border">
                       <img
                         src={cert.svgPath}

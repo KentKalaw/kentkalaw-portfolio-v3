@@ -90,16 +90,6 @@ export default function ProjectsPage() {
   return (
     <main className="animate-fade-in animate-delay-100 relative min-h-screen overflow-x-hidden pt-18">
       <div className="mx-auto max-w-5xl px-4 py-8">
-        <div className="flex flex-row items-center">
-          <Link
-            href="/"
-            className="text-muted-foreground hover:text-foreground mb-2 flex items-center gap-2 px-4 text-sm transition-colors"
-          >
-            <MoveLeft className="mr-1 h-4 w-4" />
-            Go Back
-          </Link>
-        </div>
-
         <Panel>
           <PanelHeader>
             <div className="flex items-center justify-between">
@@ -120,10 +110,10 @@ export default function ProjectsPage() {
                   <div key={id} className="group">
                     <button
                       onClick={() => toggleIndex(id)}
-                      className="hover:bg-muted/40 flex w-full cursor-pointer items-center justify-between py-4 text-left transition-colors"
+                      className="hover:bg-muted/40 flex w-full cursor-pointer items-center justify-between text-left transition-colors"
                     >
                       <div className="flex items-center">
-                        <div className="flex items-center px-4">
+                        <div className="flex items-center px-5 py-4">
                           <div className="border-border flex h-8 w-8 items-center justify-center rounded-full border">
                             <Code2 className="dark:text-muted-foreground h-4 w-4" />
                           </div>
@@ -173,15 +163,15 @@ export default function ProjectsPage() {
                       }}
                     >
                       <div
-                        className={`mt-2 py-2 pr-4 pl-4 transition-opacity duration-300 ${
+                        className={`transition-opacity duration-300 ${
                           isOpen ? "opacity-100" : "opacity-0"
                         }`}
                       >
-                        <p className="dark:text-muted-foreground text-sm">
-                          {project.description}
-                        </p>
                         {project.features && (
-                          <ul className="dark:text-muted-foreground mt-1 list-disc space-y-1 pl-8 text-sm">
+                          <ul className="dark:text-muted-foreground screen-line-before list-disc space-y-4 px-8 py-4 text-sm">
+                            <p className="dark:text-muted-foreground text-sm">
+                              {project.description}
+                            </p>
                             {project.features.map((feature, i) => (
                               <li key={i}>{feature}</li>
                             ))}

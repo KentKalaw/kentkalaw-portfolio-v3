@@ -100,10 +100,10 @@ export default function Projects() {
               <div key={id} className="group">
                 <button
                   onClick={() => toggleIndex(id)}
-                  className="hover:bg-muted/40 flex w-full cursor-pointer items-center justify-between py-4 text-left transition-colors"
+                  className="hover:bg-muted/40 flex w-full cursor-pointer items-center justify-between text-left transition-colors"
                 >
                   <div className="flex items-center">
-                    <div className="flex items-center px-4">
+                    <div className="flex items-center px-5 py-4">
                       <div className="border-border flex h-8 w-8 items-center justify-center rounded-full border">
                         <Code2 className="dark:text-muted-foreground h-4 w-4" />
                       </div>
@@ -124,7 +124,7 @@ export default function Projects() {
                             href={project.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            onClick={(e) => e.stopPropagation()}
+                            onClick={e => e.stopPropagation()}
                             className="text-muted-foreground hover:text-foreground transition-colors"
                           >
                             <ExternalLink className="h-4 w-4" />
@@ -141,9 +141,9 @@ export default function Projects() {
                   </div>
                 </button>
                 <div
-                  ref={(el) => {
-                      contentRefs.current[id] = el;
-                    }}
+                  ref={el => {
+                    contentRefs.current[id] = el;
+                  }}
                   style={{
                     maxHeight: isOpen
                       ? `${contentRefs.current[id]?.scrollHeight}px`
@@ -153,15 +153,15 @@ export default function Projects() {
                   }}
                 >
                   <div
-                    className={`mt-2 pr-4 pl-4 py-2 transition-opacity duration-300 ${
+                    className={`transition-opacity duration-300 ${
                       isOpen ? "opacity-100" : "opacity-0"
                     }`}
                   >
-                    <p className="dark:text-muted-foreground text-sm">
-                      {project.description}
-                    </p>
                     {project.features && (
-                      <ul className="dark:text-muted-foreground mt-1 list-disc space-y-1 pl-8 text-sm">
+                      <ul className="dark:text-muted-foreground screen-line-before list-disc space-y-4 px-8 py-4 text-sm">
+                        <p className="dark:text-muted-foreground text-sm">
+                          {project.description}
+                        </p>
                         {project.features.map((feature, i) => (
                           <li key={i}>{feature}</li>
                         ))}

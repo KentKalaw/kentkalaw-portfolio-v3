@@ -67,13 +67,13 @@ export default function Certifications() {
         {certifications.map((cert, id) => (
           <button
             key={id}
-            className="group hover:bg-muted/40 flex w-full cursor-pointer items-center justify-between py-4 text-left transition-colors"
+            className="group hover:bg-muted/40 flex w-full cursor-pointer items-center justify-between text-left transition-colors"
             onClick={() =>
               cert.certLink && window.open(cert.certLink, "_blank")
             }
           >
             <div className="flex items-center">
-              <div className="flex items-center px-4">
+              <div className="flex items-center px-5 py-4">
                 <div className="border-border text-muted-foreground flex h-8 w-8 items-center justify-center rounded-full border">
                   <img
                     src={cert.svgPath}

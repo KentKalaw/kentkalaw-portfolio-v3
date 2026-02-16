@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip"
+import { FloatingNavbar } from "@/components/navbar/navbar";
 // import { ChatDialog } from "@/components/chat";
 // import { FloatingNavbar } from "@/components/navbar/navbar";
 
@@ -43,6 +44,7 @@ export default function RootLayout({
             defaultTheme="system"
             enableSystem
           >
+            <FloatingNavbar />
             <TooltipProvider>{children}</TooltipProvider>
             {/* <ChatDialog /> */}
           </ThemeProvider>

@@ -1,5 +1,15 @@
 "use client";
-import { Home, Mail, FileText, Download, X, User, BookOpen, Tickets, FolderCode } from "lucide-react";
+import {
+  Home,
+  Mail,
+  FileText,
+  Download,
+  X,
+  User,
+  BookOpen,
+  Tickets,
+  FolderCode,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeSwitch } from "@/components/theme-switch";
 import {
@@ -16,161 +26,180 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useState } from "react";
+import { useRouter, usePathname } from "next/navigation";
 
 const NavItem = () => {
   const [showCVViewer, setShowCVViewer] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
 
-
-const triggerScrollToTop = () => {
+  const triggerScrollToTop = () => {
     window.scrollTo({
-    top: 0,
-    behavior: "smooth",
+      top: 0,
+      behavior: "smooth",
     });
-};
+  };
 
   return (
     <TooltipProvider>
-    <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-black/40 px-3 py-2 shadow-lg backdrop-blur-xl md:px-6 md:py-3">
-      <div className="flex items-center gap-2 md:gap-4">
-        <Tooltip>
-  <TooltipTrigger asChild>
-    <Button
-      variant="ghost"
-      size="icon"
-      className="h-8 w-8 rounded-xl text-white/70 hover:bg-white/10 hover:text-white md:h-9 md:w-9"
-      onClick={triggerScrollToTop}
-    >
-      <Home />
-    </Button>
-  </TooltipTrigger>
-  <TooltipContent>
-    <p>Home</p>
-  </TooltipContent>
-</Tooltip>
+      <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-black/40 px-3 py-2 shadow-lg backdrop-blur-xl md:px-6 md:py-3">
+        <div className="flex items-center gap-2 md:gap-4">
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-8 w-8 rounded-xl text-white/70 hover:bg-white/10 hover:text-white md:h-9 md:w-9"
+                onClick={() => {
+                  if (pathname !== "/") {
+                    router.push("/");
+                  } else {
+                    triggerScrollToTop();
+                  }
+                }}
+              >
+                <Home />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Home</p>
+            </TooltipContent>
+          </Tooltip>
 
-     <Tooltip>
-  <TooltipTrigger asChild>
-    <Button
-      variant="ghost"
-      size="icon"
-      className="h-8 w-8 rounded-xl text-white/70 hover:bg-white/10 hover:text-white md:h-9 md:w-9"
-      onClick={() => {
-        const aboutSection = document.getElementById("about");
-        if (aboutSection) {
-          aboutSection.scrollIntoView({ behavior: "smooth", block: "center" });
-        }
-      }}
-    >
-      <User />
-    </Button>
-  </TooltipTrigger>
-  <TooltipContent>
-    <p>About Me</p>
-  </TooltipContent>
-</Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-8 w-8 rounded-xl text-white/70 hover:bg-white/10 hover:text-white md:h-9 md:w-9"
+                onClick={() => {
+                  if (pathname !== "/about") {
+                    router.push("/about");
+                  }
+                }}
+              >
+                <User />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>About Me</p>
+            </TooltipContent>
+          </Tooltip>
 
-<Tooltip>
-  <TooltipTrigger asChild>
-    <Button
-      variant="ghost"
-      size="icon"
-      className="h-8 w-8 rounded-xl text-white/70 hover:bg-white/10 hover:text-white md:h-9 md:w-9"
-      onClick={() => {
-        window.location.href = "/blogs";
-      }}
-    >
-      <BookOpen />
-    </Button>
-  </TooltipTrigger>
-  <TooltipContent>
-    <p>Blogs</p>
-  </TooltipContent>
-</Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-8 w-8 rounded-xl text-white/70 hover:bg-white/10 hover:text-white md:h-9 md:w-9"
+                onClick={() => {
+                  if (pathname !== "/blogs") {
+                    router.push("/blogs");
+                  }
+                }}
+              >
+                <BookOpen />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Blogs</p>
+            </TooltipContent>
+          </Tooltip>
 
-<Tooltip>
-  <TooltipTrigger asChild>
-    <Button
-      variant="ghost"
-      size="icon"
-      className="h-8 w-8 rounded-xl text-white/70 hover:bg-white/10 hover:text-white md:h-9 md:w-9"
-      onClick={() => {
-        window.location.href = "/certifications";
-      }}
-    >
-      <Tickets />
-    </Button>
-  </TooltipTrigger>
-  <TooltipContent>
-    <p>Certifications</p>
-  </TooltipContent>
-</Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-8 w-8 rounded-xl text-white/70 hover:bg-white/10 hover:text-white md:h-9 md:w-9"
+                onClick={() => {
+                  if (pathname !== "/certifications") {
+                    router.push("/certifications");
+                  }
+                }}
+              >
+                <Tickets />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Certifications</p>
+            </TooltipContent>
+          </Tooltip>
 
-       <Tooltip>
-  <TooltipTrigger asChild>
-    <Button
-      variant="ghost"
-      size="icon"
-      className="h-8 w-8 rounded-xl text-white/70 hover:bg-white/10 hover:text-white md:h-9 md:w-9"
-      onClick={() => {
-        window.location.href = "/projects";
-      }}
-    >
-      <FolderCode />
-    </Button>
-  </TooltipTrigger>
-  <TooltipContent>
-    <p>Projects</p>
-  </TooltipContent>
-</Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-8 w-8 rounded-xl text-white/70 hover:bg-white/10 hover:text-white md:h-9 md:w-9"
+                onClick={() => {
+                  if (pathname !== "/projects") {
+                    router.push("/projects");
+                  }
+                }}
+              >
+                <FolderCode />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Projects</p>
+            </TooltipContent>
+          </Tooltip>
+        </div>
+        <div className="flex items-center gap-2 md:gap-4">
+          <ThemeSwitch />
+          <Button
+            size="icon"
+            className="rounded-xl bg-white/10 text-white hover:bg-white/20 md:hidden"
+            onClick={() => {
+              const contactSection = document.getElementById("contact");
+              if (contactSection) {
+                contactSection.scrollIntoView({ behavior: "smooth" });
+              }
+            }}
+          >
+            <Mail className="h-4 w-4" />
+          </Button>
 
+          <Button
+            size="icon"
+            className="rounded-xl bg-white/10 text-white hover:bg-white/20 md:hidden"
+            onClick={() => setShowCVViewer(true)}
+          >
+            <FileText className="h-4 w-4" />
+          </Button>
+          <Button
+            size="sm"
+            className="hidden gap-2 rounded-xl bg-white/10 text-white hover:bg-white/20 md:flex"
+            onClick={() => {
+              if (pathname !== "/") {
+                router.push("/#contact");
+              } else {
+                const contactSection = document.getElementById("contact");
+                if (contactSection) {
+                  contactSection.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center",
+                  });
+                }
+              }
+            }}
+          >
+            <Mail className="h-4 w-4" />
+            Contact Me
+          </Button>
+
+          <Button
+            size="sm"
+            className="hidden gap-2 rounded-xl bg-white/10 text-white hover:bg-white/20 md:flex"
+            onClick={() => setShowCVViewer(true)}
+          >
+            <FileText className="h-4 w-4" />
+            View Resume
+          </Button>
+        </div>
+        <CVViewerDialog open={showCVViewer} onOpenChange={setShowCVViewer} />
       </div>
-      <div className="flex items-center gap-2 md:gap-4">
-        <ThemeSwitch />
-        <Button
-          size="icon"
-          className="rounded-xl bg-white/10 text-white hover:bg-white/20 md:hidden"
-          onClick={() => {
-            const contactSection = document.getElementById("contact");
-            if (contactSection) {
-              contactSection.scrollIntoView({ behavior: "smooth" });
-            }
-          }}
-        >
-          <Mail className="h-4 w-4" />
-        </Button>
-
-        <Button
-          size="icon"
-          className="rounded-xl bg-white/10 text-white hover:bg-white/20 md:hidden"
-          onClick={() => setShowCVViewer(true)}
-        >
-          <FileText className="h-4 w-4" />
-        </Button>
-        <Button
-          size="sm"
-          className="hidden gap-2 rounded-xl bg-white/10 text-white hover:bg-white/20 md:flex"
-          onClick={() => {
-            const contactSection = document.getElementById("contact");
-            if (contactSection) {
-              contactSection.scrollIntoView({ behavior: "smooth" });
-            }
-          }}
-        >
-          <Mail className="h-4 w-4" />
-          Contact Me
-        </Button>
-
-        <Button
-          size="sm"
-          className="hidden gap-2 rounded-xl bg-white/10 text-white hover:bg-white/20 md:flex"
-          onClick={() => setShowCVViewer(true)}
-        >
-          <FileText className="h-4 w-4" />
-          View Resume
-        </Button>
-      </div>
-      <CVViewerDialog open={showCVViewer} onOpenChange={setShowCVViewer} />
-    </div>
     </TooltipProvider>
   );
 };

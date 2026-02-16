@@ -122,15 +122,6 @@ export default async function BlogsPage({ searchParams }: BlogsPageProps) {
   return (
     <main className="relative min-h-screen overflow-x-hidden pt-18 animate-fade-in animate-delay-100">
       <div className="mx-auto max-w-5xl px-4 py-10">
-        <div className="flex flex-row items-center">
-          <Link
-            href="/"
-            className="text-muted-foreground hover:text-foreground mb-2 flex items-center gap-2 px-4 text-sm transition-colors"
-          >
-            <MoveLeft className="mr-1 h-4 w-4" />
-            Go Back
-          </Link>
-        </div>
         <Panel>
           <PanelHeader>
             <div className="flex items-center justify-between">

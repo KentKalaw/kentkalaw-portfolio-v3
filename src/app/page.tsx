@@ -45,7 +45,7 @@ export default function Home() {
       ref={scrollAreaRef}
     >
       <div className="mx-auto max-w-5xl px-4 py-8">
-        <FloatingNavbar />
+         
         <Name />
         <div className="flex md:gap-3">
           <div className="w-full">
