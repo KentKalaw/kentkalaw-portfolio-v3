@@ -77,7 +77,7 @@ export default function Projects() {
     <Panel id="projects" className="animate-fade-in animate-delay-500">
       <PanelHeader>
         <div className="flex items-center justify-between">
-          <PanelTitle className="text-muted-foreground text-base tracking-[0.4em] uppercase">
+          <PanelTitle className="text-muted-foreground text-base tracking-[0.8em] uppercase">
             Projects
           </PanelTitle>
 
