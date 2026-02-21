@@ -85,6 +85,7 @@ export default function Name() {
                   "API Integration",
                   "AI Integration",
                   "Database Management",
+                  "Version Control",
                 ]}
                 y={10}
                 duration={3000}
