@@ -43,6 +43,7 @@ export default function RootLayout({
             attribute="class"
             defaultTheme="system"
             enableSystem
+            disableTransitionOnChange
           >
             <FloatingNavbar />
             <TooltipProvider>{children}</TooltipProvider>
