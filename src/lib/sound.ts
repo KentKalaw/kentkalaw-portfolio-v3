@@ -1,3 +1,3 @@
 export const SOUND = {
-    click: "/sounds/click.mp3"
+    click: "/sounds/click.MP3"
 }
