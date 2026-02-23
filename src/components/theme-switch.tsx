@@ -5,25 +5,13 @@ import { Sun, Moon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { useEffect, useState } from "react"
+import { useSound } from "@/hooks/use-sound"
 import { SOUND } from "@/lib/sound"
-import { useRef } from "react";
 
 export function ThemeSwitch() {
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-
-
-  const play = () => {
-      const audio = new Audio(SOUND.click);
-      audioRef.current = audio;
-
-    if (audioRef.current) {
-      audioRef.current.play()
-    } else {
-      throw new Error("Audio element not available")
-    }
-  }
+  const playClick = useSound(SOUND.click)
 
   useEffect(() => {
     setMounted(true)
@@ -38,8 +26,8 @@ export function ThemeSwitch() {
       variant="ghost"
       size="icon"
       onClick={() => {
+        playClick(0.5)
         setTheme(isDark ? "light" : "dark")
-        play()
       }}
       className="relative h-9 w-9 rounded-xl text-white/70 hover:bg-white/10 hover:text-white"
     >
