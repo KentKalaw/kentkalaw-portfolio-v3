@@ -26,8 +26,8 @@ export function ThemeSwitch() {
       variant="ghost"
       size="icon"
       onClick={() => {
-        playClick(0.5)
         setTheme(isDark ? "light" : "dark")
+        playClick(0.5)
       }}
       className="relative h-9 w-9 rounded-xl text-white/70 hover:bg-white/10 hover:text-white"
     >
