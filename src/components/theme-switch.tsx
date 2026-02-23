@@ -13,16 +13,12 @@ export function ThemeSwitch() {
   const [mounted, setMounted] = useState(false)
   const playClick = useSound(SOUND.click)
 
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  if (!mounted) return null
   const isDark = theme === "dark"
 
 
   return (
-    <Button
+    <Button 
+      suppressHydrationWarning
       variant="ghost"
       size="icon"
       onClick={() => {

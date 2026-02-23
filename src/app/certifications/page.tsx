@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { MoveLeft } from "lucide-react";
+import Image from "next/image";
 import {
   Panel,
   PanelContent,
@@ -87,10 +86,12 @@ export default function CertificationsPage() {
                 <div className="flex items-center">
                   <div className="flex items-center px-5 py-4">
                     <div className="border-border text-muted-foreground flex h-8 w-8 items-center justify-center rounded-full border">
-                      <img
+                      <Image
                         src={cert.svgPath}
                         alt={cert.company}
-                        className="h-6 w-6 object-contain dark:invert"
+                        width={24}
+                        height={24}
+                        className="object-contain dark:invert"
                       />
                     </div>
                   </div>
