@@ -3,11 +3,12 @@ import { MoveRight } from "lucide-react";
 import Image from "next/image";
 import { ShimmeringText } from "@/components/animate-ui/primitives/texts/shimmering";
 import Link from "next/link";
+import AudioPlayerComponent  from "@/components/audio-player";
 
 export default function Name() {
   return (
     <section className="animate-fade-in">
-      <div className="border-edge border-y flex flex-col items-center gap-4 border-x md:flex-row md:items-center md:gap-6">
+      <div className="border-edge border-y flex flex-col items-center gap-4 px-4 py-2 border-x md:flex-row md:items-center md:gap-6">
         <div className="group relative h-40 w-40">
           <div className="relative h-full w-full overflow-hidden">
             <Image
@@ -49,12 +50,15 @@ export default function Name() {
           </div>
 
           <div className="flex items-center justify-center gap-2 md:justify-between">
-            <p className="text-sm md:text-lg">
+            <p className="text-xs md:text-lg">
             Full-stack Developer {" "}
               <span className="text-muted-foreground">
                 |
               </span> 
             {" "}Software Developer</p>
+          </div>
+          <div className="flex items-center justify-center gap-2 md:justify-start">
+            <AudioPlayerComponent />
           </div>
           <div className="mb-2 md:mb-0 flex items-center justify-center gap-2 md:justify-start">
             <Link href="/about" className="text-sm md:text-lg text-muted-foreground flex items-center gap-1 transition-colors hover:text-foreground">

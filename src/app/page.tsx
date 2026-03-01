@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Footer from "@/components/footer/footer";
 import { PlaceholderPattern } from "@/components/placeholder-pattern";
+import AudioPlayer from "@/components/audio-player";
 
 export default function Home() {
   const scrollAreaRef = useRef<HTMLDivElement | null>(null);
