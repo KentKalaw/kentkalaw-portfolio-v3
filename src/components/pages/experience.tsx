@@ -117,7 +117,7 @@ export default function Experience() {
                     isOpen ? "opacity-100" : "opacity-0"
                   }`}
                 >
-                  <ul className="text-muted-foreground screen-line-before list-disc space-y-4 px-8 py-4 text-sm">
+                  <ul className="text-muted-foreground border-t dark:border-muted list-disc space-y-4 px-8 py-4 text-sm">
                     {exp.description.map((item, i) => (
                       <li key={i}>{item}</li>
                     ))}

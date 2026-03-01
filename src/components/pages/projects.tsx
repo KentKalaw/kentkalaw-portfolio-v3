@@ -158,7 +158,7 @@ export default function Projects() {
                     }`}
                   >
                     {project.features && (
-                      <ul className="dark:text-muted-foreground screen-line-before list-disc space-y-4 px-8 py-4 text-sm">
+                      <ul className="dark:text-muted-foreground border-t dark:border-muted list-disc space-y-4 px-8 py-4 text-sm">
                         <p className="dark:text-muted-foreground text-sm">
                           {project.description}
                         </p>

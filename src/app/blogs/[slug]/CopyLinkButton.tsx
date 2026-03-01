@@ -16,7 +16,7 @@ export default function CopyLinkButton() {
   };
 
   return (
-    <div className="flex flex-row screen-line-before gap-2 px-4 py-2 justify-start">
+    <div className="flex flex-row border-t dark:border-muted gap-2 px-4 py-2 justify-start">
       <Button
         variant="outline"
         size="sm"

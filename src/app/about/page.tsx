@@ -8,24 +8,20 @@ import {
   PanelHeader,
   PanelTitle,
 } from "@/components/panel";
-import { ExternalLink } from "lucide-react";
-import { ThemeSwitch } from "@/components/theme-switch";
 import Footer from "@/components/footer/footer";
 
 export default function AboutPage() {
   
 
   return (
-    <main className="animate-fade-in animate-delay-100 relative min-h-screen overflow-x-hidden pt-18">
+    <main className="animate-fade-in animate-delay-100 relative min-h-screen overflow-x-hidden pt-11">
       <div className="mx-auto max-w-5xl px-4 py-8">
         <Panel>
           <PanelHeader>
             <div className="flex items-center justify-between">
-              <PanelTitle className="text-xl tracking-[0.4em] uppercase">
+              <PanelTitle className="text-2xl py-2 tracking-[0.8em] uppercase">
                 About Me
               </PanelTitle>
-
-              <ThemeSwitch />
             </div>
           </PanelHeader>
           <PanelContent className="divide-border divide-y p-0">

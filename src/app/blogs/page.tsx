@@ -120,16 +120,14 @@ export default async function BlogsPage({ searchParams }: BlogsPageProps) {
   const pageCount = Math.max(1, Math.ceil(total / PAGE_SIZE));
 
   return (
-    <main className="relative min-h-screen overflow-x-hidden pt-18 animate-fade-in animate-delay-100">
-      <div className="mx-auto max-w-5xl px-4 py-10">
+    <main className="animate-fade-in animate-delay-100 relative min-h-screen overflow-x-hidden pt-11">
+      <div className="mx-auto max-w-5xl px-4 py-8">
         <Panel>
           <PanelHeader>
             <div className="flex items-center justify-between">
-              <PanelTitle className="text-xl tracking-[0.4em] uppercase">
+              <PanelTitle className="text-2xl py-2 tracking-[0.8em] uppercase">
                 Blogs
               </PanelTitle>
-
-              <ThemeSwitch />
             </div>
           </PanelHeader>
           <PanelContent className="p-0">
@@ -172,7 +170,7 @@ export default async function BlogsPage({ searchParams }: BlogsPageProps) {
               })}
             </div>
             {pageCount > 1 && (
-              <div className="screen-line-before dark:text-muted-foreground flex items-center px-2 py-2 justify-between text-sm">
+              <div className="border-t dark:text-muted-foreground flex items-center px-2 py-2 justify-between text-sm">
                 <Link
                   href={
                     currentPage <= 2

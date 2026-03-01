@@ -88,16 +88,14 @@ export default function ProjectsPage() {
   ];
 
   return (
-    <main className="animate-fade-in animate-delay-100 relative min-h-screen overflow-x-hidden pt-18">
+    <main className="animate-fade-in animate-delay-100 relative min-h-screen overflow-x-hidden pt-11">
       <div className="mx-auto max-w-5xl px-4 py-8">
         <Panel>
           <PanelHeader>
             <div className="flex items-center justify-between">
-              <PanelTitle className="text-xl tracking-[0.4em] uppercase">
+              <PanelTitle className="text-2xl py-2 tracking-[0.8em] uppercase">
                 Projects
               </PanelTitle>
-
-              <ThemeSwitch />
             </div>
           </PanelHeader>
           <PanelContent className="p-0">
@@ -168,7 +166,7 @@ export default function ProjectsPage() {
                         }`}
                       >
                         {project.features && (
-                          <ul className="dark:text-muted-foreground screen-line-before list-disc space-y-4 px-8 py-4 text-sm">
+                          <ul className="dark:text-muted-foreground border-t dark:border-muted list-disc space-y-4 px-8 py-4 text-sm">
                             <p className="dark:text-muted-foreground text-sm">
                               {project.description}
                             </p>

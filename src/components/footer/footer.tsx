@@ -4,7 +4,7 @@ import { Facebook, Github, Linkedin } from "lucide-react";
 
 export default function Footer() {
     return (
-        <footer className="screen-line-before screen-line-after border-x border-edge max-w-5xl mx-auto">
+        <footer className="border-b border-x border-edge max-w-5xl mx-auto">
   <div className="border-t border-edge px-4 py-8">
     <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
       <p className="text-sm text-muted-foreground">

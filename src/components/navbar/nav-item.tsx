@@ -42,14 +42,14 @@ const NavItem = () => {
 
   return (
     <TooltipProvider>
-      <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-black/40 px-3 py-2 shadow-lg backdrop-blur-xl md:px-6 md:py-3">
+      <div className="border-border bg-background/80 flex items-center justify-between border px-3 py-3 md:px-6 md:py-3">
         <div className="flex items-center gap-2 md:gap-4">
           <Tooltip>
             <TooltipTrigger asChild>
               <Button
                 variant="ghost"
                 size="icon"
-                className="h-8 w-8 rounded-xl text-white/70 hover:bg-white/10 hover:text-white md:h-9 md:w-9"
+                className="text-muted-foreground hover:bg-muted hover:text-foreground h-8 w-8 rounded-xl md:h-9 md:w-9"
                 onClick={() => {
                   if (pathname !== "/") {
                     router.push("/");
@@ -71,7 +71,7 @@ const NavItem = () => {
               <Button
                 variant="ghost"
                 size="icon"
-                className="h-8 w-8 rounded-xl text-white/70 hover:bg-white/10 hover:text-white md:h-9 md:w-9"
+                className="text-muted-foreground hover:bg-muted hover:text-foreground h-8 w-8 rounded-xl md:h-9 md:w-9"
                 onClick={() => {
                   if (pathname !== "/about") {
                     router.push("/about");
@@ -91,7 +91,7 @@ const NavItem = () => {
               <Button
                 variant="ghost"
                 size="icon"
-                className="h-8 w-8 rounded-xl text-white/70 hover:bg-white/10 hover:text-white md:h-9 md:w-9"
+                className="text-muted-foreground hover:bg-muted hover:text-foreground h-8 w-8 rounded-xl md:h-9 md:w-9"
                 onClick={() => {
                   if (pathname !== "/blogs") {
                     router.push("/blogs");
@@ -111,7 +111,7 @@ const NavItem = () => {
               <Button
                 variant="ghost"
                 size="icon"
-                className="h-8 w-8 rounded-xl text-white/70 hover:bg-white/10 hover:text-white md:h-9 md:w-9"
+                className="text-muted-foreground hover:bg-muted hover:text-foreground h-8 w-8 rounded-xl md:h-9 md:w-9"
                 onClick={() => {
                   if (pathname !== "/certifications") {
                     router.push("/certifications");
@@ -131,7 +131,7 @@ const NavItem = () => {
               <Button
                 variant="ghost"
                 size="icon"
-                className="h-8 w-8 rounded-xl text-white/70 hover:bg-white/10 hover:text-white md:h-9 md:w-9"
+                className="text-muted-foreground hover:bg-muted hover:text-foreground h-8 w-8 rounded-xl md:h-9 md:w-9"
                 onClick={() => {
                   if (pathname !== "/projects") {
                     router.push("/projects");
@@ -146,11 +146,13 @@ const NavItem = () => {
             </TooltipContent>
           </Tooltip>
         </div>
+
         <div className="flex items-center gap-2 md:gap-4">
           <ThemeSwitch />
+
           <Button
             size="icon"
-            className="rounded-xl bg-white/10 text-white hover:bg-white/20 md:hidden"
+            className="bg-muted text-foreground hover:bg-muted/80 rounded-xl md:hidden"
             onClick={() => {
               const contactSection = document.getElementById("contact");
               if (contactSection) {
@@ -163,14 +165,15 @@ const NavItem = () => {
 
           <Button
             size="icon"
-            className="rounded-xl bg-white/10 text-white hover:bg-white/20 md:hidden"
+            className="bg-muted text-foreground hover:bg-muted/80 rounded-xl md:hidden"
             onClick={() => setShowCVViewer(true)}
           >
             <FileText className="h-4 w-4" />
           </Button>
+
           <Button
             size="sm"
-            className="hidden gap-2 rounded-xl bg-white/10 text-white hover:bg-white/20 md:flex"
+            className="bg-muted text-foreground hover:bg-muted/80 hidden gap-2 rounded-xl md:flex"
             onClick={() => {
               if (pathname !== "/") {
                 router.push("/#contact");
@@ -191,13 +194,14 @@ const NavItem = () => {
 
           <Button
             size="sm"
-            className="hidden gap-2 rounded-xl bg-white/10 text-white hover:bg-white/20 md:flex"
+            className="bg-muted text-foreground hover:bg-muted/80 hidden gap-2 rounded-xl md:flex"
             onClick={() => setShowCVViewer(true)}
           >
             <FileText className="h-4 w-4" />
             View Resume
           </Button>
         </div>
+
         <CVViewerDialog open={showCVViewer} onOpenChange={setShowCVViewer} />
       </div>
     </TooltipProvider>
@@ -225,7 +229,7 @@ const CVViewerDialog = ({ open, onOpenChange }: CVViewerDialogProps) => {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="flex h-[95vh] w-full max-w-[95vw] flex-col p-0 md:h-[90vh] md:max-w-4xl [&>button]:hidden">
+      <DialogContent aria-describedby="cv-preview-description" className="flex h-[95vh] w-full max-w-[95vw] flex-col p-0 md:h-[90vh] md:max-w-4xl [&>button]:hidden">
         <DialogHeader className="border-border shrink-0 border-b px-6 py-4">
           <div className="flex items-center justify-between gap-4">
             <DialogTitle className="text-sm font-semibold md:text-lg">

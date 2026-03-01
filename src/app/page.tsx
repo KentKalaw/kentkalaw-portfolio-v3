@@ -13,9 +13,9 @@ import Contact from "@/components/pages/contact";
 import { useRef, useState, useEffect } from "react";
 import { Linkedin, Github, Facebook, ChevronsUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { FloatingNavbar } from "@/components/navbar/navbar";
 import { cn } from "@/lib/utils";
 import Footer from "@/components/footer/footer";
+import { PlaceholderPattern } from "@/components/placeholder-pattern";
 
 export default function Home() {
   const scrollAreaRef = useRef<HTMLDivElement | null>(null);
@@ -41,41 +41,33 @@ export default function Home() {
 
   return (
     <main
-      className="relative min-h-screen overflow-x-hidden pt-18"
+      className="relative min-h-screen overflow-x-hidden pt-11"
       ref={scrollAreaRef}
     >
       <div className="mx-auto max-w-5xl px-4 py-8">
          
         <Name />
         <div className="flex md:gap-3">
-          <div className="w-full">
-            <Separator className="animate-fade-in animate-delay-500" />
+          <div className="w-full gap-3">
+            <Separator className="animate-fade-in animate-delay-500"/>
             <About />
-            <Separator className="animate-fade-in animate-delay-500" />
-
+            <Separator className="animate-fade-in animate-delay-500"/>
             <BlogPreview />
-            <Separator className="animate-fade-in animate-delay-500" />
-
+            <Separator className="animate-fade-in animate-delay-500"/>
             <TechStack />
-            <Separator className="animate-fade-in animate-delay-500" />
-
+            <Separator className="animate-fade-in animate-delay-500"/>
             <Certifications />
-            <Separator className="animate-fade-in animate-delay-500" />
-
+            <Separator className="animate-fade-in animate-delay-500"/>
             <Experience />
-            <Separator className="animate-fade-in animate-delay-500" />
-
+            <Separator className="animate-fade-in animate-delay-500"/>    
             <GithubContributionsCard />
-            <Separator className="animate-fade-in animate-delay-500" />
-
+            <Separator className="animate-fade-in animate-delay-500"/>
             <Projects />
-            <Separator className="animate-fade-in animate-delay-500" />
-
+            <Separator className="animate-fade-in animate-delay-500"/>
             <Socials />
-            <Separator className="animate-fade-in animate-delay-500" />
-
+            <Separator className="animate-fade-in animate-delay-500"/>
             <Contact />
-            <Separator className="animate-fade-in animate-delay-500" />
+            <Separator className="animate-fade-in animate-delay-500"/>
             
           </div>
         </div>
@@ -104,13 +96,30 @@ function Separator({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "screen-line-before screen-line-after",
-        "relative h-8 border-x border-edge max-w-5xl mx-auto",
-        "flex items-center",
+        "relative h-8 max-w-5xl mx-auto overflow-hidden",
+        "flex items-center justify-center",
         className
       )}
     >
-      <div className="mx-auto h-px w-32 bg-gradient-to-r from-transparent via-border to-transparent" />
+      <svg
+        className="absolute inset-0 w-full h-full stroke-neutral-900/20 dark:stroke-neutral-100/20"
+        fill="none"
+      >
+        <defs>
+          <pattern
+            id="separator-pattern"
+            x="0"
+            y="0"
+            width="16"
+            height="16"
+            patternUnits="userSpaceOnUse"
+          >
+            <path d="M0 16L16 0" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#separator-pattern)" />
+      </svg>
+
     </div>
   )
 }

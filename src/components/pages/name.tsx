@@ -1,22 +1,20 @@
 "use client";
-
-import { CircleSmall } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { MoveRight } from "lucide-react";
 import Image from "next/image";
-import {
-  RotatingText,
-  RotatingTextContainer,
-} from "@/components/animate-ui/primitives/texts/rotating";
+import { ShimmeringText } from "@/components/animate-ui/primitives/texts/shimmering";
+import Link from "next/link";
+
 export default function Name() {
   return (
     <section className="animate-fade-in">
-      <div className="border-edge flex flex-col items-center gap-4 border-x md:flex-row md:items-center md:gap-6">
-        <div className="group screen-line-before screen-line-after relative h-40 w-40 rounded-full bg-zinc-300 p-1 shadow-xs dark:bg-zinc-800">
-          <div className="relative h-full w-full overflow-hidden rounded-full bg-white">
+      <div className="border-edge border-y flex flex-col items-center gap-4 border-x md:flex-row md:items-center md:gap-6">
+        <div className="group relative h-40 w-40">
+          <div className="relative h-full w-full overflow-hidden">
             <Image
               src="/kentkalaw-v1.jpg"
               alt="Kent Kalaw"
-              fill
+              width={240}
+              height={240}
               priority
               className="object-cover transition-opacity duration-300 group-hover:opacity-0"
             />
@@ -24,8 +22,9 @@ export default function Name() {
             <Image
               src="/isagi-yoichi.jpg"
               alt="Isagi Yoichi"
-              fill
-              className="object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              width={240}
+              height={240}
+              className="absolute inset-0 object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100"
             />
           </div>
         </div>
@@ -48,70 +47,23 @@ export default function Name() {
               </svg>
             </div>
           </div>
-          <div className="flex items-center justify-center gap-2 md:justify-between">
-            <div className="flex items-center gap-2">
-              <p className="text-foreground/70 flex items-center gap-1 font-mono text-xs md:text-base">
-                <svg
-                  className="h-3 w-3 md:h-5 md:w-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="1.5"
-                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="1.5"
-                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                </svg>
-                Batangas City, Philippines
-              </p>
-            </div>
-          </div>
 
           <div className="flex items-center justify-center gap-2 md:justify-between">
-            <div className="flex items-center gap-2">
-              <RotatingTextContainer
-                text={[
-                  "Web Development",
-                  "Software Developer",
-                  "Full-stack Developer",
-                  "API Integration",
-                  "AI Integration",
-                  "Database Management",
-                  "Version Control",
-                ]}
-                y={10}
-                duration={3000}
-                className="text-foreground/80 font-mono text-base md:text-lg"
-              >
-                <RotatingText />
-              </RotatingTextContainer>
-            </div>
+            <p className="text-sm md:text-lg">
+            Full-stack Developer {" "}
+              <span className="text-muted-foreground">
+                |
+              </span> 
+            {" "}Software Developer</p>
           </div>
-          <div className="mb-2 flex items-center justify-center gap-2 md:justify-between">
-            <div className="flex items-center gap-2">
-              <Badge
-                variant="outline"
-                className="inline-flex items-center gap-1 rounded-lg bg-green-50 px-3 py-1 font-mono text-xs font-medium text-green-500 dark:bg-green-950 dark:text-green-400"
-              >
-                <CircleSmall className="h-2 w-2 animate-pulse text-green-500" />
-                AVAILABLE FOR WORK
-              </Badge>
-              <Badge
-                variant="outline"
-                className="inline-flex items-center gap-1 rounded-lg bg-blue-50 px-3 py-1 font-mono text-xs font-medium text-blue-500 dark:bg-blue-950 dark:text-blue-400"
-              >
-                <CircleSmall className="h-2 w-2 animate-pulse text-blue-500" />
-                FRESH GRADUATE
-              </Badge>
-            </div>
+          <div className="mb-2 md:mb-0 flex items-center justify-center gap-2 md:justify-start">
+            <Link href="/about" className="text-sm md:text-lg text-muted-foreground flex items-center gap-1 transition-colors hover:text-foreground">
+            <ShimmeringText 
+              duration={2}
+              text="More About Me →" 
+              className="text-sm md:text-lg"
+            />
+            </Link>
           </div>
         </div>
       </div>
