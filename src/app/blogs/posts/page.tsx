@@ -160,7 +160,7 @@ function BlogPostsDashboard() {
   }
 
   return (
-    <main className="relative min-h-screen">
+    <main className="relative min-h-screen pt-18">
       <div className="mx-auto max-w-4xl px-4 py-8">
         <div className="mb-6 flex items-center justify-between gap-3">
           <div className="space-y-1">
@@ -188,8 +188,6 @@ function BlogPostsDashboard() {
                 New post
               </Link>
             </Button>
-
-            <ThemeSwitch />
           </div>
         </div>
 
