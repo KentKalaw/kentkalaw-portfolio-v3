@@ -6,14 +6,12 @@ import {
   PanelHeader,
   PanelTitle,
 } from "@/components/panel";
-import { MoveLeft, Code2, ChevronDown, ExternalLink } from "lucide-react";
-import { ThemeSwitch } from "@/components/theme-switch";
+import { Code2, ChevronDown, ExternalLink } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import Link from "next/link";
 import { useRef, useState } from "react";
 import Footer from "@/components/footer/footer";
 export default function ProjectsPage() {

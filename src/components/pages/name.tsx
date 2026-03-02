@@ -16,6 +16,7 @@ export default function Name() {
               alt="Kent Kalaw"
               width={240}
               height={240}
+              quality={80}
               priority
               className="object-cover transition-opacity duration-300 group-hover:opacity-0"
             />
@@ -25,6 +26,7 @@ export default function Name() {
               alt="Isagi Yoichi"
               width={240}
               height={240}
+              quality={80}
               className="absolute inset-0 object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100"
             />
           </div>
@@ -51,14 +53,15 @@ export default function Name() {
 
           <div className="flex items-center justify-center gap-2 md:justify-between">
             <p className="text-xs md:text-lg">
-            Full-stack Developer {" "}
-              <span className="text-muted-foreground">
-                |
-              </span> 
-            {" "}Software Developer</p>
+            Full-stack Developer
+            </p>
           </div>
           <div className="flex items-center justify-center gap-2 md:justify-start">
-            <AudioPlayerComponent />
+            <AudioPlayerComponent 
+              title="keshi - dream"
+              src="/music/keshi - dream.MP3"
+              externalLink="https://www.youtube.com/watch?v=M2_tjzmbwQY"
+            />
           </div>
           <div className="mb-2 md:mb-0 flex items-center justify-center gap-2 md:justify-start">
             <Link href="/about" className="text-sm md:text-lg text-muted-foreground flex items-center gap-1 transition-colors hover:text-foreground">
