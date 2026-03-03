@@ -2,16 +2,12 @@ import { notFound } from "next/navigation";
 import CopyLinkButton from "./CopyLinkButton";
 import Link from "next/link";
 import { BookOpen, MoveLeft } from "lucide-react";
-import { ThemeSwitch } from "@/components/theme-switch";
 import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { Panel, PanelHeader, PanelTitle, PanelContent } from "@/components/panel";
+  Panel,
+  PanelHeader,
+  PanelTitle,
+  PanelContent,
+} from "@/components/panel";
 import { supabase, isSupabaseConfigured, type BlogPost } from "@/lib/supabase";
 import ReactMarkdown, { type Components } from "react-markdown";
 import { cn } from "@/lib/utils";
@@ -68,7 +64,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
         <p
           className={cn(
             "mb-4 text-sm leading-relaxed whitespace-pre-wrap",
-            className
+            className,
           )}
           {...props}
         />
@@ -79,8 +75,8 @@ export default async function BlogPage({ params }: BlogPageProps) {
         return (
           <code
             className={cn(
-              "rounded bg-muted px-1.5 py-0.5 text-xs font-mono",
-              className
+              "bg-muted rounded px-1.5 py-0.5 font-mono text-xs",
+              className,
             )}
             {...props}
           >
@@ -91,8 +87,12 @@ export default async function BlogPage({ params }: BlogPageProps) {
       return (
         <code
           className={cn(
-            "inline-block rounded-sm border border-edge bg-card px-2 py-2 text-xs leading-relaxed font-mono whitespace-pre-wrap",
-            className
+            "inline-block rounded-md border",
+            "border-border bg-muted/60",
+            "px-2 py-2 font-mono text-xs leading-relaxed",
+            "text-foreground",
+            "whitespace-pre-wrap",
+            className,
           )}
           {...props}
         >
@@ -105,7 +105,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
         <ul
           className={cn(
             "mt-4 mb-4 list-disc space-y-2 pl-5 text-sm leading-relaxed",
-            className
+            className,
           )}
           {...props}
         />
@@ -116,7 +116,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
         <ol
           className={cn(
             "mt-4 list-decimal space-y-2 pl-5 text-sm leading-relaxed",
-            className
+            className,
           )}
           {...props}
         />
@@ -125,18 +125,18 @@ export default async function BlogPage({ params }: BlogPageProps) {
   };
 
   return (
-    <main className="relative min-h-screen overflow-x-hidden pt-11 animate-fade-in animate-delay-100">
+    <main className="animate-fade-in animate-delay-100 relative min-h-screen overflow-x-hidden pt-11">
       <div className="mx-auto max-w-5xl px-4 py-8">
         <Panel>
           <PanelHeader>
             <div className="flex items-center justify-between">
-              <PanelTitle className="py-2 text-2xl tracking-[0.8em] uppercase">
+              <PanelTitle className="py-2 md:text-2xl md:tracking-[0.8em] uppercase">
                 Blog Post
               </PanelTitle>
               <div className="flex items-center gap-4">
                 <Link
                   href="/blogs"
-                  className="text-sm text-muted-foreground flex items-center gap-1 transition-colors hover:text-foreground"
+                  className="text-muted-foreground hover:text-foreground flex items-center gap-1 text-sm transition-colors"
                 >
                   <MoveLeft className="h-4 w-4" />
                   Back to blogs
@@ -145,27 +145,26 @@ export default async function BlogPage({ params }: BlogPageProps) {
             </div>
           </PanelHeader>
           <PanelContent className="p-0">
-            <div className="flex items-center p-4 gap-2 text-xs text-muted-foreground">
+            <div className="text-muted-foreground flex items-center gap-2 p-4 text-xs">
               <BookOpen className="h-4 w-4" />
               <span>{minutesToRead} min read</span>
               <span>·</span>
               <span>{formatDate(blog.created_at)}</span>
             </div>
 
-            <div className="flex flex-col px-4 gap-2">
-              {
-              blog.title && (
-                <p className="text-2xl">{blog.title}</p>
+            <div className="flex flex-col gap-2 px-4">
+              {blog.title && <p className="text-2xl">{blog.title}</p>}
+              {blog.subtitle && (
+                <p className="text-muted-foreground mb-4 text-sm">
+                  {blog.subtitle}
+                </p>
               )}
-            {blog.subtitle && (
-              <p className="text-sm text-muted-foreground mb-4">{blog.subtitle}</p>
-            )}
 
-             <article className="prose prose-sm max-w-none text-sm leading-relaxed dark:prose-invert md:prose-base mb-4">
-              <ReactMarkdown components={markdownComponents}>
-                {blog.content}
-              </ReactMarkdown>
-            </article>
+              <article className="prose prose-sm dark:prose-invert md:prose-base mb-4 max-w-none text-sm leading-relaxed">
+                <ReactMarkdown components={markdownComponents}>
+                  {blog.content}
+                </ReactMarkdown>
+              </article>
             </div>
             <CopyLinkButton />
           </PanelContent>

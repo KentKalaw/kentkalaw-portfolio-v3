@@ -89,7 +89,7 @@ export default function AboutPage() {
     </div>
   ));
   return (
-    <main className="animate-fade-in animate-delay-100 relative min-h-screen overflow-x-hidden pt-11">
+    <main className="animate-fade-in animate-delay-100 relative overflow-x-hidden pt-10 md:pt-11">
       <div className="mx-auto max-w-5xl px-4 py-8">
         <Panel>
           <PanelHeader>

@@ -2,14 +2,13 @@
 import {
   Home,
   Mail,
-  FileText,
-  Download,
-  X,
   User,
   BookOpen,
   Tickets,
   FolderCode,
+  Component,
 } from "lucide-react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ThemeSwitch } from "@/components/theme-switch";
 import {
@@ -18,18 +17,10 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
+import { Separator } from "../ui/separator";
 
 const NavItem = () => {
-  const [showCVViewer, setShowCVViewer] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
 
@@ -147,125 +138,32 @@ const NavItem = () => {
           </Tooltip>
         </div>
 
-        <div className="flex items-center gap-2 md:gap-4">
+        <div className="flex h-5 items-center gap-2">
+          <Link href="/components" className="md:hidden">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-foreground/70 hover:bg-muted/50 hover:text-foreground relative h-9 w-9 rounded-lg transition-colors"
+            >
+              <Component className="h-5 w-5 transition-transform duration-200 group-hover:scale-110" />
+            </Button>
+          </Link>
+          <Link href="/components" className="hidden md:block">
+          <Button
+            variant="ghost"
+            size="sm"
+            className="text-foreground/70 hover:bg-muted/50 hover:text-foreground hidden items-center gap-2 rounded-lg transition-colors md:flex"
+          >
+            <Component className="h-4 w-4 transition-transform duration-200 group-hover:scale-110" />
+            Components
+          </Button>
+          </Link>
+          <Separator orientation="vertical" className="h-6" />
           <ThemeSwitch />
-
-          <Button
-            size="icon"
-            className="bg-muted text-foreground hover:bg-muted/80 rounded-xl md:hidden"
-            onClick={() => {
-              const contactSection = document.getElementById("contact");
-              if (contactSection) {
-                contactSection.scrollIntoView({ behavior: "smooth" });
-              }
-            }}
-          >
-            <Mail className="h-4 w-4" />
-          </Button>
-
-          <Button
-            size="icon"
-            className="bg-muted text-foreground hover:bg-muted/80 rounded-xl md:hidden"
-            onClick={() => setShowCVViewer(true)}
-          >
-            <FileText className="h-4 w-4" />
-          </Button>
-
-          <Button
-            size="sm"
-            className="bg-muted text-foreground hover:bg-muted/80 hidden gap-2 rounded-xl md:flex"
-            onClick={() => {
-              if (pathname !== "/") {
-                router.push("/#contact");
-              } else {
-                const contactSection = document.getElementById("contact");
-                if (contactSection) {
-                  contactSection.scrollIntoView({
-                    behavior: "smooth",
-                    block: "center",
-                  });
-                }
-              }
-            }}
-          >
-            <Mail className="h-4 w-4" />
-            Contact Me
-          </Button>
-
-          <Button
-            size="sm"
-            className="bg-muted text-foreground hover:bg-muted/80 hidden gap-2 rounded-xl md:flex"
-            onClick={() => setShowCVViewer(true)}
-          >
-            <FileText className="h-4 w-4" />
-            View Resume
-          </Button>
         </div>
-
-        <CVViewerDialog open={showCVViewer} onOpenChange={setShowCVViewer} />
       </div>
     </TooltipProvider>
   );
 };
 
 export default NavItem;
-
-interface CVViewerDialogProps {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-}
-
-const CVViewerDialog = ({ open, onOpenChange }: CVViewerDialogProps) => {
-  const cvPath = "/Kent-Francis-Kalaw-Resume.pdf";
-
-  const handleDownload = () => {
-    const link = document.createElement("a");
-    link.href = cvPath;
-    link.download = "Kent-Francis-Kalaw-Resume.pdf";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
-  return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent aria-describedby="cv-preview-description" className="flex h-[95vh] w-full max-w-[95vw] flex-col p-0 md:h-[90vh] md:max-w-4xl [&>button]:hidden">
-        <DialogHeader className="border-border shrink-0 border-b px-6 py-4">
-          <div className="flex items-center justify-between gap-4">
-            <DialogTitle className="text-sm font-semibold md:text-lg">
-              My Resume
-            </DialogTitle>
-            <div className="flex items-center gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleDownload}
-                className="rounded-full bg-transparent"
-              >
-                <Download className="mr-2 h-4 w-4" />
-                Download
-              </Button>
-              <DialogClose asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 rounded-full"
-                >
-                  <X className="h-4 w-4" />
-                  <span className="sr-only">Close</span>
-                </Button>
-              </DialogClose>
-            </div>
-          </div>
-        </DialogHeader>
-        <div className="min-h-0 flex-1 overflow-hidden">
-          <iframe
-            src={cvPath}
-            className="h-full w-full border-0"
-            title="CV Preview"
-          />
-        </div>
-      </DialogContent>
-    </Dialog>
-  );
-};

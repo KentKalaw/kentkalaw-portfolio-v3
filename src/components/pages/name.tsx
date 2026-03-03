@@ -1,14 +1,21 @@
 "use client";
-import { MoveRight } from "lucide-react";
+import { Mail, MoveRight, FileText } from "lucide-react";
 import Image from "next/image";
 import { ShimmeringText } from "@/components/animate-ui/primitives/texts/shimmering";
 import Link from "next/link";
-import AudioPlayerComponent  from "@/components/audio-player";
+import AudioPlayerComponent from "@/components/audio-player";
+import { Button } from "@/components/ui/button";
+import { CVViewerDialog } from "@/components/cv-viewer";
+import { useState } from "react";
+import { useRouter, usePathname } from "next/navigation";
 
 export default function Name() {
+  const [showCVViewer, setShowCVViewer] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
   return (
     <section className="animate-fade-in">
-      <div className="border-edge border-y flex flex-col items-center gap-4 px-4 py-2 border-x md:flex-row md:items-center md:gap-6">
+      <div className="border-edge flex flex-col items-center gap-4 border-x border-y px-4 py-2 md:flex-row md:items-center md:gap-6">
         <div className="group relative h-40 w-40">
           <div className="relative h-full w-full overflow-hidden">
             <Image
@@ -52,26 +59,64 @@ export default function Name() {
           </div>
 
           <div className="flex items-center justify-center gap-2 md:justify-between">
-            <p className="text-xs md:text-lg">
-            Full-stack Developer
-            </p>
+            <p className="text-xs md:text-lg">Full-stack Developer</p>
           </div>
           <div className="flex items-center justify-center gap-2 md:justify-start">
-            <AudioPlayerComponent 
+            <AudioPlayerComponent
               title="keshi - dream"
               src="/music/keshi - dream.MP3"
               externalLink="https://www.youtube.com/watch?v=M2_tjzmbwQY"
             />
           </div>
-          <div className="mb-2 md:mb-0 flex items-center justify-center gap-2 md:justify-start">
-            <Link href="/about" className="text-sm md:text-lg text-muted-foreground flex items-center gap-1 transition-colors hover:text-foreground">
-            <ShimmeringText 
-              duration={2}
-              text="More About Me →" 
-              className="text-sm md:text-lg"
-            />
-            </Link>
+          <div className="py-2 flex items-center justify-center gap-2 md:mb-0 md:justify-start">
+            <Button
+              size="icon"
+              variant="outline"
+              className="rounded-xl shadow-sm transition-all hover:shadow md:hidden"
+              onClick={() => {
+                const contactSection = document.getElementById("contact");
+                contactSection?.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              <Mail className="h-4 w-4" />
+            </Button>
+            <Button
+              size="icon"
+              variant="outline"
+              className="hover:bg-muted rounded-xl transition-colors md:hidden"
+              onClick={() => setShowCVViewer(true)}
+            >
+              <FileText className="h-4 w-4" />
+            </Button>
+            <Button
+              size="sm"
+              className="hidden items-center gap-2 rounded-none shadow-sm transition-all hover:shadow-md md:flex"
+              onClick={() => {
+                if (pathname !== "/") {
+                  router.push("/#contact");
+                } else {
+                  document.getElementById("contact")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center",
+                  });
+                }
+              }}
+            >
+              <Mail className="h-4 w-4" />
+              Contact Me
+            </Button>
+            <Button
+              size="sm"
+              variant="outline"
+              className="hidden items-center gap-2 rounded-none md:flex"
+              onClick={() => setShowCVViewer(true)}
+            >
+              <FileText className="h-4 w-4" />
+              View Resume
+            </Button>
           </div>
+
+          <CVViewerDialog open={showCVViewer} onOpenChange={setShowCVViewer} />
         </div>
       </div>
     </section>
