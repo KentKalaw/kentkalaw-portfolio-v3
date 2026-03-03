@@ -1,7 +1,6 @@
 // Portfolio Knowledge Base for RAG
 // This file contains all the content from Kent Kalaw's portfolio website
 
-import { blogPosts } from "./blog-data";
 
 export const portfolioKnowledge = {
   personalInfo: {
@@ -154,7 +153,6 @@ ${k.certifications.map(cert => `- **${cert.title}** from ${cert.issuer} (${cert.
 
 ### Blog Posts
 Kent writes blog posts about his journey and experiences. Here are the current posts:
-${blogPosts.map(post => `- **${post.title || 'Untitled'}** (${post.timestamp}): ${post.content.substring(0, 150).replace(/\n/g, ' ')}...`).join('\n')}
 
 To read the full blog posts, visitors can go to the /blogs page or click on individual posts.
 
