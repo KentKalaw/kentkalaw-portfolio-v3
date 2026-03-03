@@ -33,7 +33,7 @@ export function ThemeSwitch() {
           variant="ghost"
           size="icon"
           onClick={toggleTheme}
-          className="relative h-9 w-9 rounded-xl
+          className="relative h-9 w-9 rounded-sm
                      text-foreground/70
                      hover:bg-muted/50
                      hover:text-foreground

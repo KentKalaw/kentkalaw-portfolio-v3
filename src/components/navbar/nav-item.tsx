@@ -152,7 +152,7 @@ const NavItem = () => {
           <Button
             variant="ghost"
             size="sm"
-            className="text-foreground/70 hover:bg-muted/50 hover:text-foreground hidden items-center gap-2 rounded-lg transition-colors md:flex"
+            className="text-foreground/70 hover:bg-muted/50 hover:text-foreground hidden items-center gap-2 rounded-sm transition-colors md:flex"
           >
             <Component className="h-4 w-4 transition-transform duration-200 group-hover:scale-110" />
             Components

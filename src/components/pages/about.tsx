@@ -6,16 +6,23 @@ import {
   PanelHeader,
   PanelTitle,
 } from "@/components/panel";
+import Link from "next/link";
 
 export default function About() {
   return (
     <Panel id="about" className="animate-fade-in animate-delay-400">
       <PanelHeader>
-        <PanelTitle>
-          <p className="text-muted-foreground text-base tracking-[0.8em] uppercase">
-            About
-          </p>
-        </PanelTitle>
+        <div className="flex items-center justify-between">
+          <PanelTitle className="text-muted-foreground text-base tracking-[0.8em] uppercase">  
+              About
+          </PanelTitle>
+          <Link
+            href="/about"
+            className="text-muted-foreground hover:text-foreground text-xs transition-colors"
+          >
+            More About Me →
+          </Link>
+        </div>
       </PanelHeader>
 
       <PanelContent className="space-y-4 text-justify text-sm leading-relaxed md:text-base">
