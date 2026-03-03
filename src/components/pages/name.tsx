@@ -70,27 +70,8 @@ export default function Name() {
           </div>
           <div className="py-2 flex items-center justify-center gap-2 md:mb-0 md:justify-start">
             <Button
-              size="icon"
-              variant="outline"
-              className="rounded-xl shadow-sm transition-all hover:shadow md:hidden"
-              onClick={() => {
-                const contactSection = document.getElementById("contact");
-                contactSection?.scrollIntoView({ behavior: "smooth" });
-              }}
-            >
-              <Mail className="h-4 w-4" />
-            </Button>
-            <Button
-              size="icon"
-              variant="outline"
-              className="hover:bg-muted rounded-xl transition-colors md:hidden"
-              onClick={() => setShowCVViewer(true)}
-            >
-              <FileText className="h-4 w-4" />
-            </Button>
-            <Button
               size="sm"
-              className="hidden items-center gap-2 rounded-none shadow-sm transition-all hover:shadow-md md:flex"
+              className="items-center gap-2 rounded-none shadow-sm transition-all hover:shadow-md md:flex"
               onClick={() => {
                 if (pathname !== "/") {
                   router.push("/#contact");
@@ -108,7 +89,7 @@ export default function Name() {
             <Button
               size="sm"
               variant="outline"
-              className="hidden items-center gap-2 rounded-none md:flex"
+              className="items-center gap-2 rounded-none md:flex"
               onClick={() => setShowCVViewer(true)}
             >
               <FileText className="h-4 w-4" />

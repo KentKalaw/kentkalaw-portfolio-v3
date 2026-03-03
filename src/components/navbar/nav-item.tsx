@@ -138,7 +138,7 @@ const NavItem = () => {
           </Tooltip>
         </div>
 
-        <div className="flex h-5 items-center gap-2">
+        <div className="flex h-6 items-center gap-2">
           <Link href="/components" className="md:hidden">
             <Button
               variant="ghost"

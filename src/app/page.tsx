@@ -40,7 +40,7 @@ export default function Home() {
 
   return (
     <main
-      className="relative min-h-screen overflow-x-hidden pt-11"
+      className="relative min-h-screen overflow-x-hidden pt-10 md:pt-11"
       ref={scrollAreaRef}
     >
       
