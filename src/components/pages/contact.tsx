@@ -155,7 +155,6 @@ function ContactForm() {
 
           <Button
             type="submit"
-            variant="outline"
             className="flex w-full items-center justify-center gap-2 rounded-sm md:w-auto"
             disabled={isSubmitting}
           >
