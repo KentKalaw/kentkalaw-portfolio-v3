@@ -63,6 +63,17 @@ export default async function BlogPage({ params }: BlogPageProps) {
   const minutesToRead = estimateReadingTime(blog.content);
 
   const markdownComponents: Components = {
+    p({ className, ...props }) {
+      return (
+        <p
+          className={cn(
+            "mb-4 text-sm leading-relaxed whitespace-pre-wrap",
+            className
+          )}
+          {...props}
+        />
+      );
+    },
     code({ inline, className, children, ...props }: any) {
       if (inline) {
         return (
@@ -80,7 +91,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
       return (
         <code
           className={cn(
-            "mt-4 block w-full overflow-x-auto rounded-lg border border-edge bg-card px-3 py-3 text-xs leading-relaxed font-mono",
+            "inline-block rounded-sm border border-edge bg-card px-2 py-2 text-xs leading-relaxed font-mono whitespace-pre-wrap",
             className
           )}
           {...props}
@@ -93,7 +104,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
       return (
         <ul
           className={cn(
-            "mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed",
+            "mt-4 mb-4 list-disc space-y-2 pl-5 text-sm leading-relaxed",
             className
           )}
           {...props}
@@ -114,37 +125,23 @@ export default async function BlogPage({ params }: BlogPageProps) {
   };
 
   return (
-    <main className="relative min-h-screen overflow-x-hidden pt-18 animate-fade-in animate-delay-100">
-      <div className="mx-auto max-w-5xl px-4 py-10">
-        <div className="flex flex-row items-center">
-          <Breadcrumb className="text-muted-foreground hover:text-foreground mb-2 flex items-center gap-2 px-4 text-sm transition-colors">
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <Link href="/">Home</Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <Link href="/blogs">Blogs</Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbPage>{blog.title}</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
-        </div>
+    <main className="relative min-h-screen overflow-x-hidden pt-11 animate-fade-in animate-delay-100">
+      <div className="mx-auto max-w-5xl px-4 py-8">
         <Panel>
           <PanelHeader>
             <div className="flex items-center justify-between">
-              <PanelTitle className="text-xl tracking-[0.4em] uppercase">
+              <PanelTitle className="py-2 text-2xl tracking-[0.8em] uppercase">
                 Blog Post
               </PanelTitle>
-
-              <ThemeSwitch />
+              <div className="flex items-center gap-4">
+                <Link
+                  href="/blogs"
+                  className="text-sm text-muted-foreground flex items-center gap-1 transition-colors hover:text-foreground"
+                >
+                  <MoveLeft className="h-4 w-4" />
+                  Back to blogs
+                </Link>
+              </div>
             </div>
           </PanelHeader>
           <PanelContent className="p-0">
@@ -161,7 +158,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
                 <p className="text-2xl">{blog.title}</p>
               )}
             {blog.subtitle && (
-              <p className="text-sm text-muted-foreground">{blog.subtitle}</p>
+              <p className="text-sm text-muted-foreground mb-4">{blog.subtitle}</p>
             )}
 
              <article className="prose prose-sm max-w-none text-sm leading-relaxed dark:prose-invert md:prose-base mb-4">
@@ -169,11 +166,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
                 {blog.content}
               </ReactMarkdown>
             </article>
-
             </div>
-            
-
-           
             <CopyLinkButton />
           </PanelContent>
         </Panel>

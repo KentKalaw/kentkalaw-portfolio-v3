@@ -144,7 +144,15 @@ export default function EditBlogPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form 
+            onSubmit={handleSubmit} 
+            onKeyDown={(event) => {
+              if (event.key === "Enter" && event.target instanceof HTMLInputElement) {
+                event.preventDefault();
+              }
+            }}
+            className="space-y-4"
+          >
             <div className="space-y-1.5">
               <Label htmlFor="title">Title</Label>
               <Input

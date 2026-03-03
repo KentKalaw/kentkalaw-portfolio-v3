@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { supabase, isSupabaseConfigured } from "@/lib/supabase";
 
-function generateSlug(title: string) {
+function generateBaseSlug(title: string) {
   const base = title
     .toLowerCase()
     .trim()
@@ -18,7 +18,38 @@ function generateSlug(title: string) {
     .replace(/\s+/g, "-")
     .replace(/-+/g, "-");
 
-  return `${base || "post"}-${Date.now().toString(36)}`;
+  return base || "post";
+}
+
+async function generateUniqueSlug(title: string): Promise<string> {
+  const baseSlug = generateBaseSlug(title);
+  
+  // Check if the base slug exists
+  const { data: existingPost } = await supabase
+    .from("blogs")
+    .select("slug")
+    .eq("slug", baseSlug)
+    .maybeSingle();
+
+  if (!existingPost) {
+    return baseSlug;
+  }
+
+  // If it exists, find the next available number suffix
+  let counter = 2;
+  while (true) {
+    const slugWithNumber = `${baseSlug}-${counter}`;
+    const { data: duplicatePost } = await supabase
+      .from("blogs")
+      .select("slug")
+      .eq("slug", slugWithNumber)
+      .maybeSingle();
+
+    if (!duplicatePost) {
+      return slugWithNumber;
+    }
+    counter++;
+  }
 }
 
 export default function NewBlogPage() {
@@ -61,7 +92,7 @@ export default function NewBlogPage() {
     setSaving(true);
 
     try {
-      const slug = generateSlug(title);
+      const slug = await generateUniqueSlug(title);
 
       const { error } = await supabase.from("blogs").insert({
         title: title.trim(),
@@ -116,7 +147,15 @@ export default function NewBlogPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form 
+            onSubmit={handleSubmit} 
+            onKeyDown={(event) => {
+              if (event.key === "Enter" && event.target instanceof HTMLInputElement) {
+                event.preventDefault();
+              }
+            }}
+            className="space-y-4"
+          >
             <div className="space-y-1.5">
               <Label htmlFor="title">Title</Label>
               <Input
