@@ -10,7 +10,6 @@ import {
 } from "@/components/panel";
 
 import { supabase, isSupabaseConfigured, type BlogPost } from "@/lib/supabase";
-import { blogPosts as fallbackBlogPosts } from "@/lib/blog-data";
 
 type BlogListItem = {
   id: string | number;
@@ -78,31 +77,11 @@ async function getBlogs(page: number): Promise<PaginatedBlogs> {
         total: count ?? items.length,
       };
     }
-
-    console.error("Error fetching blogs from Supabase:", error);
   }
 
-  const sortedFallback = [...fallbackBlogPosts].sort(
-    (a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime(),
-  );
-
-  const items = sortedFallback.map((post, index) => ({
-    id: post.id,
-    title: post.title ?? `Note ${index + 1}`,
-    subtitle: "Personal note",
-    content: post.content,
-    slug: `local-${post.id}`,
-    createdAt: post.timestamp,
-    minutesToRead: estimateReadingTime(post.content),
-    preview: createPreview(post.content),
-  }));
-
-  const from = (page - 1) * PAGE_SIZE;
-  const to = from + PAGE_SIZE;
-
   return {
-    items: items.slice(from, to),
-    total: items.length,
+    items: [],
+    total: 0,
   };
 }
 

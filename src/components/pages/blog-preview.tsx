@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { blogPosts as fallbackBlogPosts } from "@/lib/blog-data";
 import { supabase, isSupabaseConfigured, type BlogPost } from "@/lib/supabase";
 import {
   Panel,
@@ -51,25 +50,8 @@ export default function BlogPreview() {
             })) ?? [];
 
           setPosts(mapped);
-          return;
         }
       }
-
-      const latest = [...fallbackBlogPosts]
-        .sort(
-          (a, b) =>
-            new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime(),
-        )
-        .slice(0, 2)
-        .map(post => ({
-          id: post.id,
-          title: post.title ?? "Blog post",
-          timestamp: post.timestamp,
-          content: post.content,
-          slug: "/blogs",
-        }));
-
-      setPosts(latest);
     }
 
     load();

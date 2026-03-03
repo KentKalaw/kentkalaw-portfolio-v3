@@ -12,7 +12,9 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { Badge } from "@/components/ui/badge";
 import { useRef, useState } from "react";
+import { projects } from "@/lib/projects-data";
 import Footer from "@/components/footer/footer";
 export default function ProjectsPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -21,69 +23,6 @@ export default function ProjectsPage() {
   const toggleIndex = (id: number) => {
     setOpenIndex(openIndex === id ? null : id);
   };
-
-  const projects = [
-    {
-      title: "IQAO - Auditing System",
-      date: "2025",
-      description:
-        "A Centralized Auditing System for University of Batangas' Institutional Quality Assurance Office (IQAO) built with modern web stack.",
-      features: [
-        "Role-based authentication",
-        "Automated document compliance",
-        "Real-time auditing between auditors and auditees",
-        "Secure file uploads with validation",
-      ],
-      url: "https://www.iqao.ub.edu.ph/",
-    },
-    {
-      title: "AI Resume Builder",
-      date: "2025",
-      description:
-        "Simple AI-powered resume generator that optimizes CV content.",
-      features: [
-        "AI Content Optimization: Enhance resume content with AI suggestions.",
-      ],
-      url: "https://ai-resume-builder-pi-navy.vercel.app",
-    },
-    {
-      title: "Pixelria",
-      date: "2025",
-      description:
-        "A pixel sketching web app with canvas rendering and color grid tools.",
-      features: [
-        "Drawing Tools: Pen with color selection, flood fill, eyedropper, eraser, and customizable background.",
-        "Modifiers: Stackable shading or exclusive lighten effect.",
-        "Canvas Controls: Adjustable grid (8 by 8 to 60 by 60), toggleable gridlines, and full reset with confirmation.",
-        "Export Options: Download sketches as PNG",
-      ],
-      url: "https://pixelria.vercel.app/",
-    },
-    {
-      title: "CICT Days Registration System",
-      date: "2025",
-      description:
-        "A web-based registration system for University of Batangas' College of Information and Communications Technology (CICT) Days event.",
-      features: [
-        "Barcode Reader Registration: Attendees can register by scanning their Student ID barcode.",
-        "Admin Dashboard: Interface to manage registrations, view attendee information, and generate reports.",
-        "Engagement Features: Live Reaction System for attendees to interact during sessions. (Emojis)",
-        "Lottery System: Random selection of attendees for giveaways and prizes.",
-      ],
-      url: "https://github.com/MKarloPilares/cict-days-reg",
-    },
-    {
-      title: "Koyam's Recette",
-      date: "2023",
-      description: "A Filipino recipe management and discovery app.",
-      features: [
-        "Recipe Categorization: Organize recipes by type, cuisine, and ingredients.",
-        "Search and Filter: Find recipes quickly with advanced search options.",
-        "User Contributions: Add, edit, and share your own recipes.",
-      ],
-      url: "https://github.com/KentKalaw/koyam-recette",
-    },
-  ];
 
   return (
     <main className="animate-fade-in animate-delay-100 relative min-h-screen overflow-x-hidden pt-11">
@@ -164,22 +103,40 @@ export default function ProjectsPage() {
                         }`}
                       >
                         {project.features && (
-                          <ul className="dark:text-muted-foreground border-t dark:border-muted list-disc space-y-4 px-8 py-4 text-sm">
-                            <p className="dark:text-muted-foreground text-sm">
-                              {project.description}
-                            </p>
-                            {project.features.map((feature, i) => (
-                              <li key={i}>{feature}</li>
-                            ))}
-                          </ul>
-                        )}
+                      <ul className="dark:text-muted-foreground border-t dark:border-muted list-disc space-y-4 px-8 py-4 text-sm">
+                        <p className="dark:text-muted-foreground text-sm">
+                          {project.description}
+                        </p>
+                        {project.features.map((feature, i) => (
+                          <li key={i}>{feature}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                  {project.stack && (
+                    <div
+                      className={`transition-opacity duration-300 border-t border-border px-8 py-4 ${
+                        isOpen ? "opacity-100" : "opacity-0"
+                      }`}
+                    >
+                      <p className="text-xs text-muted-foreground mb-2">
+                        Tech Stack:
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {project.stack.split(",").map((tech, i) => (
+                          <Badge key={i} variant="secondary">
+                            {tech.trim()}
+                          </Badge>
+                        ))}
                       </div>
                     </div>
-                  </div>
-                );
-              })}
-            </div>
-          </PanelContent>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </PanelContent>
         </Panel>
         <Footer />
       </div>

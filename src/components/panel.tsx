@@ -60,4 +60,14 @@ function PanelContent({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
-export { Panel, PanelContent, PanelHeader, PanelTitle, PanelTitleSup }
+function PanelFooter({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="panel-footer"
+      className={cn("flex items-center px-6 [.border-t]:pt-6", className)}
+      {...props}
+    />
+  )
+}
+
+export { Panel, PanelContent, PanelHeader, PanelTitle, PanelTitleSup, PanelFooter }

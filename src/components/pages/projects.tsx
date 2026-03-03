@@ -14,6 +14,8 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { Badge } from "@/components/ui/badge";
+import { projects } from "@/lib/projects-data";
 
 export default function Projects() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -22,56 +24,6 @@ export default function Projects() {
   const toggleIndex = (id: number) => {
     setOpenIndex(openIndex === id ? null : id);
   };
-
-  const projects = [
-    {
-      title: "IQAO - Auditing System",
-      date: "2025",
-      description:
-        "A Centralized Auditing System for University of Batangas' Institutional Quality Assurance Office (IQAO) built with modern web stack.",
-      features: [
-        "Role-based authentication",
-        "Automated document compliance",
-        "Real-time auditing between auditors and auditees",
-        "Secure file uploads with validation",
-      ],
-      url: "https://www.iqao.ub.edu.ph/",
-    },
-    {
-      title: "AI Resume Builder",
-      date: "2025",
-      description:
-        "Simple AI-powered resume generator that optimizes CV content.",
-      features: [
-        "AI Content Optimization: Enhance resume content with AI suggestions.",
-      ],
-      url: "https://ai-resume-builder-pi-navy.vercel.app",
-    },
-    {
-      title: "Pixelria",
-      date: "2025",
-      description:
-        "A pixel sketching web app with canvas rendering and color grid tools.",
-      features: [
-        "Drawing Tools: Pen with color selection, flood fill, eyedropper, eraser, and customizable background.",
-        "Modifiers: Stackable shading or exclusive lighten effect.",
-        "Canvas Controls: Adjustable grid (8 by 8 to 60 by 60), toggleable gridlines, and full reset with confirmation.",
-        "Export Options: Download sketches as PNG",
-      ],
-      url: "https://pixelria.vercel.app/",
-    },
-    {
-      title: "Koyam's Recette",
-      date: "2023",
-      description: "A Filipino recipe management and discovery app.",
-      features: [
-        "Recipe Categorization: Organize recipes by type, cuisine, and ingredients.",
-        "Search and Filter: Find recipes quickly with advanced search options.",
-        "User Contributions: Add, edit, and share your own recipes.",
-      ],
-      url: "https://github.com/KentKalaw/koyam-recette",
-    },
-  ];
 
   return (
     <Panel id="projects" className="animate-fade-in animate-delay-500">
@@ -168,6 +120,24 @@ export default function Projects() {
                       </ul>
                     )}
                   </div>
+                  {project.stack && (
+                    <div
+                      className={`transition-opacity duration-300 border-t border-border px-8 py-4 ${
+                        isOpen ? "opacity-100" : "opacity-0"
+                      }`}
+                    >
+                      <p className="text-xs text-muted-foreground mb-2">
+                        Tech Stack:
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {project.stack.split(",").map((tech, i) => (
+                          <Badge key={i} variant="secondary">
+                            {tech.trim()}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             );
