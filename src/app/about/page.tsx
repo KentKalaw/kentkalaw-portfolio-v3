@@ -71,8 +71,6 @@ export default function AboutPage() {
     
   ];
 
-  console.log(logos);
-
   const logosSvg = logos.map((icon, index) => (
     <div
       key={index}
