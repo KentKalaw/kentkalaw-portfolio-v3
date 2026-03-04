@@ -200,13 +200,15 @@ export default function AboutPage() {
                     Games I Liked Recently
                   </span>
                 </p>
-                <LogoSlider logos={logosSvg} speed={40} direction="left" />
+                <div className="flex items-center justify-center gap-8 flex-wrap">
+                  {logosSvg}
+                </div>
                 <p>
                   <span className="text-sm tracking-widest uppercase">
                     Song I vibe to recently
                   </span>
                 </p>
-                <AudioPlayerComponent 
+                <AudioPlayerComponent
                   title="NIKI - Backburner"
                   src="/music/NIKI - Backburner.MP3"
                   externalLink="https://www.youtube.com/watch?v=BBpIV9A1PXc"
