@@ -19,6 +19,23 @@
         }
       ],
       "type": "registry:component"
+    },
+    {
+      "name": "social-icon",
+      "title": "Social Icons",
+      "description": "A set of social media icons with hover effects and theme-aware styling, built with shadcn/ui.",
+      "dependencies": [
+        "lucide-react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "src/registry/components/social-icon.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "type": "registry:component"
     }
   ]
 }

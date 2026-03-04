@@ -13,5 +13,18 @@ export const components: Registry["items"] = [
                 type: "registry:component"
             },
         ],
+    },
+    {
+        name: "social-icon",
+        type: "registry:component",
+        description: "A set of social media icons with hover effects and theme-aware styling, built with shadcn/ui.",
+        title: "Social Icons",
+        dependencies: ["lucide-react", "clsx", "tailwind-merge"],
+        files: [
+            {
+                path: "components/social-icon.tsx",
+                type: "registry:component"
+            },
+        ],
     }
 ];

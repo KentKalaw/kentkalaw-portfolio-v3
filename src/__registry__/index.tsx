@@ -16,4 +16,13 @@
         type: "registry:component",
         }],
     },
+      "social-icon": {
+        name: "social-icon",
+        description: "A set of social media icons with hover effects and theme-aware styling, built with shadcn/ui.",
+        type: "registry:component",
+        files: [{
+        path: "src/registry/components/social-icon.tsx",
+        type: "registry:component",
+        }],
+    },
     }

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "social-icon",
+  "title": "Social Icons",
+  "description": "A set of social media icons with hover effects and theme-aware styling, built with shadcn/ui.",
+  "dependencies": [
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "src/registry/components/social-icon.tsx",
+      "content": "\"use client\";\r\n\r\nimport { LucideIcon } from \"lucide-react\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\nexport interface SocialLink {\r\n  name: string;\r\n  url: string;\r\n  icon: LucideIcon;\r\n}\r\n\r\ninterface SocialLinksProps {\r\n  links: SocialLink[];\r\n  showLabel?: boolean;\r\n  className?: string;\r\n  iconClassName?: string;\r\n  size?: \"sm\" | \"md\" | \"lg\";\r\n}\r\n\r\nexport default function SocialIcon({\r\n  links,\r\n  showLabel = true,\r\n  className,\r\n  iconClassName,\r\n  size = \"md\",\r\n}: SocialLinksProps) {\r\n  const sizeStyles = {\r\n    sm: \"h-8 w-8\",\r\n    md: \"h-10 w-10\",\r\n    lg: \"h-12 w-12\",\r\n  };\r\n\r\n  return (\r\n    <div\r\n      className={cn(\r\n        \"flex flex-wrap justify-center gap-4 sm:gap-6\",\r\n        className\r\n      )}\r\n    >\r\n      {links.map((link) => {\r\n        const Icon = link.icon;\r\n\r\n        return (\r\n          <a\r\n            key={link.name}\r\n            href={link.url}\r\n            target=\"_blank\"\r\n            rel=\"noopener noreferrer\"\r\n            aria-label={link.name}\r\n            className=\"group text-muted-foreground hover:text-foreground flex items-center gap-2 transition-all duration-200 active:scale-95\"\r\n          >\r\n            <div\r\n              className={cn(\r\n                \"border-border bg-background group-hover:border-foreground flex items-center justify-center rounded-full border transition-all duration-200 group-hover:scale-105\",\r\n                sizeStyles[size]\r\n              )}\r\n            >\r\n              <Icon className={cn(\"h-5 w-5\", iconClassName)} />\r\n            </div>\r\n\r\n            {showLabel && (\r\n              <span className=\"hidden text-sm opacity-80 transition-opacity duration-200 group-hover:opacity-100 sm:inline\">\r\n                {link.name}\r\n              </span>\r\n            )}\r\n          </a>\r\n        );\r\n      })}\r\n    </div>\r\n  );\r\n}",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}
