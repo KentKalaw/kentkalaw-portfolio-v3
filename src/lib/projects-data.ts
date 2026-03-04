@@ -52,7 +52,22 @@ export const projects: Projects[] = [
     stack: "Next.js, TypeScript, Tailwind CSS, Supabase, PostgreSQL",
   },
   {
-    id: 4,
+      id: 4,
+      title: "CICT Days Registration System",
+      date: "2025",
+      description:
+        "A web-based registration system for University of Batangas' College of Information and Communications Technology (CICT) Days event.",
+      features: [
+        "Barcode Reader Registration: Attendees can register by scanning their Student ID barcode.",
+        "Admin Dashboard: Interface to manage registrations, view attendee information, and generate reports.",
+        "Engagement Features: Live Reaction System for attendees to interact during sessions. (Emojis)",
+        "Lottery System: Random selection of attendees for giveaways and prizes.",
+      ],
+      url: "https://github.com/MKarloPilares/cict-days-reg",
+      stack: "Next.js, TypeScript, Tailwind CSS, Prisma, MySQL",
+    },
+  {
+    id: 5,
     title: "Koyam's Recette",
     date: "2023",
     description: "A Filipino recipe management and discovery app.",
