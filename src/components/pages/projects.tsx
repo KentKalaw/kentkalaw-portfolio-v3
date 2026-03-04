@@ -44,14 +44,14 @@ export default function Projects() {
 
       <PanelContent className="p-0">
         <div className="divide-border divide-y">
-          {projects.map((project, id) => {
-            const isOpen = openIndex === id;
+          {projects.filter((project) => [1, 3, 4, 5].includes(project.id)).map((project) => {
+            const isOpen = openIndex === project.id;
             const isClickable = !!project.url;
 
             return (
-              <div key={id} className="group">
+              <div key={project.id} className="group">
                 <button
-                  onClick={() => toggleIndex(id)}
+                  onClick={() => toggleIndex(project.id)}
                   className="hover:bg-muted/40 flex w-full cursor-pointer items-center justify-between text-left transition-colors"
                 >
                   <div className="flex items-center">
@@ -94,11 +94,11 @@ export default function Projects() {
                 </button>
                 <div
                   ref={el => {
-                    contentRefs.current[id] = el;
+                    contentRefs.current[project.id] = el;
                   }}
                   style={{
                     maxHeight: isOpen
-                      ? `${contentRefs.current[id]?.scrollHeight}px`
+                      ? `${contentRefs.current[project.id]?.scrollHeight}px`
                       : "0px",
                     transition: "max-height 0.3s ease",
                     overflow: "hidden",

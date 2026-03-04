@@ -52,14 +52,13 @@ export default function AboutPage() {
 
   const logos = [
     {
-      path: "/genshin.svg",
-      name: "Genshin Impact",
-    },
-    {
       path: "/valorant.svg",
       name: "Valorant",
     },
-    
+    {
+      path: "/genshin.svg",
+      name: "Genshin Impact",
+    },
     {
       path: "/minecraft-icon.svg",
       name: "Minecraft",
@@ -136,7 +135,7 @@ export default function AboutPage() {
                   </div>
                   <div className="flex items-center gap-4 font-mono text-sm">
                     <IconBox icon={Handshake} />
-                    <p>Open to work</p>
+                    <p className="text-green-500 dark:text-green-800">Open to work</p>
                   </div>
                 </div>
                 <div className="grid gap-x-24 gap-y-2.5 sm:grid-cols-2">
