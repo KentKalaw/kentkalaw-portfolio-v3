@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "audio-player",
+  "title": "Audio Player",
+  "description": "A minimal, theme-aware audio player component built for shadcn/ui, featuring play/pause controls, integrated progress visualization.",
+  "dependencies": [
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "src/registry/components/audio-player.tsx",
+      "content": "\"use client\";\r\n\r\nimport { useRef, useState, useEffect } from \"react\";\r\nimport { PlayIcon, Square, ExternalLink } from \"lucide-react\";\r\nimport Link from \"next/link\";\r\n\r\nconst RADIUS = 18;\r\nconst CIRCUMFERENCE = 2 * Math.PI * RADIUS;\r\n\r\ninterface AudioPlayerProps {\r\n  title: string;\r\n  src: string;\r\n  externalLink?: string;\r\n  volume?: number;\r\n}\r\n\r\nconst AudioPlayer = ({\r\n  title,\r\n  src,\r\n  externalLink,\r\n  volume = 0.1,\r\n}: AudioPlayerProps) => {\r\n  const audioRef = useRef<HTMLAudioElement | null>(null);\r\n  const [isPlaying, setIsPlaying] = useState(false);\r\n  const [progress, setProgress] = useState(0);\r\n\r\n  const handleClick = () => {\r\n    if (!audioRef.current) return;\r\n    if (!isPlaying) {\r\n      audioRef.current.currentTime = 0;\r\n      audioRef.current.play();\r\n      setIsPlaying(true);\r\n    } else {\r\n      audioRef.current.pause();\r\n      audioRef.current.currentTime = 0;\r\n      setIsPlaying(false);\r\n    }\r\n  };\r\n\r\n  const handleTimeUpdate = () => {\r\n    if (!audioRef.current) return;\r\n    const pct = (audioRef.current.currentTime / audioRef.current.duration) * 100;\r\n    setProgress(pct || 0);\r\n  };\r\n\r\n  const handleEnded = () => {\r\n    setIsPlaying(false);\r\n    setProgress(0);\r\n    if (audioRef.current) audioRef.current.currentTime = 0;\r\n  };\r\n\r\n  useEffect(() => {\r\n    if (audioRef.current) audioRef.current.volume = volume;\r\n    return () => { audioRef.current?.pause(); };\r\n  }, [volume]);\r\n\r\n  return (\r\n    <div className=\"flex w-fit items-center gap-2 py-1\">\r\n      <div className=\"relative h-7 w-7\">\r\n        <svg\r\n          className=\"pointer-events-none absolute inset-0 h-full w-full -rotate-90\"\r\n          viewBox=\"0 0 40 40\"\r\n          fill=\"none\"\r\n          xmlns=\"http://www.w3.org/2000/svg\"\r\n        >\r\n          <circle cx=\"20\" cy=\"20\" r={RADIUS} stroke=\"currentColor\" strokeOpacity={0.2} strokeWidth=\"3\" className=\"text-primary\" />\r\n          <circle\r\n            cx=\"20\" cy=\"20\" r={RADIUS}\r\n            stroke=\"currentColor\" strokeWidth=\"3\"\r\n            strokeDasharray={CIRCUMFERENCE}\r\n            strokeDashoffset={CIRCUMFERENCE * (1 - progress / 100)}\r\n            strokeLinecap=\"round\"\r\n            className=\"text-primary transition-[stroke-dashoffset] duration-200 ease-linear\"\r\n          />\r\n        </svg>\r\n        <button\r\n          onClick={handleClick}\r\n          className=\"bg-primary text-primary-foreground absolute inset-1 flex cursor-pointer items-center justify-center rounded-full\"\r\n          aria-label={isPlaying ? \"Pause\" : \"Play\"}\r\n        >\r\n          {isPlaying ? <Square className=\"h-2.5 w-2.5\" /> : <PlayIcon className=\"h-2.5 w-2.5\" />}\r\n        </button>\r\n      </div>\r\n      <span className=\"text-sm font-medium\">{title}</span>\r\n      {externalLink && (\r\n        <Link href={externalLink} target=\"_blank\" className=\"text-muted-foreground mt-1 self-start text-sm underline\">\r\n          <ExternalLink className=\"mb-2 inline h-3 w-3\" />\r\n        </Link>\r\n      )}\r\n      <audio ref={audioRef} src={src} onEnded={handleEnded} onTimeUpdate={handleTimeUpdate} />\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default AudioPlayer;",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}

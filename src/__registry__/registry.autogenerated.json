@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "kentkalaw-portfolio-v3",
+  "homepage": "https://kentkalaw.vercel.app/",
+  "items": [
+    {
+      "name": "audio-player",
+      "title": "Audio Player",
+      "description": "A minimal, theme-aware audio player component built for shadcn/ui, featuring play/pause controls, integrated progress visualization.",
+      "dependencies": [
+        "lucide-react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "src/registry/components/audio-player.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "type": "registry:component"
+    }
+  ]
+}
