@@ -68,9 +68,9 @@ export default function Name() {
             />
           </div>
           <div className="py-2 flex items-center justify-center gap-2 md:mb-0 md:justify-start">
-            <CornerBorderButton
+            <Button
               size="sm"
-              className="items-center gap-2 rounded-none transition-all md:flex"
+              className="items-center gap-2 text-xs font-mono tracking-wide rounded-none transition-all md:flex"
               onClick={() => {
                 if (pathname !== "/") {
                   router.push("/#contact");
@@ -84,7 +84,7 @@ export default function Name() {
             >
               <Mail className="h-4 w-4" />
               Contact Me
-            </CornerBorderButton>
+            </Button>
             <CornerBorderButton
               size="sm"
               className="items-center gap-2 rounded-none md:flex"
