@@ -209,7 +209,7 @@ export default function AboutPage() {
                 </p>
                 <AudioPlayerComponent
                   title="NIKI - Backburner"
-                  src="/music/NIKI - Backburner.MP3"
+                  src="/music/NIKI - Backburner.mp3"
                   externalLink="https://www.youtube.com/watch?v=BBpIV9A1PXc"
                 />
               </div>
