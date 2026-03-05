@@ -25,6 +25,15 @@
         type: "registry:component",
         }],
     },
+      "theme-switcher": {
+        name: "theme-switcher",
+        description: "A custom-built theme switcher component for toggling between light and dark modes and system.",
+        type: "registry:component",
+        files: [{
+        path: "src/registry/components/theme-switcher.tsx",
+        type: "registry:component",
+        }],
+    },
       "placeholder-pattern": {
         name: "placeholder-pattern",
         description: "A minimal, theme-aware placeholder pattern component built for shadcn/ui.",

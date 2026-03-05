@@ -38,6 +38,28 @@
       "type": "registry:component"
     },
     {
+      "name": "theme-switcher",
+      "title": "Theme Switcher",
+      "description": "A custom-built theme switcher component for toggling between light and dark modes and system.",
+      "dependencies": [
+        "lucide-react",
+        "clsx",
+        "tailwind-merge",
+        "next-themes",
+        "framer-motion"
+      ],
+      "registryDependencies": [
+        "dropdown-menu"
+      ],
+      "files": [
+        {
+          "path": "src/registry/components/theme-switcher.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
       "name": "placeholder-pattern",
       "title": "Placeholder Pattern",
       "description": "A minimal, theme-aware placeholder pattern component built for shadcn/ui.",

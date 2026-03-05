@@ -17,6 +17,13 @@ export interface PackageManagerCommands {
   yarn: string;
 }
 
+export interface ExtraStep {
+  title: string;
+  code: string;
+  filename: string;
+  language?: string;
+}
+
 export interface ComponentDocsProps {
   title: string;
   description: string;
@@ -30,6 +37,7 @@ export interface ComponentDocsProps {
   cliCommands?: PackageManagerCommands;
   dependencies: PackageManagerCommands;
   utilsFile?: string;
+  extraSteps?: ExtraStep[];
   additionalFiles?: Array<{
     title: string;
     code: string;
@@ -51,6 +59,7 @@ export function ComponentDocs({
   cliCommands,
   dependencies,
   utilsFile,
+  extraSteps = [],
   additionalFiles = [],
 }: ComponentDocsProps) {
   return (
@@ -132,32 +141,54 @@ export function ComponentDocs({
                       </h4>
                       <CodeBlock
                         code={utilsFile}
-                        language="tsx"
+                        language="ts"
                         filename="lib/utils.ts"
                         showLineNumbers
                       />
                     </div>
                   )}
 
-                  {additionalFiles.map((file, index) => (
-                    <div key={index}>
-                      <h4 className="text-sm font-medium mb-2">
-                        {utilsFile ? index + 3 : index + 2}. {file.title}
-                      </h4>
-                      <CodeBlock
-                        code={file.code}
-                        language={file.language || "tsx"}
-                        filename={file.filename}
-                        showLineNumbers
-                      />
-                    </div>
-                  ))}
+                  {extraSteps.map((step, index) => {
+                    const stepNumber = 2 + (utilsFile ? 1 : 0) + index;
+                    return (
+                      <div key={index}>
+                        <h4 className="text-sm font-medium mb-2">
+                          {stepNumber}. {step.title}
+                        </h4>
+                        <CodeBlock
+                          code={step.code}
+                          language={step.language || "tsx"}
+                          filename={step.filename}
+                          showLineNumbers
+                        />
+                      </div>
+                    );
+                  })}
+
+                  {additionalFiles.map((file, index) => {
+                    const stepOffset =
+                      2 + (utilsFile ? 1 : 0) + extraSteps.length;
+                    return (
+                      <div key={index}>
+                        <h4 className="text-sm font-medium mb-2">
+                          {stepOffset + index}. {file.title}
+                        </h4>
+                        <CodeBlock
+                          code={file.code}
+                          language={file.language || "tsx"}
+                          filename={file.filename}
+                          showLineNumbers
+                        />
+                      </div>
+                    );
+                  })}
 
                   <div>
                     <h4 className="text-sm font-medium mb-2">
-                      {utilsFile
-                        ? additionalFiles.length + 3
-                        : additionalFiles.length + 2}
+                      {2 +
+                        (utilsFile ? 1 : 0) +
+                        extraSteps.length +
+                        additionalFiles.length}
                       . Copy and paste the component code
                     </h4>
                     <div className="h-[400px] overflow-y-auto">

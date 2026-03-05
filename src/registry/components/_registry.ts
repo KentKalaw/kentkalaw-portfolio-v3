@@ -26,5 +26,19 @@ export const components: Registry["items"] = [
                 type: "registry:component"
             },
         ],
+    },
+    {
+        name: "theme-switcher",
+        type: "registry:component",
+        description: "A custom-built theme switcher component for toggling between light and dark modes and system.",
+        title: "Theme Switcher",
+        dependencies: ["lucide-react", "clsx", "tailwind-merge", "next-themes", "framer-motion"],
+        registryDependencies: ["dropdown-menu"],
+        files: [
+            {
+                path: "components/theme-switcher.tsx",
+                type: "registry:component"
+            },
+        ],
     }
 ];
