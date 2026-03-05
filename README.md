@@ -4,7 +4,7 @@ A modern, minimalistic, and responsive personal portfolio website created using 
 
 Access through: https://kentkalaw.vercel.app
 
-![Portfolio Preview](public/desktop-preview-v2.png)
+![Portfolio Preview](public/desktop-preview-v3.png)
 
 ## Features
 
