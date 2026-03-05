@@ -34,4 +34,13 @@
         type: "registry:ui",
         }],
     },
+      "corner-border-button": {
+        name: "corner-border-button",
+        description: "A corner border button component with animated corner borders",
+        type: "registry:ui",
+        files: [{
+        path: "src/registry/ui/corner-border-button.tsx",
+        type: "registry:ui",
+        }],
+    },
     }

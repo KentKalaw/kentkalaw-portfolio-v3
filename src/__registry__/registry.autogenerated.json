@@ -52,6 +52,24 @@
         }
       ],
       "type": "registry:ui"
+    },
+    {
+      "name": "corner-border-button",
+      "title": "Corner Border Button",
+      "description": "A corner border button component with animated corner borders",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge",
+        "@radix-ui/react-slot",
+        "class-variance-authority"
+      ],
+      "files": [
+        {
+          "path": "src/registry/ui/corner-border-button.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "type": "registry:ui"
     }
   ]
 }

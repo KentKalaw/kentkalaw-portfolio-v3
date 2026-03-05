@@ -1,8 +1,7 @@
 "use client";
 import { Mail, MoveRight, FileText } from "lucide-react";
 import Image from "next/image";
-import { ShimmeringText } from "@/components/animate-ui/primitives/texts/shimmering";
-import Link from "next/link";
+import { CornerBorderButton } from "@/components/ui/corner-border-button";
 import AudioPlayerComponent from "@/components/audio-player";
 import { Button } from "@/components/ui/button";
 import { CVViewerDialog } from "@/components/cv-viewer";
@@ -69,9 +68,9 @@ export default function Name() {
             />
           </div>
           <div className="py-2 flex items-center justify-center gap-2 md:mb-0 md:justify-start">
-            <Button
+            <CornerBorderButton
               size="sm"
-              className="items-center gap-2 rounded-none shadow-sm transition-all hover:shadow-md md:flex"
+              className="items-center gap-2 rounded-none transition-all md:flex"
               onClick={() => {
                 if (pathname !== "/") {
                   router.push("/#contact");
@@ -85,16 +84,15 @@ export default function Name() {
             >
               <Mail className="h-4 w-4" />
               Contact Me
-            </Button>
-            <Button
+            </CornerBorderButton>
+            <CornerBorderButton
               size="sm"
-              variant="outline"
               className="items-center gap-2 rounded-none md:flex"
               onClick={() => setShowCVViewer(true)}
             >
               <FileText className="h-4 w-4" />
               View Resume
-            </Button>
+            </CornerBorderButton>
           </div>
 
           <CVViewerDialog open={showCVViewer} onOpenChange={setShowCVViewer} />

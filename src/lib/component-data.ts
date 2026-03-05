@@ -4,7 +4,7 @@ export interface ComponentData {
 }
 
 export const uiComponents: ComponentData[] = [
-  { name: "Border Corner Button", href: "components/border-corner-button" },
+  { name: "Corner Border Button", href: "components/corner-border-button" },
   { name: "Placeholder Pattern", href: "components/placeholder-pattern" },
 ];
 
