@@ -1,3 +1,5 @@
+"use client";
+
 import { CornerBorderButton } from "@/components/ui/corner-border-button";
 import { ComponentDocs } from "@/components/component-docs";
 import {
@@ -5,6 +7,7 @@ import {
   usageExample,
   utilsFile,
 } from "@/lib/components/corner-border-button-data";
+import { toast } from "sonner";
 
 export default function CornerBorderButtonComponent() {
   return (
@@ -12,7 +15,10 @@ export default function CornerBorderButtonComponent() {
       title="Corner Border Button"
       description="A corner border button component with animated corner borders"
       preview={
-            <CornerBorderButton>
+
+            <CornerBorderButton
+              onClick={() => toast.success("Button clicked! :>")}
+              >
               Click Me :{">"}
             </CornerBorderButton>
       }
