@@ -25,8 +25,7 @@ const cornerBorderButtonVariants = cva(
   `
   relative inline-flex items-center justify-center gap-2
   whitespace-nowrap font-mono tracking-wide
-  transition-all duration-200
- cursor-pointer
+  transition-all duration-200 cursor-pointer
 
   text-sm
   outline-none

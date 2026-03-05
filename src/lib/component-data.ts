@@ -10,6 +10,6 @@ export const uiComponents: ComponentData[] = [
 
 export const customComponents: ComponentData[] = [
   { name: "Audio Player", href: "components/audio-player" },
-  { name: "Logo Slider", href: "components/logo-slider" },
+  { name: "Theme Switcher", href: "components/theme-switcher" },
   { name: "Social Icons", href: "components/social-icons" },
 ];
