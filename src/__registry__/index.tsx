@@ -25,4 +25,13 @@
         type: "registry:component",
         }],
     },
+      "placeholder-pattern": {
+        name: "placeholder-pattern",
+        description: "A minimal, theme-aware placeholder pattern component built for shadcn/ui.",
+        type: "registry:ui",
+        files: [{
+        path: "src/registry/ui/placeholder-pattern.tsx",
+        type: "registry:ui",
+        }],
+    },
     }

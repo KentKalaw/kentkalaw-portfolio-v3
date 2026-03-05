@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+export const placeholderPatternCode = `import { cn } from "@/lib/utils";
 
 export interface PlaceholderPatternProps {
   className?: string;
@@ -34,4 +34,21 @@ export default function PlaceholderPattern({ className }: PlaceholderPatternProp
 
     </div>
   )
-}
+}`;
+
+export const usageExample = `import PlaceholderPattern from "@/components/placeholder-pattern";
+
+export default function Example() {
+  return (
+  <>
+      <PlaceholderPattern className="w-full" />
+  </>
+  );
+}`;
+
+export const utilsFile = `import { twMerge } from "tailwind-merge";
+import clsx from "clsx";
+
+export function cn(...inputs: ClassValue[]) {
+return twMerge(clsx(inputs));
+};`;

@@ -36,6 +36,22 @@
         }
       ],
       "type": "registry:component"
+    },
+    {
+      "name": "placeholder-pattern",
+      "title": "Placeholder Pattern",
+      "description": "A minimal, theme-aware placeholder pattern component built for shadcn/ui.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "src/registry/ui/placeholder-pattern.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "type": "registry:ui"
     }
   ]
 }

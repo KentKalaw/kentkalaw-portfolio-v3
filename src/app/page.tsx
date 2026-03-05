@@ -13,7 +13,7 @@ import Contact from "@/components/pages/contact";
 import { useRef, useState, useEffect } from "react";
 import { Linkedin, Github, Facebook, ChevronsUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import PlaceholderPattern from "@/components/placeholder-pattern";
 import Footer from "@/components/footer/footer";
 
 export default function Home() {
@@ -49,25 +49,25 @@ export default function Home() {
         <Name />
         <div className="flex md:gap-3">
           <div className="w-full gap-3">
-            <Separator className="animate-fade-in animate-delay-500"/>
+            <PlaceholderPattern className="animate-fade-in animate-delay-500"/>
             <About />
-            <Separator className="animate-fade-in animate-delay-500"/>
+            <PlaceholderPattern className="animate-fade-in animate-delay-500"/>
             <BlogPreview />
-            <Separator className="animate-fade-in animate-delay-500"/>
+            <PlaceholderPattern className="animate-fade-in animate-delay-500"/>
             <TechStack />
-            <Separator className="animate-fade-in animate-delay-500"/>
+            <PlaceholderPattern className="animate-fade-in animate-delay-500"/>
             <Certifications />
-            <Separator className="animate-fade-in animate-delay-500"/>
+            <PlaceholderPattern className="animate-fade-in animate-delay-500"/>
             <Experience />
-            <Separator className="animate-fade-in animate-delay-500"/>    
+            <PlaceholderPattern className="animate-fade-in animate-delay-500"/>    
             <GithubContributionsCard />
-            <Separator className="animate-fade-in animate-delay-500"/>
+            <PlaceholderPattern className="animate-fade-in animate-delay-500"/>
             <Projects />
-            <Separator className="animate-fade-in animate-delay-500"/>
+            <PlaceholderPattern className="animate-fade-in animate-delay-500"/>
             <Socials />
-            <Separator className="animate-fade-in animate-delay-500"/>
+            <PlaceholderPattern className="animate-fade-in animate-delay-500"/>
             <Contact />
-            <Separator className="animate-fade-in animate-delay-500"/>
+            <PlaceholderPattern className="animate-fade-in animate-delay-500"/>
             
           </div>
         </div>
@@ -90,36 +90,4 @@ export default function Home() {
       </div>
     </main>
   );
-}
-
-function Separator({ className }: { className?: string }) {
-  return (
-    <div
-      className={cn(
-        "relative h-8 max-w-5xl mx-auto overflow-hidden",
-        "flex items-center justify-center",
-        className
-      )}
-    >
-      <svg
-        className="absolute inset-0 w-full h-full stroke-neutral-900/20 dark:stroke-neutral-100/20"
-        fill="none"
-      >
-        <defs>
-          <pattern
-            id="separator-pattern"
-            x="0"
-            y="0"
-            width="16"
-            height="16"
-            patternUnits="userSpaceOnUse"
-          >
-            <path d="M0 16L16 0" />
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#separator-pattern)" />
-      </svg>
-
-    </div>
-  )
 }
