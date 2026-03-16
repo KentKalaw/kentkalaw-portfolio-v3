@@ -8,11 +8,13 @@ import { useSound } from "@/hooks/use-sound"
 import { SOUND } from "@/lib/sound"
 import { useHotkeys } from "react-hotkeys-hook"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
+import { useEffect, useState } from "react"
 
 export function ThemeSwitch() {
   const { theme, setTheme } = useTheme()
   const playClick = useSound(SOUND.click)
   const isDark = theme === "dark"
+  const [mounted, setMounted] = useState(false);
 
   const toggleTheme = () => {
     playClick(0.5)
@@ -24,6 +26,12 @@ export function ThemeSwitch() {
     () => toggleTheme(),
     { enableOnFormTags: false }
   )
+
+    useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) return null
 
   return (
     <Tooltip>
