@@ -8,12 +8,12 @@ export interface CVViewerDialogProps {
 }
 
 export const CVViewerDialog = ({ open, onOpenChange }: CVViewerDialogProps) => {
-  const cvPath = "/Kent-Francis-Kalaw-Resume.pdf";
+  const cvPath = "/Kent_Francis_Kalaw_Resume.pdf";
 
   const handleDownload = () => {
     const link = document.createElement("a");
     link.href = cvPath;
-    link.download = "Kent-Francis-Kalaw-Resume.pdf";
+    link.download = "Kent_Francis_Kalaw_Resume.pdf";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
